@@ -445,7 +445,7 @@ function render(universe, theme, data) {
       (i, n) => `
       <a class="exhibit exhibit-${n + 1}" href="#${universe.chapters[0].key}" data-reveal>
         <img src="${esc(i.image)}" alt="${esc(i.title)}" loading="eager" decoding="async" />
-        <span class="exhibit-label">${esc(copy.exhibitLabel.replaceAll("{letter}", "ABCD"[n]))}</span>
+        <span class="exhibit-label">${copy.exhibitLabel.replaceAll("{letter}", "ABCD"[n])}</span>
       </a>`
     )
     .join("");
