@@ -1,6 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "node core/render.js sopranos && node core/render.js true-detective && node core/render.js breaking-bad && node scripts/assemble-public.mjs",
+  "buildCommand": "node core/render.js sopranos && node core/render.js true-detective && node core/render.js breaking-bad && node core/render.js stranger-things && node scripts/assemble-public.mjs",
   "outputDirectory": "public",
   "cleanUrls": true,
   "trailingSlash": true

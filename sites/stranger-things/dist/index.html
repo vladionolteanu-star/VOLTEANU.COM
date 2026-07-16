@@ -1,0 +1,1169 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Hawkins General | A Curated Edit of the Stranger Things Universe</title>
+<meta name="description" content="Stranger Things, bought carefully. The licensed goods, the basement campaign, the Byers living room, and the rest of Hawkins retail, in five aisles." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Literata:ital,opsz,wght@0,7..72,400;1,7..72,400&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ground: oklch(0.16 0.03 285);
+    --surface: oklch(0.20 0.035 285);
+    --well: oklch(0.13 0.025 285);
+    --ink: oklch(0.93 0.015 90);
+    --ink-dim: oklch(0.72 0.025 290);
+    --accent: oklch(0.70 0.17 25);
+    --accent-strong: oklch(0.62 0.25 27);
+    --plate-bg: oklch(0.92 0.02 90);
+    --plate-ink: oklch(0.20 0.03 285);
+    --plate-numeral: oklch(0.52 0.21 27);
+    --plate-intro-ink: oklch(0.34 0.03 285);
+    --tag-bg: oklch(0.50 0.20 27);
+    --tag-ink: oklch(0.93 0.015 90);
+    --cta-hover: oklch(0.93 0.015 90);
+    --scrollbar: oklch(0.55 0.18 27);
+    --exhibit-paper: oklch(0.93 0.01 90);
+    --exhibit-ink: oklch(0.30 0.03 285);
+    --exhibit-filter: saturate(.88) contrast(1.03);
+    --font-base: "Literata", Georgia, serif;
+    --font-title: "Fraunces", Georgia, serif;
+    --font-label: "Share Tech Mono", "Courier New", monospace;
+    --font-prose: "Literata", Georgia, serif;
+    --font-quote: "Fraunces", Georgia, serif;
+    --font-note: "Literata", Georgia, serif;
+    --note-style: italic;
+    --title-transform: none;
+    --title-weight: 700;
+    --title-leading: 0.96;
+    --name-font: "Fraunces", Georgia, serif;
+    --name-size: 19px;
+    --name-weight: 600;
+    --price-size: 17px;
+    --wordmark-size: 19px;
+    --hairline: color-mix(in oklch, var(--ink) 12%, transparent);
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body{
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--font-base);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { max-width: 100%; }
+  a { color: inherit; }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 48px); }
+
+  [data-reveal]{ opacity: 0; transform: translateY(14px);
+    transition: opacity .34s var(--ease), transform .34s var(--ease);
+    transition-delay: var(--stagger, 0ms); }
+  [data-reveal].in{ opacity: 1; transform: none; }
+
+  /* ---- masthead + hero ---- */
+  .masthead{
+    position: sticky; top: 0; z-index: 20;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 14px clamp(20px, 4vw, 48px);
+    background: color-mix(in oklch, var(--ground) 87%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .wordmark{ font-family: var(--font-title); font-weight: 600;
+    font-size: var(--wordmark-size, 19px); letter-spacing: .05em;
+    text-transform: uppercase; text-decoration: none; }
+  .wm-accent{ color: var(--accent-strong); }
+  .masthead-note{ font-family: var(--font-note, var(--font-label));
+    font-style: var(--note-style, normal); font-size: 13px; color: var(--ink-dim); }
+
+  .hero{ padding: clamp(70px, 11vh, 140px) 0 clamp(56px, 8vh, 90px);
+    display: grid; gap: clamp(36px, 5vw, 72px); align-items: center; }
+  @media (min-width: 980px){ .hero{ grid-template-columns: 1.15fr 1fr; } }
+  .kicker{ font-family: var(--font-label); font-size: 11.5px; font-weight: 500;
+    letter-spacing: .22em; text-transform: uppercase;
+    color: var(--accent); margin: 0 0 26px; }
+  h1{
+    font-family: var(--font-title); font-weight: var(--title-weight, 600);
+    text-transform: var(--title-transform, none);
+    font-size: clamp(52px, 10.5vw, 148px);
+    line-height: var(--title-leading, 0.95); letter-spacing: -0.01em;
+    margin: 0 0 30px; max-width: 13ch; text-wrap: balance;
+  }
+
+  .h1-accent{
+    color: var(--accent-strong);
+    text-shadow: 0 0 28px color-mix(in oklch, var(--accent-strong) 55%, transparent),
+                 0 0 6px color-mix(in oklch, var(--accent-strong) 80%, transparent);
+    animation: flick 1.9s steps(1) 1;
+  }
+  @keyframes flick{
+    0%, 34%, 46%, 58%, 100% { opacity: 1; }
+    30% { opacity: .2; } 42% { opacity: .55; } 54% { opacity: .3; }
+  }
+  .hero .lede{
+    font-family: var(--font-prose);
+    font-size: clamp(16px, 1.9vw, 19.5px);
+    color: var(--ink-dim); max-width: 57ch; margin: 0;
+  }
+
+  /* evidence board */
+  .evidence{ position: relative; min-height: 465px; }
+
+  .thread{ display: none; }
+  .exhibit{
+    position: absolute; display: block; width: min(46%, 228px);
+    background: var(--exhibit-paper, var(--ink)); padding: 9px 9px 7px;
+    box-shadow: 0 18px 44px -18px oklch(0 0 0 / 0.68);
+    text-decoration: none;
+    transition: transform .35s var(--ease), box-shadow .35s var(--ease);
+  }
+  .exhibit img{ display: block; width: 100%; aspect-ratio: 1;
+    object-fit: cover; filter: var(--exhibit-filter, saturate(.9)); }
+  .exhibit-label{ display: block; padding: 7px 2px 2px;
+    font-family: var(--font-label); font-size: 10px; font-weight: 600;
+    letter-spacing: .2em; text-transform: uppercase;
+    color: var(--exhibit-ink, oklch(0.33 0.04 60)); }
+  .exhibit-1{ top: 0; left: 3%; transform: rotate(-3.5deg); z-index: 4; }
+  .exhibit-2{ top: 9%; right: 2%; transform: rotate(2.5deg); z-index: 3; }
+  .exhibit-3{ bottom: 5%; left: 11%; transform: rotate(2deg); z-index: 2; }
+  .exhibit-4{ bottom: 0; right: 9%; transform: rotate(-2deg); z-index: 1; }
+  .exhibit:hover{ transform: rotate(0deg) translateY(-6px); z-index: 9; }
+  .exhibit:focus-visible{ outline: 2px solid var(--accent); outline-offset: 3px; }
+  @media (max-width: 979px){
+    .evidence{ min-height: 0; display: grid; gap: 18px 14px;
+      grid-template-columns: repeat(2, 1fr); padding: 8px 4px; }
+    .exhibit{ position: static; width: auto; }
+    .thread{ display: none; }
+    .exhibit-1{ transform: rotate(-2deg); }
+    .exhibit-2{ transform: rotate(1.5deg); }
+    .exhibit-3{ transform: rotate(1.5deg); }
+    .exhibit-4{ transform: rotate(-1.5deg); }
+  }
+
+  /* chapter index */
+  .index-head{ font-family: var(--font-label); font-size: 12px;
+    letter-spacing: .22em; text-transform: uppercase; color: var(--ink-dim);
+    margin: clamp(48px, 7vh, 80px) 0 14px; }
+  .index{ display: grid; gap: 1px; background: var(--hairline);
+    border-block: 1px solid var(--hairline);
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+  .index.no-head{ margin-top: clamp(48px, 7vh, 80px); }
+  .idx{ background: var(--ground); padding: 20px 20px 24px;
+    display: flex; flex-direction: column; gap: 5px;
+    text-decoration: none; transition: background .3s var(--ease); }
+  .idx:hover{ background: var(--surface); }
+  .idx:focus-visible{ outline: 2px solid var(--accent); outline-offset: -2px; }
+  .idx-numeral{ font-family: var(--font-label); color: var(--accent);
+    font-size: 11px; letter-spacing: .2em; text-transform: uppercase; }
+  .idx-title{ font-family: var(--font-title); font-size: 23px; font-weight: 600;
+    text-transform: var(--title-transform, none); }
+  .idx-count{ font-family: var(--font-note, var(--font-label));
+    font-style: var(--note-style, normal); font-size: 12.5px; color: var(--ink-dim); }
+
+  /* ---- chapter plates ---- */
+  .chapter{ margin-top: clamp(90px, 14vh, 160px); }
+  .plate{
+    background: var(--plate-bg); color: var(--plate-ink);
+    padding: clamp(52px, 9vh, 110px) clamp(20px, 4vw, 48px);
+  }
+  .numeral{ display: block; font-family: var(--font-label);
+    color: var(--plate-numeral); font-size: 12px; font-weight: 500;
+    letter-spacing: .28em; text-transform: uppercase; margin-bottom: 13px; }
+  .plate-title{
+    font-family: var(--font-title); font-weight: var(--title-weight, 600);
+    text-transform: var(--title-transform, none);
+    font-size: clamp(45px, 9vw, 118px); line-height: .95;
+    margin: 0 0 17px; max-width: 1200px;
+  }
+  .plate-intro{ font-family: var(--font-prose); font-style: italic;
+    font-size: clamp(16px, 1.8vw, 19px);
+    color: var(--plate-intro-ink); margin: 0; max-width: 54ch; }
+  .chapter-body{ max-width: 1296px;
+    margin: clamp(36px, 6vh, 64px) auto 0;
+    padding: 0 clamp(20px, 4vw, 48px); }
+
+  /* ---- cards ---- */
+  .card{ display: flex; flex-direction: column;
+    border: 1px solid var(--hairline); background: var(--surface); }
+  .frame{ display: block; aspect-ratio: 1; overflow: hidden; position: relative;
+    background: var(--well, oklch(0.12 0.01 60)); }
+  .frame img{ width: 100%; height: 100%; object-fit: cover; display: block;
+    transition: transform .4s var(--ease); }
+  .card:hover .frame img{ transform: scale(1.03); }
+
+  .oos .frame img, .oos .thumb img{ filter: grayscale(.58) brightness(.87); }
+  .oos-tag{ position: absolute; top: 12px; left: 12px;
+    background: var(--tag-bg); color: var(--tag-ink);
+    font-family: var(--font-label); font-size: 10px; font-weight: 600;
+    letter-spacing: .2em; text-transform: uppercase; padding: 5px 9px; }
+  .oos-tag-inline{ position: static; margin-left: 10px; padding: 3px 7px;
+    vertical-align: middle; }
+
+  .body{ display: flex; flex-direction: column; gap: 7px;
+    padding: 18px 18px 22px; flex: 1; }
+  .eyebrow{ font-family: var(--font-label); color: var(--accent);
+    font-size: 10.5px; font-weight: 500;
+    letter-spacing: .17em; text-transform: uppercase; }
+  .name{ font-family: var(--name-font, var(--font-title));
+    font-size: var(--name-size, 19px); font-weight: var(--name-weight, 600);
+    line-height: 1.2; margin: 0; }
+  .note{ font-family: var(--font-prose); font-style: italic;
+    font-size: 14.5px; color: var(--ink-dim); margin: 0; }
+  .row{ margin-top: auto; padding-top: 16px; display: flex;
+    justify-content: space-between; align-items: baseline; gap: 12px;
+    border-top: 1px solid var(--hairline); }
+  .price{ font-family: var(--price-font, var(--font-label));
+    font-size: var(--price-size, 17px); font-weight: 600;
+    font-variant-numeric: tabular-nums; }
+  .was{ color: var(--ink-dim); font-weight: 400; font-size: 12.5px; margin-left: 6px; }
+  .cta{ font-family: var(--font-label); font-size: 11.5px; font-weight: 500;
+    letter-spacing: .09em; text-transform: uppercase; color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid color-mix(in oklch, var(--accent) 45%, transparent);
+    padding-bottom: 2px; white-space: nowrap;
+    transition: color .25s var(--ease), border-color .25s var(--ease); }
+  .cta:hover{ color: var(--cta-hover, var(--ink)); border-color: var(--cta-hover, var(--ink)); }
+  .cta:focus-visible, .frame:focus-visible{
+    outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  /* feature layout: hero + 2x2 support; overflow flows below */
+  .feature{ display: grid; gap: 22px; grid-template-columns: 1.35fr 1fr; }
+  .card-hero .frame{ aspect-ratio: auto; flex: 1; min-height: 380px; }
+  .card-hero .body{ flex: 0 0 auto; }
+  .card-hero .name{ font-size: calc(var(--name-size, 19px) + 7px); }
+  .card-hero .note{ font-size: 15.5px; }
+  .feature-rest{ display: grid; gap: 22px; grid-template-columns: repeat(2, 1fr); }
+  .feature-overflow{ display: grid; gap: 22px; margin-top: 22px;
+    grid-template-columns: repeat(3, 1fr); }
+  @media (max-width: 880px){
+    .feature{ grid-template-columns: 1fr; }
+    .card-hero .frame{ aspect-ratio: 1; min-height: 0; flex: initial; }
+    .feature-rest{ grid-template-columns: repeat(2, 1fr); }
+    .feature-overflow{ grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 560px){
+    .feature-rest, .feature-overflow{ grid-template-columns: 1fr; }
+  }
+
+  /* shelf layout */
+  .shelf{ display: flex; gap: 18px; overflow-x: auto;
+    scroll-snap-type: x mandatory; padding-bottom: 10px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar, var(--accent)) transparent; }
+  .card-shelf{ min-width: min(300px, 78vw); scroll-snap-align: start; }
+  .shelf-hint{ font-family: var(--font-note, var(--font-label));
+    font-style: var(--note-style, normal); color: var(--ink-dim);
+    font-size: 12px; letter-spacing: .06em; margin: 10px 0 0; }
+  @media (hover: none){ .shelf-hint{ display: none; } }
+
+  /* ledger layout */
+  .ledger{ border-top: 1px solid var(--hairline); }
+  .ledger-row{ display: grid; align-items: center; gap: 20px;
+    grid-template-columns: 92px 1fr auto;
+    padding: 18px 0; border-bottom: 1px solid var(--hairline); }
+  .thumb{ width: 92px; height: 92px; overflow: hidden; display: block;
+    background: var(--well, oklch(0.12 0.01 60)); }
+  .thumb img{ width: 100%; height: 100%; object-fit: cover; display: block; }
+  .ledger-main .name{ font-size: calc(var(--name-size, 19px) + 2px); }
+  .ledger-main .note{ margin-top: 4px; }
+  .ledger-end{ display: flex; flex-direction: column; gap: 8px;
+    align-items: flex-end; text-align: right; }
+  @media (max-width: 640px){
+    .ledger-row{ grid-template-columns: 72px 1fr; }
+    .thumb{ width: 72px; height: 72px; }
+    .ledger-end{ grid-column: 2; flex-direction: row; align-items: baseline;
+      justify-content: space-between; width: 100%; }
+  }
+
+  /* quote interstitial */
+  .quote{ margin-top: clamp(90px, 14vh, 160px); text-align: center;
+    padding: 0 clamp(20px, 4vw, 48px); }
+  .quote blockquote{
+    font-family: var(--font-quote, var(--font-title));
+    font-style: italic; font-weight: 500;
+    font-size: clamp(27px, 4.6vw, 46px); line-height: 1.22;
+    max-width: 24ch; margin: 0 auto; text-wrap: balance; }
+  .quote cite{ display: block; margin-top: 18px; font-style: normal;
+    font-family: var(--font-label); font-size: 11px; font-weight: 500;
+    letter-spacing: .28em; text-transform: uppercase; color: var(--accent); }
+
+  /* footer */
+  footer{ margin-top: clamp(100px, 16vh, 180px);
+    border-top: 1px solid var(--hairline);
+    padding: 44px 0 72px; }
+  footer .wrap{ display: grid; gap: 28px; grid-template-columns: 1.2fr 1fr; }
+  @media (max-width: 720px){ footer .wrap{ grid-template-columns: 1fr; } }
+  footer h2{ font-family: var(--font-label); font-size: 13px; font-weight: 600;
+    letter-spacing: .16em; text-transform: uppercase; margin: 0 0 10px; }
+  footer p{ font-family: var(--font-prose); font-size: 14px;
+    color: var(--ink-dim); margin: 0 0 8px; max-width: 58ch; }
+
+  @media (prefers-reduced-motion: reduce){
+    [data-reveal]{ opacity: 1; transform: none; transition: none; }
+    .h1-accent{ animation: none; }
+    html{ scroll-behavior: auto; }
+    .frame img{ transition: none; }
+  }</style>
+</head>
+<body>
+  <header class="masthead">
+    <a class="wordmark" href="#top">Hawkins <span class="wm-accent">General</span></a>
+    <span class="masthead-note">Hawkins, Indiana</span>
+  </header>
+
+  <main id="top">
+    <section class="hero wrap">
+      <div class="hero-copy">
+        <p class="kicker" data-reveal>56 pieces &middot; five aisles &middot; Hawkins, Indiana, 1983&ndash;86 &middot; updated July 2026</p>
+        <h1 data-reveal>Stock up before the lights <span class="h1-accent">flicker</span></h1>
+        <p class="lede" data-reveal>Stranger Things, bought carefully. The licensed goods, the campaign table, the Byers living room, and the rest of Hawkins retail: waffles, walkie-talkies, tape decks, denim. Every link goes straight to the retailer.</p>
+      </div>
+      <div class="evidence" aria-label="Polaroids from Hawkins">
+        
+      <a class="exhibit exhibit-1" href="#starcourt" data-reveal>
+        <img src="https://cdn.trychannel3.com/0f59c8t?aid=01KXNGVC9JTSW0NEAZ35WRMV0Z&amp;mid=asdf" alt="Mens Stranger Things Hellfire Club Badge Graphic T-shirt" loading="eager" decoding="async" />
+        <span class="exhibit-label">Snapshot A &middot; Hawkins</span>
+      </a>
+      <a class="exhibit exhibit-2" href="#starcourt" data-reveal>
+        <img src="https://cdn.trychannel3.com/d937ed0e-c0a6-400f-a783-e230f1ac4ebf?aid=01KXNGVGKK4A5DHBX9QH9PYJ5N&amp;mid=9pEg" alt="Stranger Things The Rise Of Vecna Film Poster Wall Art" loading="eager" decoding="async" />
+        <span class="exhibit-label">Snapshot B &middot; Hawkins</span>
+      </a>
+      <a class="exhibit exhibit-3" href="#starcourt" data-reveal>
+        <img src="https://cdn.trychannel3.com/e342274b-265c-4bf2-ba72-04310583e5d3?aid=01KXNGVJ8W58DK2GM54HNJQ118&amp;mid=vVQC" alt="Funko Pop! Television: Stranger Things Eleven 3.9-in Vinyl Figure" loading="eager" decoding="async" />
+        <span class="exhibit-label">Snapshot C &middot; Hawkins</span>
+      </a>
+      <a class="exhibit exhibit-4" href="#starcourt" data-reveal>
+        <img src="https://cdn.trychannel3.com/c7bd2c68-5a95-4cdb-a79b-1bb749f226e6?aid=01KXNGVVTRXWK40BBATNM8T3VW&amp;mid=QetO" alt="Kate Bush – Hounds Of Love (2018 Remaster 180‑gram) Lp" loading="eager" decoding="async" />
+        <span class="exhibit-label">Snapshot D &middot; Hawkins</span>
+      </a>
+      </div>
+    </section>
+
+    <div class="wrap">
+      <p class="index-head">Shop the aisles</p>
+      <nav class="index" aria-label="Chapters">
+      <a class="idx" href="#starcourt" data-reveal>
+        <span class="idx-numeral">Aisle I</span>
+        <span class="idx-title">Starcourt</span>
+        <span class="idx-count">21 pieces</span>
+      </a>
+      <a class="idx" href="#basement" data-reveal>
+        <span class="idx-numeral">Aisle II</span>
+        <span class="idx-title">The Wheeler Basement</span>
+        <span class="idx-count">8 pieces</span>
+      </a>
+      <a class="idx" href="#byers" data-reveal>
+        <span class="idx-numeral">Aisle III</span>
+        <span class="idx-title">The Byers Living Room</span>
+        <span class="idx-count">8 pieces</span>
+      </a>
+      <a class="idx" href="#avclub" data-reveal>
+        <span class="idx-numeral">Aisle IV</span>
+        <span class="idx-title">The AV Club</span>
+        <span class="idx-count">8 pieces</span>
+      </a>
+      <a class="idx" href="#dime" data-reveal>
+        <span class="idx-numeral">Aisle V</span>
+        <span class="idx-title">The Five-and-Dime</span>
+        <span class="idx-count">11 pieces</span>
+      </a></nav>
+    </div>
+    
+  <section class="chapter" id="starcourt">
+    <header class="plate" data-reveal>
+      <span class="numeral">Aisle I</span>
+      <h2 class="plate-title">Starcourt</h2>
+      <p class="plate-intro">The licensed goods. Shirts, posters, box sets, and the cast at four inches tall.</p>
+    </header>
+    <div class="chapter-body">
+    <div class="ledger">
+  <article class="ledger-row" data-reveal>
+    <a class="thumb" href="https://buy.trychannel3.com/ukkejHK-Qoqa-uosIs6?o=01KVZB6ZA423BP3JQYW6CQYETJ&amp;aid=01KXNGVC9JTSW0NEAZ35WRMV0Z" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/0e851480-5a94-4eb1-8dd9-51a7f2f3132e?aid=01KXNGVC9JTSW0NEAZ35WRMV0Z&amp;mid=Qoqa" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="ledger-main">
+      <h3 class="name">Novelty Mens Crew Neck Short Sleeve Regular Fit Stranger Things Graphic T-shirt </h3>
+      <p class="note">The entry point. Hawkins on your chest, no questions at school.</p>
+    </div>
+    <div class="ledger-end">
+      <span class="price">$13</span>
+      <a class="cta" href="https://buy.trychannel3.com/ukkejHK-Qoqa-uosIs6?o=01KVZB6ZA423BP3JQYW6CQYETJ&amp;aid=01KXNGVC9JTSW0NEAZ35WRMV0Z" target="_blank" rel="noopener sponsored">Grab it at jcpenney.com</a>
+    </div>
+  </article>
+  <article class="ledger-row" data-reveal>
+    <a class="thumb" href="https://buy.trychannel3.com/YwMHbiX-Z87s-uosIs6?o=01KKCAR50DGMZ1SZCHAP1PG15Y&amp;aid=01KXNGVC9JTSW0NEAZ35WRMV0Z" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/869ac3c4-a7d9-4d0f-8e3b-cc5477199c22?aid=01KXNGVC9JTSW0NEAZ35WRMV0Z&amp;mid=Z87s" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="ledger-main">
+      <h3 class="name">Men&#39;s Netflix Stranger Things Vecna Infographic Graphic Tee </h3>
+      <p class="note">The entry point. Hawkins on your chest, no questions at school.</p>
+    </div>
+    <div class="ledger-end">
+      <span class="price">$24.99</span>
+      <a class="cta" href="https://buy.trychannel3.com/YwMHbiX-Z87s-uosIs6?o=01KKCAR50DGMZ1SZCHAP1PG15Y&amp;aid=01KXNGVC9JTSW0NEAZ35WRMV0Z" target="_blank" rel="noopener sponsored">Grab it at kohls.com</a>
+    </div>
+  </article>
+  <article class="ledger-row" data-reveal>
+    <a class="thumb" href="https://buy.trychannel3.com/DVLE8RP-SDz8-uosIs6?o=01KRCFTVH9RFEFH6MDFWSBGFW1&amp;aid=01KXNGVC9JTSW0NEAZ35WRMV0Z" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/d1451271-10e4-4817-a40b-1d992b8f9998?aid=01KXNGVC9JTSW0NEAZ35WRMV0Z&amp;mid=SDz8" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="ledger-main">
+      <h3 class="name">Stranger Things Relaxed Graphic Tee </h3>
+      <p class="note">The entry point. Hawkins on your chest, no questions at school.</p>
+    </div>
+    <div class="ledger-end">
+      <span class="price">$20</span>
+      <a class="cta" href="https://buy.trychannel3.com/DVLE8RP-SDz8-uosIs6?o=01KRCFTVH9RFEFH6MDFWSBGFW1&amp;aid=01KXNGVC9JTSW0NEAZ35WRMV0Z" target="_blank" rel="noopener sponsored">Grab it at aeropostale.com</a>
+    </div>
+  </article>
+  <article class="ledger-row oos" data-reveal>
+    <a class="thumb" href="https://buy.trychannel3.com/0f59c8t-asdf-uosIs6?o=01KCGGKV0C4CZD6MX8AQ34Z3M1&amp;aid=01KXNGVC9JTSW0NEAZ35WRMV0Z" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/0f59c8t?aid=01KXNGVC9JTSW0NEAZ35WRMV0Z&amp;mid=asdf" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="ledger-main">
+      <h3 class="name">Mens Stranger Things Hellfire Club Badge Graphic T-shirt <span class="oos-tag oos-tag-inline">Vanished</span></h3>
+      <p class="note">The entry point. Hawkins on your chest, no questions at school.</p>
+    </div>
+    <div class="ledger-end">
+      <span class="price">$24.99</span>
+      <a class="cta" href="https://buy.trychannel3.com/0f59c8t-asdf-uosIs6?o=01KCGGKV0C4CZD6MX8AQ34Z3M1&amp;aid=01KXNGVC9JTSW0NEAZ35WRMV0Z" target="_blank" rel="noopener sponsored">Grab it at nordstrom.com</a>
+    </div>
+  </article>
+  <article class="ledger-row oos" data-reveal>
+    <a class="thumb" href="https://buy.trychannel3.com/lFNmCBu-ucSc-uosIs6?o=01KCRW7XTTAHZN78W8PSSZGQPV&amp;aid=01KXNGVERMCNGVQV060EEZ88H3" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/d4d3faef-e578-4049-8fe9-427144fc828a?aid=01KXNGVERMCNGVQV060EEZ88H3&amp;mid=ucSc" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="ledger-main">
+      <h3 class="name">Stranger Things Hellfire Club T-shirt <span class="oos-tag oos-tag-inline">Vanished</span></h3>
+      <p class="note">Club shirt. Attendance is mandatory, socially.</p>
+    </div>
+    <div class="ledger-end">
+      <span class="price">$24.99</span>
+      <a class="cta" href="https://buy.trychannel3.com/lFNmCBu-ucSc-uosIs6?o=01KCRW7XTTAHZN78W8PSSZGQPV&amp;aid=01KXNGVERMCNGVQV060EEZ88H3" target="_blank" rel="noopener sponsored">Grab it at fye.com</a>
+    </div>
+  </article>
+  <article class="ledger-row" data-reveal>
+    <a class="thumb" href="https://buy.trychannel3.com/f8bj0yw-7wju-uosIs6?o=01KHS3DH32GS3EVX9VQYD6PP03&amp;aid=01KXNGVERMCNGVQV060EEZ88H3" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/01KHRYXSHH6EGFGZW4EYVQ38RF?aid=01KXNGVERMCNGVQV060EEZ88H3&amp;mid=7wju" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="ledger-main">
+      <h3 class="name">Hellfire Club Raglan T Shirt - Stranger Things </h3>
+      <p class="note">Club shirt. Attendance is mandatory, socially.</p>
+    </div>
+    <div class="ledger-end">
+      <span class="price">$26.39</span>
+      <a class="cta" href="https://buy.trychannel3.com/f8bj0yw-7wju-uosIs6?o=01KHS3DH32GS3EVX9VQYD6PP03&amp;aid=01KXNGVERMCNGVQV060EEZ88H3" target="_blank" rel="noopener sponsored">Grab it at spencersonline.com</a>
+    </div>
+  </article>
+  <article class="ledger-row" data-reveal>
+    <a class="thumb" href="https://buy.trychannel3.com/vVKZoGM-QnTm-uosIs6?o=01KJ96T8SAGFWC2YHQQDV76M1C&amp;aid=01KXNGVGKK4A5DHBX9QH9PYJ5N" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/2ec61bc5-6aae-42a8-be64-226ae3a5750a?aid=01KXNGVGKK4A5DHBX9QH9PYJ5N&amp;mid=QnTm" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="ledger-main">
+      <h3 class="name">Trends International Netflix Stranger Things: Season 3 - Key Art Unframed Wall Poster Prints </h3>
+      <p class="note">For the bedroom wall, between the bike and the radio.</p>
+    </div>
+    <div class="ledger-end">
+      <span class="price">$22.99</span>
+      <a class="cta" href="https://buy.trychannel3.com/vVKZoGM-QnTm-uosIs6?o=01KJ96T8SAGFWC2YHQQDV76M1C&amp;aid=01KXNGVGKK4A5DHBX9QH9PYJ5N" target="_blank" rel="noopener sponsored">Grab it at target.com</a>
+    </div>
+  </article>
+  <article class="ledger-row oos" data-reveal>
+    <a class="thumb" href="https://buy.trychannel3.com/UswWea5-QnTm-uosIs6?o=01KDFHDT32HBDZ4EB0VE8RQJ71&amp;aid=01KXNGVGKK4A5DHBX9QH9PYJ5N" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/01KDFHDDDH7Y9B61QRE9GQC99S?aid=01KXNGVGKK4A5DHBX9QH9PYJ5N&amp;mid=QnTm" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="ledger-main">
+      <h3 class="name">Trends International Netflix Stranger Things 3 - Game Over Framed Wall Poster Prints <span class="oos-tag oos-tag-inline">Vanished</span></h3>
+      <p class="note">For the bedroom wall, between the bike and the radio.</p>
+    </div>
+    <div class="ledger-end">
+      <span class="price">$25.99</span>
+      <a class="cta" href="https://buy.trychannel3.com/UswWea5-QnTm-uosIs6?o=01KDFHDT32HBDZ4EB0VE8RQJ71&amp;aid=01KXNGVGKK4A5DHBX9QH9PYJ5N" target="_blank" rel="noopener sponsored">Grab it at target.com</a>
+    </div>
+  </article>
+  <article class="ledger-row" data-reveal>
+    <a class="thumb" href="https://buy.trychannel3.com/XVL3cvH-QnTm-uosIs6?o=01KDE5VRB7JKRFZ6ZY0K4JP5K5&amp;aid=01KXNGVGKK4A5DHBX9QH9PYJ5N" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/01KDE5V30QH60G19YNSYFJJG5W?aid=01KXNGVGKK4A5DHBX9QH9PYJ5N&amp;mid=QnTm" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="ledger-main">
+      <h3 class="name">Trends International Netflix Stranger Things: Season 4 - Rock On Framed Wall Poster Prints </h3>
+      <p class="note">For the bedroom wall, between the bike and the radio.</p>
+    </div>
+    <div class="ledger-end">
+      <span class="price">$54.99</span>
+      <a class="cta" href="https://buy.trychannel3.com/XVL3cvH-QnTm-uosIs6?o=01KDE5VRB7JKRFZ6ZY0K4JP5K5&amp;aid=01KXNGVGKK4A5DHBX9QH9PYJ5N" target="_blank" rel="noopener sponsored">Grab it at target.com</a>
+    </div>
+  </article>
+  <article class="ledger-row" data-reveal>
+    <a class="thumb" href="https://buy.trychannel3.com/q2lYk4k-9pEg-uosIs6?o=01KBP9BHS014BFV0VGV4W4RGN9&amp;aid=01KXNGVGKK4A5DHBX9QH9PYJ5N" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/d937ed0e-c0a6-400f-a783-e230f1ac4ebf?aid=01KXNGVGKK4A5DHBX9QH9PYJ5N&amp;mid=9pEg" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="ledger-main">
+      <h3 class="name">Stranger Things The Rise Of Vecna Film Poster Wall Art </h3>
+      <p class="note">For the bedroom wall, between the bike and the radio.</p>
+    </div>
+    <div class="ledger-end">
+      <span class="price">$14.90</span>
+      <a class="cta" href="https://buy.trychannel3.com/q2lYk4k-9pEg-uosIs6?o=01KBP9BHS014BFV0VGV4W4RGN9&amp;aid=01KXNGVGKK4A5DHBX9QH9PYJ5N" target="_blank" rel="noopener sponsored">Grab it at boxlunch.com</a>
+    </div>
+  </article>
+  <article class="ledger-row oos" data-reveal>
+    <a class="thumb" href="https://buy.trychannel3.com/N4VUufX-9pEg-uosIs6?o=01KRQ403Q6ZN8T3PZ221RG08E9&amp;aid=01KXNGVJ8W58DK2GM54HNJQ118" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/2c1a9d60-08d3-4bc3-b0f2-f5995ea749e7?aid=01KXNGVJ8W58DK2GM54HNJQ118&amp;mid=9pEg" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="ledger-main">
+      <h3 class="name">Stranger Things Season 4 Vecna And Eleven Figure <span class="oos-tag oos-tag-inline">Vanished</span></h3>
+      <p class="note">The party, four inches tall, holding the line on a shelf.</p>
+    </div>
+    <div class="ledger-end">
+      <span class="price">$54.90</span>
+      <a class="cta" href="https://buy.trychannel3.com/N4VUufX-9pEg-uosIs6?o=01KRQ403Q6ZN8T3PZ221RG08E9&amp;aid=01KXNGVJ8W58DK2GM54HNJQ118" target="_blank" rel="noopener sponsored">Grab it at boxlunch.com</a>
+    </div>
+  </article>
+  <article class="ledger-row" data-reveal>
+    <a class="thumb" href="https://buy.trychannel3.com/lOGR4ds-vVQC-uosIs6?o=01KVM8F6VAB211DVD8F8VDS92G&amp;aid=01KXNGVJ8W58DK2GM54HNJQ118" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/e342274b-265c-4bf2-ba72-04310583e5d3?aid=01KXNGVJ8W58DK2GM54HNJQ118&amp;mid=vVQC" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="ledger-main">
+      <h3 class="name">Funko Pop! Television: Stranger Things Eleven 3.9-in Vinyl Figure </h3>
+      <p class="note">The party, four inches tall, holding the line on a shelf.</p>
+    </div>
+    <div class="ledger-end">
+      <span class="price">$15.19</span>
+      <a class="cta" href="https://buy.trychannel3.com/lOGR4ds-vVQC-uosIs6?o=01KVM8F6VAB211DVD8F8VDS92G&amp;aid=01KXNGVJ8W58DK2GM54HNJQ118" target="_blank" rel="noopener sponsored">Grab it at gamestop.com</a>
+    </div>
+  </article>
+  <article class="ledger-row oos" data-reveal>
+    <a class="thumb" href="https://buy.trychannel3.com/mSkiBQ5-RYZv-uosIs6?o=01KBPCS65TD1WEK0G2T6V62GHY&amp;aid=01KXNGVJ8W58DK2GM54HNJQ118" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/2599ec25-bdab-4235-aeb4-4b4420da0749?aid=01KXNGVJ8W58DK2GM54HNJQ118&amp;mid=RYZv" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="ledger-main">
+      <h3 class="name">Vecna Collectible Figure <span class="oos-tag oos-tag-inline">Vanished</span></h3>
+      <p class="note">The party, four inches tall, holding the line on a shelf.</p>
+    </div>
+    <div class="ledger-end">
+      <span class="price">$29.99</span>
+      <a class="cta" href="https://buy.trychannel3.com/mSkiBQ5-RYZv-uosIs6?o=01KBPCS65TD1WEK0G2T6V62GHY&amp;aid=01KXNGVJ8W58DK2GM54HNJQ118" target="_blank" rel="noopener sponsored">Grab it at youtooz.com</a>
+    </div>
+  </article>
+  <article class="ledger-row" data-reveal>
+    <a class="thumb" href="https://buy.trychannel3.com/VnTnIYQ-vXOJ-uosIs6?o=01KT6SWV3X628805Y613E7T7CM&amp;aid=01KXNGVKTQ149WGR0CB5S6W5ZJ" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/9edff9f7-37c1-45ea-9c24-cbeb6d578e15?aid=01KXNGVKTQ149WGR0CB5S6W5ZJ&amp;mid=vXOJ" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="ledger-main">
+      <h3 class="name">Stranger Things: Season 4 Volume 1 (colored Vinyl, Blue) </h3>
+      <p class="note">Every season. Watch with the lights on, or don&#39;t.</p>
+    </div>
+    <div class="ledger-end">
+      <span class="price">$87.99</span>
+      <a class="cta" href="https://buy.trychannel3.com/VnTnIYQ-vXOJ-uosIs6?o=01KT6SWV3X628805Y613E7T7CM&amp;aid=01KXNGVKTQ149WGR0CB5S6W5ZJ" target="_blank" rel="noopener sponsored">Grab it at merchoid.com</a>
+    </div>
+  </article>
+  <article class="ledger-row" data-reveal>
+    <a class="thumb" href="https://buy.trychannel3.com/nyuqlBS-fFUX-uosIs6?o=01KP31SAVP863SR0JXQESVZ774&amp;aid=01KXNGVKTQ149WGR0CB5S6W5ZJ" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/baf8a8d1-1900-4b18-a3b6-e1ed4a5f8445?aid=01KXNGVKTQ149WGR0CB5S6W5ZJ&amp;mid=fFUX" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="ledger-main">
+      <h3 class="name">Stranger Things Season 4 Original Score 2x Cd Black </h3>
+      <p class="note">Every season. Watch with the lights on, or don&#39;t.</p>
+    </div>
+    <div class="ledger-end">
+      <span class="price">$13</span>
+      <a class="cta" href="https://buy.trychannel3.com/nyuqlBS-fFUX-uosIs6?o=01KP31SAVP863SR0JXQESVZ774&amp;aid=01KXNGVKTQ149WGR0CB5S6W5ZJ" target="_blank" rel="noopener sponsored">Grab it at stockx.com</a>
+    </div>
+  </article>
+  <article class="ledger-row oos" data-reveal>
+    <a class="thumb" href="https://buy.trychannel3.com/g7agKgG-vXOJ-uosIs6?o=01KT6VT334AYVTJ04BBENVJT09&amp;aid=01KXNGVPG32KQJMEJ6SAPQVVF7" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/fa13cdb3-7401-4909-9935-ad521ed13221?aid=01KXNGVPG32KQJMEJ6SAPQVVF7&amp;mid=vXOJ" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="ledger-main">
+      <h3 class="name">Stranger Things: Stranger Things 4 (soundtrack From The Netflix Series) (150 Gram Vinyl, Gatefold Lp Jacket) <span class="oos-tag oos-tag-inline">Vanished</span></h3>
+      <p class="note">The synth that follows you down the driveway.</p>
+    </div>
+    <div class="ledger-end">
+      <span class="price">$89.99</span>
+      <a class="cta" href="https://buy.trychannel3.com/g7agKgG-vXOJ-uosIs6?o=01KT6VT334AYVTJ04BBENVJT09&amp;aid=01KXNGVPG32KQJMEJ6SAPQVVF7" target="_blank" rel="noopener sponsored">Grab it at merchoid.com</a>
+    </div>
+  </article>
+  <article class="ledger-row" data-reveal>
+    <a class="thumb" href="https://buy.trychannel3.com/f6LzNEy-QetO-uosIs6?o=01KH8EN7X3VTGSSKSZS3JN7NW8&amp;aid=01KXNGVPG32KQJMEJ6SAPQVVF7" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/f6LzNEy?aid=01KXNGVPG32KQJMEJ6SAPQVVF7&amp;mid=QetO" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="ledger-main">
+      <h3 class="name">Various Artists - Stranger Things 5 (soundtrack From The Netflix Series) Lp </h3>
+      <p class="note">The synth that follows you down the driveway.</p>
+    </div>
+    <div class="ledger-end">
+      <span class="price">$23.98</span>
+      <a class="cta" href="https://buy.trychannel3.com/f6LzNEy-QetO-uosIs6?o=01KH8EN7X3VTGSSKSZS3JN7NW8&amp;aid=01KXNGVPG32KQJMEJ6SAPQVVF7" target="_blank" rel="noopener sponsored">Grab it at urbanoutfitters.com</a>
+    </div>
+  </article>
+  <article class="ledger-row" data-reveal>
+    <a class="thumb" href="https://buy.trychannel3.com/KBQ3Znx-vVQC-uosIs6?o=01KVBREAF2SJA101D0VY271S8D&amp;aid=01KXNGVRQXZXD8YFFHC239QG57" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/1133007e-24d9-4ca7-bb05-6b5faad46598?aid=01KXNGVRQXZXD8YFFHC239QG57&amp;mid=vVQC" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="ledger-main">
+      <h3 class="name">Stranger Things The Upside Down 8.26-in Lamp </h3>
+      <p class="note">The companion volume. Deeper than the quarry.</p>
+    </div>
+    <div class="ledger-end">
+      <span class="price">$24.98</span>
+      <a class="cta" href="https://buy.trychannel3.com/KBQ3Znx-vVQC-uosIs6?o=01KVBREAF2SJA101D0VY271S8D&amp;aid=01KXNGVRQXZXD8YFFHC239QG57" target="_blank" rel="noopener sponsored">Grab it at gamestop.com</a>
+    </div>
+  </article>
+  <article class="ledger-row" data-reveal>
+    <a class="thumb" href="https://buy.trychannel3.com/XgN8Msj-9qJW-uosIs6?o=01KTES3MA18S3Q4XKDWCMA3A1K&amp;aid=01KXNGVRQXZXD8YFFHC239QG57" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/fc793fef-179c-458c-9ac5-68e05767f382?aid=01KXNGVRQXZXD8YFFHC239QG57&amp;mid=9qJW" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="ledger-main">
+      <h3 class="name">Stranger Things: Tales From Hawkins (graphic Novel) </h3>
+      <p class="note">The companion volume. Deeper than the quarry.</p>
+    </div>
+    <div class="ledger-end">
+      <span class="price">$11.99</span>
+      <a class="cta" href="https://buy.trychannel3.com/XgN8Msj-9qJW-uosIs6?o=01KTES3MA18S3Q4XKDWCMA3A1K&amp;aid=01KXNGVRQXZXD8YFFHC239QG57" target="_blank" rel="noopener sponsored">Grab it at barnesandnoble.com</a>
+    </div>
+  </article>
+  <article class="ledger-row" data-reveal>
+    <a class="thumb" href="https://buy.trychannel3.com/kcOgpgC-QetO-uosIs6?o=01KH89PE36AZR1XXKEZC07CGYN&amp;aid=01KXNGVVTRXWK40BBATNM8T3VW" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/c7bd2c68-5a95-4cdb-a79b-1bb749f226e6?aid=01KXNGVVTRXWK40BBATNM8T3VW&amp;mid=QetO" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="ledger-main">
+      <h3 class="name">Kate Bush – Hounds Of Love (2018 Remaster 180‑gram) Lp </h3>
+      <p class="note">The song that pulls you back. Keep it within reach.</p>
+    </div>
+    <div class="ledger-end">
+      <span class="price">$36.98</span>
+      <a class="cta" href="https://buy.trychannel3.com/kcOgpgC-QetO-uosIs6?o=01KH89PE36AZR1XXKEZC07CGYN&amp;aid=01KXNGVVTRXWK40BBATNM8T3VW" target="_blank" rel="noopener sponsored">Grab it at urbanoutfitters.com</a>
+    </div>
+  </article>
+  <article class="ledger-row oos" data-reveal>
+    <a class="thumb" href="https://buy.trychannel3.com/UVMlTO1-lwbA-uosIs6?o=01KD9Q0EERABS90SYDS486FXQE&amp;aid=01KXNGVVTRXWK40BBATNM8T3VW" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/01KD9Q08N0ZF6M794NQRW160XA?aid=01KXNGVVTRXWK40BBATNM8T3VW&amp;mid=lwbA" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="ledger-main">
+      <h3 class="name">Kate Bush: Hounds Of Love - 2018 Remaster 180gm Black Vinyl <span class="oos-tag oos-tag-inline">Vanished</span></h3>
+      <p class="note">The song that pulls you back. Keep it within reach.</p>
+    </div>
+    <div class="ledger-end">
+      <span class="price">$48.99</span>
+      <a class="cta" href="https://buy.trychannel3.com/UVMlTO1-lwbA-uosIs6?o=01KD9Q0EERABS90SYDS486FXQE&amp;aid=01KXNGVVTRXWK40BBATNM8T3VW" target="_blank" rel="noopener sponsored">Grab it at victrola.com</a>
+    </div>
+  </article></div></div>
+  </section>
+  <section class="chapter" id="basement">
+    <header class="plate" data-reveal>
+      <span class="numeral">Aisle II</span>
+      <h2 class="plate-title">The Wheeler Basement</h2>
+      <p class="plate-intro">Ten hours into the campaign. Dice, handbooks, and a channel the adults never check.</p>
+    </header>
+    <div class="chapter-body">
+    <div class="feature">
+      <article class="card card-hero" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/KaVbWZg-0xCp-uosIs6?o=01KBPDDP0JHKDHPS0BD01GKXTK&amp;aid=01KXNGW2WR6XRPE76QEHYQC3ZM" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/f31360bd-58f8-42ab-bb55-712f500826cb?aid=01KXNGW2WR6XRPE76QEHYQC3ZM&amp;mid=0xCp" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">BCA</span>
+      <h3 class="name">Bc Link 2.0 Group Communication System</h3>
+      <p class="note">Channel six, code red. Over means over.</p>
+      <div class="row">
+        <span class="price">$189.95 </span>
+        <a class="cta" href="https://buy.trychannel3.com/KaVbWZg-0xCp-uosIs6?o=01KBPDDP0JHKDHPS0BD01GKXTK&amp;aid=01KXNGW2WR6XRPE76QEHYQC3ZM" target="_blank" rel="noopener sponsored">Grab it at ascentoutdoors.com</a>
+      </div>
+    </div></article>
+      <div class="feature-rest"><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/C0jnbXI-BsaX-uosIs6?o=01KSPN9H84G6AZS5XJDGAE5HV4&amp;aid=01KXNGW2WR6XRPE76QEHYQC3ZM" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/c146c96a-1e55-4354-b423-c58b462feeb6?aid=01KXNGW2WR6XRPE76QEHYQC3ZM&amp;mid=BsaX" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Cobra</span>
+      <h3 class="name">Cobra 37-mile Walkie Talkie Ip67 Waterproof Floating Two-way Radio 2-pack 22 Channels (acxt 1037r Flt)</h3>
+      <p class="note">Channel six, code red. Over means over.</p>
+      <div class="row">
+        <span class="price">$119.94 </span>
+        <a class="cta" href="https://buy.trychannel3.com/C0jnbXI-BsaX-uosIs6?o=01KSPN9H84G6AZS5XJDGAE5HV4&amp;aid=01KXNGW2WR6XRPE76QEHYQC3ZM" target="_blank" rel="noopener sponsored">Grab it at walmart.com</a>
+      </div>
+    </div></article><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/H88kbFo-Y4p3-uosIs6?o=01KCQAZZ8D5BQ97H85D1R84000&amp;aid=01KXNGW2WR6XRPE76QEHYQC3ZM" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/H88kbFo?aid=01KXNGW2WR6XRPE76QEHYQC3ZM&amp;mid=Y4p3" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Bushnell</span>
+      <h3 class="name">Bushnell Lpx650 Walkie Talkie Radio 2 Pack - Black/orange</h3>
+      <p class="note">Channel six, code red. Over means over.</p>
+      <div class="row">
+        <span class="price">$74.99 <s class="was">$144.78</s></span>
+        <a class="cta" href="https://buy.trychannel3.com/H88kbFo-Y4p3-uosIs6?o=01KCQAZZ8D5BQ97H85D1R84000&amp;aid=01KXNGW2WR6XRPE76QEHYQC3ZM" target="_blank" rel="noopener sponsored">Grab it at tanga.com</a>
+      </div>
+    </div></article><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/T0roUrY-CaAg-uosIs6?o=01KBPAP7NRJDKAZXJS7A31PA3W&amp;aid=01KXNGW06YTRKKNCA3FY3JJ9BQ" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/eb923be9-a62f-46fc-b1bd-48e560398437?aid=01KXNGW06YTRKKNCA3FY3JJ9BQ&amp;mid=CaAg" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Easy Roller Dice Company</span>
+      <h3 class="name">Lapis Lazuli Polyhedral Dice Set Gold Elvenkind Font</h3>
+      <p class="note">Roll for initiative. The Demogorgon gets a turn too.</p>
+      <div class="row">
+        <span class="price">$94.95 </span>
+        <a class="cta" href="https://buy.trychannel3.com/T0roUrY-CaAg-uosIs6?o=01KBPAP7NRJDKAZXJS7A31PA3W&amp;aid=01KXNGW06YTRKKNCA3FY3JJ9BQ" target="_blank" rel="noopener sponsored">Grab it at easyrollerdice.com</a>
+      </div>
+    </div></article><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/SgGssF6-7Nxp-uosIs6?o=01KJDC4J4VHNHQQK8JQSWR8BYX&amp;aid=01KXNGW4Q6B5WT8BHKYDBGEWB7" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/b43764d1-0d13-46a9-80ab-6f4420e9bcc5?aid=01KXNGW4Q6B5WT8BHKYDBGEWB7&amp;mid=7Nxp" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Duracell</span>
+      <h3 class="name">Duracell 2,500-lumen Aluminum Focusing Flashlight, Heavy-duty Compact Led Flashlight With Aa Batteries</h3>
+      <p class="note">For the woods past Mirkwood. Batteries are not optional.</p>
+      <div class="row">
+        <span class="price">$59.99 </span>
+        <a class="cta" href="https://buy.trychannel3.com/SgGssF6-7Nxp-uosIs6?o=01KJDC4J4VHNHQQK8JQSWR8BYX&amp;aid=01KXNGW4Q6B5WT8BHKYDBGEWB7" target="_blank" rel="noopener sponsored">Grab it at tractorsupply.com</a>
+      </div>
+    </div></article></div>
+    </div>
+    <div class="feature-overflow"><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/gb1B9Ra-jlW4-uosIs6?o=01KCB0DG3TK51BMAZTTD3R5ZB0&amp;aid=01KXNGW4Q6B5WT8BHKYDBGEWB7" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/9ee538a8-0d94-4199-be34-e8876ec5a50d?aid=01KXNGW4Q6B5WT8BHKYDBGEWB7&amp;mid=iTIN" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">NEBO</span>
+      <h3 class="name">Nebo Newton 2500 Full Size Flashlight</h3>
+      <p class="note">For the woods past Mirkwood. Batteries are not optional.</p>
+      <div class="row">
+        <span class="price">$39.60 <s class="was">$54.99</s></span>
+        <a class="cta" href="https://buy.trychannel3.com/gb1B9Ra-jlW4-uosIs6?o=01KCB0DG3TK51BMAZTTD3R5ZB0&amp;aid=01KXNGW4Q6B5WT8BHKYDBGEWB7" target="_blank" rel="noopener sponsored">Grab it at campingworld.com</a>
+      </div>
+    </div></article><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/0WahEar-BsaX-uosIs6?o=01KSQV4AZHVWYMK3RS9V0W7DE2&amp;aid=01KXNGW58V5HGYGZSMX53K9E70" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/c3cb64b0-5a53-435a-a205-101727d0c200?aid=01KXNGW58V5HGYGZSMX53K9E70&amp;mid=BsaX" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Energizer</span>
+      <h3 class="name">Energizer Tactical Mini Led Flashlights (3 Pack) Bright 375 Lumens Each Durable Metal Body Pocket Torch For Camping Edc Emergency Running And Hunting Batteries Included</h3>
+      <p class="note">For the woods past Mirkwood. Batteries are not optional.</p>
+      <div class="row">
+        <span class="price">$24.97 </span>
+        <a class="cta" href="https://buy.trychannel3.com/0WahEar-BsaX-uosIs6?o=01KSQV4AZHVWYMK3RS9V0W7DE2&amp;aid=01KXNGW58V5HGYGZSMX53K9E70" target="_blank" rel="noopener sponsored">Grab it at walmart.com</a>
+      </div>
+    </div></article><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/P7iTxn4-vVQC-uosIs6?o=01KVNTQ68PWPYKAKW2XADFB266&amp;aid=01KXNGVYBJ2XNA6SCZH0QFM0AW" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/ebb0958f-4a4d-440d-8eb8-20c6c1417342?aid=01KXNGVYBJ2XNA6SCZH0QFM0AW&amp;mid=vVQC" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Wizards of the Coast</span>
+      <h3 class="name">Dungeons And Dragons 2024 Player&#39;s Handbook</h3>
+      <p class="note">The campaign starts here. Ten hours minimum, no dinner breaks.</p>
+      <div class="row">
+        <span class="price">$47.49 </span>
+        <a class="cta" href="https://buy.trychannel3.com/P7iTxn4-vVQC-uosIs6?o=01KVNTQ68PWPYKAKW2XADFB266&amp;aid=01KXNGVYBJ2XNA6SCZH0QFM0AW" target="_blank" rel="noopener sponsored">Grab it at gamestop.com</a>
+      </div>
+    </div></article></div></div>
+  </section>
+  <section class="chapter" id="byers">
+    <header class="plate" data-reveal>
+      <span class="numeral">Aisle III</span>
+      <h2 class="plate-title">The Byers Living Room</h2>
+      <p class="plate-intro">String lights, a phone with a cord, waffles for whoever turns up. The wall knows more than it says.</p>
+    </header>
+    <div class="chapter-body">
+    <div class="shelf" role="list" aria-label="The Byers Living Room">
+      <article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/4w9wDPv-5d3N-uosIs6?o=01KBP7SGGGQM8VWA4T2DRTKGM4&amp;aid=01KXNHN86C567ZC8RQYZNYT2S8" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/257922fc-8c4d-4b98-89d9-d01ba171be6f?aid=01KXNHN86C567ZC8RQYZNYT2S8&amp;mid=5d3N" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Troy Lighting</span>
+      <h3 class="name">Scatchard One Light Table Lamp Oatmeal</h3>
+      <p class="note">Sixty watts, left on all night, on purpose.</p>
+      <div class="row">
+        <span class="price">$250 </span>
+        <a class="cta" href="https://buy.trychannel3.com/4w9wDPv-5d3N-uosIs6?o=01KBP7SGGGQM8VWA4T2DRTKGM4&amp;aid=01KXNHN86C567ZC8RQYZNYT2S8" target="_blank" rel="noopener sponsored">Grab it at lightingdesign.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/0b8vriT-ao0P-uosIs6?o=01KKCN1VG2NEBT2S9KJFS56YPX&amp;aid=01KXNHN6R2W09CRA6B21BYJND9" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/d0684f5d-5b03-4104-8dc2-58db3e5fb041?aid=01KXNHN6R2W09CRA6B21BYJND9&amp;mid=ao0P" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Meyda Tiffany</span>
+      <h3 class="name">Meyda Tiffany 12432 Vintage Lily Stained Glass / Tiffany Desk Lamp From The Lilies Collection</h3>
+      <p class="note">Sixty watts, left on all night, on purpose.</p>
+      <div class="row">
+        <span class="price">$122.10 </span>
+        <a class="cta" href="https://buy.trychannel3.com/0b8vriT-ao0P-uosIs6?o=01KKCN1VG2NEBT2S9KJFS56YPX&amp;aid=01KXNHN6R2W09CRA6B21BYJND9" target="_blank" rel="noopener sponsored">Grab it at fergusonhome.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/LGb10Sh-DDxa-uosIs6?o=01KJTDHY9C01XA990BRZHFV24Z&amp;aid=01KXNHN0ADMH516K03DW63VM8Q" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/9f71d5a0-4060-4bea-8e38-d29848630bad?aid=01KXNHN0ADMH516K03DW63VM8Q&amp;mid=DDxa" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Phantom Tag Protector</span>
+      <h3 class="name">M59 Corded Telephone Fixed Landline Telephone Home Business Offices Phone</h3>
+      <p class="note">A phone with a cord. It rings when it matters.</p>
+      <div class="row">
+        <span class="price">$73.99 <s class="was">$92.99</s></span>
+        <a class="cta" href="https://buy.trychannel3.com/LGb10Sh-DDxa-uosIs6?o=01KJTDHY9C01XA990BRZHFV24Z&amp;aid=01KXNHN0ADMH516K03DW63VM8Q" target="_blank" rel="noopener sponsored">Grab it at phantomtagprotector.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/018Vhti-BsaX-uosIs6?o=01KVRDG7G21007AMJ6QQ4DESF6&amp;aid=01KXNHMZ7ZF2K6KPBWFW2HJQEC" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/c18dae30-22a9-49a5-9708-9d75c01d01ab?aid=01KXNHMZ7ZF2K6KPBWFW2HJQEC&amp;mid=BsaX" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Walmart</span>
+      <h3 class="name">Almencla Corded Telephone Corded Retro Design Phone Double Gong Home Decor Tabletop Ornament For Office Study Room Beige</h3>
+      <p class="note">A phone with a cord. It rings when it matters.</p>
+      <div class="row">
+        <span class="price">$94.99 <s class="was">$99.99</s></span>
+        <a class="cta" href="https://buy.trychannel3.com/018Vhti-BsaX-uosIs6?o=01KVRDG7G21007AMJ6QQ4DESF6&amp;aid=01KXNHMZ7ZF2K6KPBWFW2HJQEC" target="_blank" rel="noopener sponsored">Grab it at walmart.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/79iV8LI-EWIx-uosIs6?o=01KBPBYPKZ1KW7TJ5VN7398TP9&amp;aid=01KXNHN1MJVNWDESTXPRJ6848H" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/01KDBQE8EMK1WVTS90R53X7TS6?aid=01KXNHN1MJVNWDESTXPRJ6848H&amp;mid=sXfe" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Ninja</span>
+      <h3 class="name">Ninja Bw1001 Neverstick Pro Belgian Waffle Maker (black &amp; Silver)</h3>
+      <p class="note">Eggos at home. Leave a box in the woods for a friend.</p>
+      <div class="row">
+        <span class="price">$114.99 </span>
+        <a class="cta" href="https://buy.trychannel3.com/79iV8LI-EWIx-uosIs6?o=01KBPBYPKZ1KW7TJ5VN7398TP9&amp;aid=01KXNHN1MJVNWDESTXPRJ6848H" target="_blank" rel="noopener sponsored">Grab it at getyourthing.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/jkmVovM-ftLt-uosIs6?o=01KCHMQG4SPNM3TGJ1B5BFZJ4T&amp;aid=01KXNHN3KRTV4QV0DKZAF7APRW" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/faf27062-4a32-4dee-9398-b6e847e1e61b?aid=01KXNHN3KRTV4QV0DKZAF7APRW&amp;mid=FP7n" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Salton</span>
+      <h3 class="name">Black Stuffed Belgian Waffle Maker Wm2105</h3>
+      <p class="note">Eggos at home. Leave a box in the woods for a friend.</p>
+      <div class="row">
+        <span class="price">$64.99 </span>
+        <a class="cta" href="https://buy.trychannel3.com/jkmVovM-ftLt-uosIs6?o=01KCHMQG4SPNM3TGJ1B5BFZJ4T&amp;aid=01KXNHN3KRTV4QV0DKZAF7APRW" target="_blank" rel="noopener sponsored">Grab it at roamans.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/x2fP5IU-BKS2-uosIs6?o=01KBPD7X4RFS2VPQFWGZEEWETP&amp;aid=01KXNGW780KED21CS4A0XA2RBN" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/a987f9a8-f1c8-462b-9429-612ef0f9bbde?aid=01KXNGW780KED21CS4A0XA2RBN&amp;mid=BKS2" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">DEWENWILS</span>
+      <h3 class="name">Dewenwils C9 Led Christmas Lights Outdoor, 33.3ft 50led Christmas String Lights, Waterproof, Multi-color Outdoor Decorations For Christmas Tree, Patio, Garden, Yard-hcsl11a</h3>
+      <p class="note">One bulb per letter. The wall answers back.</p>
+      <div class="row">
+        <span class="price">$49.99 </span>
+        <a class="cta" href="https://buy.trychannel3.com/x2fP5IU-BKS2-uosIs6?o=01KBPD7X4RFS2VPQFWGZEEWETP&amp;aid=01KXNGW780KED21CS4A0XA2RBN" target="_blank" rel="noopener sponsored">Grab it at dewenwils.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/Ebi0IHI-BKS2-uosIs6?o=01KBPABH1H05Z7QZDBHHAZJFE4&amp;aid=01KXNGW780KED21CS4A0XA2RBN" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/931a5ed8-69bc-45b2-9b4d-f644556ac2a2?aid=01KXNGW780KED21CS4A0XA2RBN&amp;mid=BKS2" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">DEWENWILS</span>
+      <h3 class="name">Dewenwils C9 Christmas Lights Outdoor, 33.3ft 50led Christmas Tree Lights, Waterproof, Big Christmas Lights, Extendable For Wedding Party Christmas Decoration, Green Wire, Red &amp; Green-hcsl11b</h3>
+      <p class="note">One bulb per letter. The wall answers back.</p>
+      <div class="row">
+        <span class="price">$49.99 </span>
+        <a class="cta" href="https://buy.trychannel3.com/Ebi0IHI-BKS2-uosIs6?o=01KBPABH1H05Z7QZDBHHAZJFE4&amp;aid=01KXNGW780KED21CS4A0XA2RBN" target="_blank" rel="noopener sponsored">Grab it at dewenwils.com</a>
+      </div>
+    </div></article>
+    </div>
+    <p class="shelf-hint" aria-hidden="true">Drag sideways. Don&#39;t wander off.</p></div>
+  </section>
+  <aside class="quote" data-reveal>
+    <blockquote>&ldquo;I am on a curiosity voyage, and I need my paddles to travel.&rdquo;</blockquote>
+    <cite>D. Henderson, Hawkins Middle AV Club</cite>
+  </aside>
+  <section class="chapter" id="avclub">
+    <header class="plate" data-reveal>
+      <span class="numeral">Aisle IV</span>
+      <h2 class="plate-title">The AV Club</h2>
+      <p class="plate-intro">Tape decks, headphones, instant film. If it takes batteries, it belongs here.</p>
+    </header>
+    <div class="chapter-body">
+    <div class="feature">
+      <article class="card card-hero" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/OWJpUj5-KB7L-uosIs6?o=01KCHPWCREA5WEYCWHGB4NDB44&amp;aid=01KXNGWJVEKVBX783VT84CSDDC" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/e244c6c8-0aaf-4563-9cb4-5c9c28a580ff?aid=01KXNGWJVEKVBX783VT84CSDDC&amp;mid=xpLQ" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">beyerdynamic Inc.</span>
+      <h3 class="name">Beyerdynamic Dt 270 Pro Compact Over-ear Studio Headphones</h3>
+      <p class="note">Over the ears, over the world. The safest place in Hawkins.</p>
+      <div class="row">
+        <span class="price">$129.99 <s class="was">$149.99</s></span>
+        <a class="cta" href="https://buy.trychannel3.com/OWJpUj5-KB7L-uosIs6?o=01KCHPWCREA5WEYCWHGB4NDB44&amp;aid=01KXNGWJVEKVBX783VT84CSDDC" target="_blank" rel="noopener sponsored">Grab it at musicarts.com</a>
+      </div>
+    </div></article>
+      <div class="feature-rest"><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/KImVoXW-ORka-uosIs6?o=01KRHYCG106H628DN3EPP2SCG6&amp;aid=01KXNGWK9X5B65FBETQT10SAW7" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/6edc629b-9540-4b6d-8554-e1fbe8501416?aid=01KXNGWK9X5B65FBETQT10SAW7&amp;mid=HT4o" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Meze Audio</span>
+      <h3 class="name">Meze Audio 99 Classics Closed Back Headphones 2nd Gen</h3>
+      <p class="note">Over the ears, over the world. The safest place in Hawkins.</p>
+      <div class="row">
+        <span class="price">$349 </span>
+        <a class="cta" href="https://buy.trychannel3.com/KImVoXW-ORka-uosIs6?o=01KRHYCG106H628DN3EPP2SCG6&amp;aid=01KXNGWK9X5B65FBETQT10SAW7" target="_blank" rel="noopener sponsored">Grab it at apos.audio</a>
+      </div>
+    </div></article><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/eQzwirj-BsaX-uosIs6?o=01KSR1FDMZ5NJSG152VJZAE6VF&amp;aid=01KXNGWHFVD43MW0SQCPDEBNC0" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/308fea05-e70a-4b3d-a2b4-5b7a3af48686?aid=01KXNGWHFVD43MW0SQCPDEBNC0&amp;mid=BsaX" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Buzz</span>
+      <h3 class="name">Fujifilm Instax Mini 12 Instant Film Camera ( Clay White ) + Fujifilm Instax Mini Twin Film Bundle ( 10 Sheets X 2 Packs )</h3>
+      <p class="note">One shot, sixty seconds, no darkroom.</p>
+      <div class="row">
+        <span class="price">$125 </span>
+        <a class="cta" href="https://buy.trychannel3.com/eQzwirj-BsaX-uosIs6?o=01KSR1FDMZ5NJSG152VJZAE6VF&amp;aid=01KXNGWHFVD43MW0SQCPDEBNC0" target="_blank" rel="noopener sponsored">Grab it at walmart.com</a>
+      </div>
+    </div></article><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/d6oI0rX-ORka-uosIs6?o=01KBPAW59CE8TFQWR7TV6WTCD9&amp;aid=01KXNGWE8T25ZHX3BPEDQBFHYJ" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/1793549b-fe7a-4b1a-9dc2-a95367b0ea49?aid=01KXNGWE8T25ZHX3BPEDQBFHYJ&amp;mid=ORka" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">FiiO 播放器</span>
+      <h3 class="name">Cp13 Portable Stereo Cassette Player</h3>
+      <p class="note">Side A saves lives. Ask Max.</p>
+      <div class="row">
+        <span class="price">$87.99 </span>
+        <a class="cta" href="https://buy.trychannel3.com/d6oI0rX-ORka-uosIs6?o=01KBPAW59CE8TFQWR7TV6WTCD9&amp;aid=01KXNGWE8T25ZHX3BPEDQBFHYJ" target="_blank" rel="noopener sponsored">Grab it at apos.audio</a>
+      </div>
+    </div></article><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/e4UxrIZ-5gFA-uosIs6?o=01KBPC5PTCP9DVCD9MP4GNGH65&amp;aid=01KXNGWFC8Z2CHC0EGG1S14SEW" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/55f2d35c-1738-448f-b866-f46bd32dc9e0?aid=01KXNGWFC8Z2CHC0EGG1S14SEW&amp;mid=5gFA" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Naxa</span>
+      <h3 class="name">Portable Cd And Cassette Stereo Boombox</h3>
+      <p class="note">Loud enough for the cul-de-sac. The Clash approves.</p>
+      <div class="row">
+        <span class="price">$95.99 <s class="was">$119.99</s></span>
+        <a class="cta" href="https://buy.trychannel3.com/e4UxrIZ-5gFA-uosIs6?o=01KBPC5PTCP9DVCD9MP4GNGH65&amp;aid=01KXNGWFC8Z2CHC0EGG1S14SEW" target="_blank" rel="noopener sponsored">Grab it at sharperimage.com</a>
+      </div>
+    </div></article></div>
+    </div>
+    <div class="feature-overflow"><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/LHJmG5Q-BsaX-uosIs6?o=01KSR0QWFK9E8TA8NTG8T9QPR2&amp;aid=01KXNGWFS8TSTET1D6KHJMQ7RF" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/6c5a1970-88af-400a-9d5a-9a76e3447c37?aid=01KXNGWFS8TSTET1D6KHJMQ7RF&amp;mid=BsaX" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Walmart</span>
+      <h3 class="name">Boombox Cassette Tape Player Recorder Fm/am Sw Radios With Bluetooth Mp3 And Karaoke.</h3>
+      <p class="note">Loud enough for the cul-de-sac. The Clash approves.</p>
+      <div class="row">
+        <span class="price">$47.59 <s class="was">$52.88</s></span>
+        <a class="cta" href="https://buy.trychannel3.com/LHJmG5Q-BsaX-uosIs6?o=01KSR0QWFK9E8TA8NTG8T9QPR2&amp;aid=01KXNGWFS8TSTET1D6KHJMQ7RF" target="_blank" rel="noopener sponsored">Grab it at walmart.com</a>
+      </div>
+    </div></article><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/zXQjrhX-LFnL-uosIs6?o=01KQJYR4HD5KXPRK0PACGMQ7Y7&amp;aid=01KXNGWFS8TSTET1D6KHJMQ7RF" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/2e137c73-425c-43f7-9c39-fbd9f9d815ab?aid=01KXNGWFS8TSTET1D6KHJMQ7RF&amp;mid=LFnL" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Jacob Jensen</span>
+      <h3 class="name">Jensen Cd-785 Bluetooth Cassette/mp3/cd/radio Player, Black</h3>
+      <p class="note">Loud enough for the cul-de-sac. The Clash approves.</p>
+      <div class="row">
+        <span class="price">$136.99 </span>
+        <a class="cta" href="https://buy.trychannel3.com/zXQjrhX-LFnL-uosIs6?o=01KQJYR4HD5KXPRK0PACGMQ7Y7&amp;aid=01KXNGWFS8TSTET1D6KHJMQ7RF" target="_blank" rel="noopener sponsored">Grab it at staples.com</a>
+      </div>
+    </div></article><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/OEfSAUt-BsaX-uosIs6?o=01KSR1F6KDJEK9C1PRMP4BDS38&amp;aid=01KXNGWE8T25ZHX3BPEDQBFHYJ" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/fb1d6330-f190-4cc1-a805-14f7ca151438?aid=01KXNGWE8T25ZHX3BPEDQBFHYJ&amp;mid=BsaX" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Jensen</span>
+      <h3 class="name">Jensen Portable Stereo Cassette Player With Am/fm Radio + Sport Earbuds (yellow)</h3>
+      <p class="note">Side A saves lives. Ask Max.</p>
+      <div class="row">
+        <span class="price">$25.04 </span>
+        <a class="cta" href="https://buy.trychannel3.com/OEfSAUt-BsaX-uosIs6?o=01KSR1F6KDJEK9C1PRMP4BDS38&amp;aid=01KXNGWE8T25ZHX3BPEDQBFHYJ" target="_blank" rel="noopener sponsored">Grab it at walmart.com</a>
+      </div>
+    </div></article></div></div>
+  </section>
+  <section class="chapter" id="dime">
+    <header class="plate" data-reveal>
+      <span class="numeral">Aisle V</span>
+      <h2 class="plate-title">The Five-and-Dime</h2>
+      <p class="plate-intro">Ringer tees, denim, tube socks. Dress for a town where nothing ever happens.</p>
+    </header>
+    <div class="chapter-body">
+    <div class="shelf" role="list" aria-label="The Five-and-Dime">
+      <article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/UVQuBiJ-2JnV-uosIs6?o=01KBPCQ206SVZM5PB42J8M68ZT&amp;aid=01KXNGWT3MMH5Q32QFKSK4XZDT" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/UVQuBiJ?aid=01KXNGWT3MMH5Q32QFKSK4XZDT&amp;mid=2JnV" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">O&#39;Neill</span>
+      <h3 class="name">O&#39;riginals District Jacket</h3>
+      <p class="note">Corduroy for October in Indiana. It whistles when you run.</p>
+      <div class="row">
+        <span class="price">$59.99 <s class="was">$99.50</s></span>
+        <a class="cta" href="https://buy.trychannel3.com/UVQuBiJ-2JnV-uosIs6?o=01KBPCQ206SVZM5PB42J8M68ZT&amp;aid=01KXNGWT3MMH5Q32QFKSK4XZDT" target="_blank" rel="noopener sponsored">Grab it at us.oneill.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/kzngdXu-E052-uosIs6?o=01KBPABFRTTCM333NFCA2ZM7TG&amp;aid=01KXNGWT3MMH5Q32QFKSK4XZDT" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/277e86d2-7204-4327-8eac-884638f97c44?aid=01KXNGWT3MMH5Q32QFKSK4XZDT&amp;mid=E052" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Vuori</span>
+      <h3 class="name">Vuori Cord Jacket</h3>
+      <p class="note">Corduroy for October in Indiana. It whistles when you run.</p>
+      <div class="row">
+        <span class="price">$218 </span>
+        <a class="cta" href="https://buy.trychannel3.com/kzngdXu-E052-uosIs6?o=01KBPABFRTTCM333NFCA2ZM7TG&amp;aid=01KXNGWT3MMH5Q32QFKSK4XZDT" target="_blank" rel="noopener sponsored">Grab it at vuoriclothing.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/wcO41CU-e1cY-uosIs6?o=01KTSH2PHM659J2S8TTN2YP8PV&amp;aid=01KXNGWQVX4CV8EE3JWQ4ME5D4" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/a9500c00-e0aa-4be8-bbd4-2b8b9595306d?aid=01KXNGWQVX4CV8EE3JWQ4ME5D4&amp;mid=e1cY" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Coach</span>
+      <h3 class="name">Denim Jacket With Shearling Collar</h3>
+      <p class="note">Denim over flannel. The Hawkins layer system.</p>
+      <div class="row">
+        <span class="price">$238 <s class="was">$595</s></span>
+        <a class="cta" href="https://buy.trychannel3.com/wcO41CU-e1cY-uosIs6?o=01KTSH2PHM659J2S8TTN2YP8PV&amp;aid=01KXNGWQVX4CV8EE3JWQ4ME5D4" target="_blank" rel="noopener sponsored">Grab it at coach.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/YolZoAH-cvfe-uosIs6?o=01KW03BPJ3MXG6W4QXE8E50QEV&amp;aid=01KXNGWQA6HTWRMDVV2RMDNJBQ" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/9aef3f11-e9a8-4c99-b89e-dec81e440ba9?aid=01KXNGWQA6HTWRMDVV2RMDNJBQ&amp;mid=cvfe" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">AG</span>
+      <h3 class="name">Dart Denim Trucker Jacket</h3>
+      <p class="note">Denim over flannel. The Hawkins layer system.</p>
+      <div class="row">
+        <span class="price">$275 </span>
+        <a class="cta" href="https://buy.trychannel3.com/YolZoAH-cvfe-uosIs6?o=01KW03BPJ3MXG6W4QXE8E50QEV&amp;aid=01KXNGWQA6HTWRMDVV2RMDNJBQ" target="_blank" rel="noopener sponsored">Grab it at nordstromrack.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/7NXgsln-72JA-uosIs6?o=01KCYD3133NZQYEX62WFC1C2KT&amp;aid=01KXNGWXZQ5FTGBNG7NB4MERSR" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/01KCYD2JQV4VMKFKM8E2AQZRET?aid=01KXNGWXZQ5FTGBNG7NB4MERSR&amp;mid=wscm" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Converse</span>
+      <h3 class="name">Converse Men&#39;s Chuck Taylor All-star High-top Shoes</h3>
+      <p class="note">Canvas high tops. Pedal fast, brake late.</p>
+      <div class="row">
+        <span class="price">$64.99 </span>
+        <a class="cta" href="https://buy.trychannel3.com/7NXgsln-72JA-uosIs6?o=01KCYD3133NZQYEX62WFC1C2KT&amp;aid=01KXNGWXZQ5FTGBNG7NB4MERSR" target="_blank" rel="noopener sponsored">Grab it at shiekh.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/SM3nzyR-72JA-uosIs6?o=01KCY9K6F9VSC4WS4AYYGRC7NT&amp;aid=01KXNGWXZQ5FTGBNG7NB4MERSR" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/01KCY9EWQRRSCDE9AYYE7PVRXD?aid=01KXNGWXZQ5FTGBNG7NB4MERSR&amp;mid=hHvi" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Converse</span>
+      <h3 class="name">Converse Chuck Taylor All Star Canvas Low Top Sneaker Black Monochrome 7.5 Mens_us/9.5 Womens_us</h3>
+      <p class="note">Canvas high tops. Pedal fast, brake late.</p>
+      <div class="row">
+        <span class="price">$59.99 </span>
+        <a class="cta" href="https://buy.trychannel3.com/SM3nzyR-72JA-uosIs6?o=01KCY9K6F9VSC4WS4AYYGRC7NT&amp;aid=01KXNGWXZQ5FTGBNG7NB4MERSR" target="_blank" rel="noopener sponsored">Grab it at shiekh.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/dI2Rz3h-cvfe-uosIs6?o=01KX7HGXZWZ2T9FEEDX1D4F3K9&amp;aid=01KXNGWSJ6K9KXX1H6BDVN16MT" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/91fac802-a0d9-4ab3-9000-66140bc62d13?aid=01KXNGWSJ6K9KXX1H6BDVN16MT&amp;mid=cvfe" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Boss</span>
+      <h3 class="name">Carper Corduory Shirt Jacket</h3>
+      <p class="note">Corduroy for October in Indiana. It whistles when you run.</p>
+      <div class="row">
+        <span class="price">$199.97 <s class="was">$399</s></span>
+        <a class="cta" href="https://buy.trychannel3.com/dI2Rz3h-cvfe-uosIs6?o=01KX7HGXZWZ2T9FEEDX1D4F3K9&amp;aid=01KXNGWSJ6K9KXX1H6BDVN16MT" target="_blank" rel="noopener sponsored">Grab it at nordstromrack.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/XEC7cUh-JrvW-uosIs6?o=01KKE6KTQPCGT2F47GRNHC2J28&amp;aid=01KXNGWP6SQ2VA1YTT18EB1G2R" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/f11ea8db-269a-432a-a450-5106e4feee12?aid=01KXNGWP6SQ2VA1YTT18EB1G2R&amp;mid=JrvW" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Boss</span>
+      <h3 class="name">Relaxed-fit T-shirt In Cotton With Striped Trims</h3>
+      <p class="note">Ringer tees, AV Club spec. Wear it to the science fair.</p>
+      <div class="row">
+        <span class="price">$99 </span>
+        <a class="cta" href="https://buy.trychannel3.com/XEC7cUh-JrvW-uosIs6?o=01KKE6KTQPCGT2F47GRNHC2J28&amp;aid=01KXNGWP6SQ2VA1YTT18EB1G2R" target="_blank" rel="noopener sponsored">Grab it at hugoboss.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/1iiwFmn-QAqJ-uosIs6?o=01KBPD0GK9949Z2W1G31424NA3&amp;aid=01KXNGWW1DXHJK44MGA1V7MN8H" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/1iiwFmn?aid=01KXNGWW1DXHJK44MGA1V7MN8H&amp;mid=QAqJ" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Mato &amp; Hash</span>
+      <h3 class="name">Unisex Classic Knee-high Tube Socks For Sports, Costumes Or Everyday Wear - Purple/white/6 Pk Medium/large</h3>
+      <p class="note">Tube socks, pulled high. Standard issue for bike commutes.</p>
+      <div class="row">
+        <span class="price">$38.99 </span>
+        <a class="cta" href="https://buy.trychannel3.com/1iiwFmn-QAqJ-uosIs6?o=01KBPD0GK9949Z2W1G31424NA3&amp;aid=01KXNGWW1DXHJK44MGA1V7MN8H" target="_blank" rel="noopener sponsored">Grab it at matohash.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/svqF307-cvfe-uosIs6?o=01KX7XPF9JYRKM5JJ57DZGK17S&amp;aid=01KXNGWNQAXMKER9R4Y6N8C8DG" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/59932864-7216-4726-998c-bcace4715f6d?aid=01KXNGWNQAXMKER9R4Y6N8C8DG&amp;mid=cvfe" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Boss</span>
+      <h3 class="name">Tessler Cotton Ringer T-shirt</h3>
+      <p class="note">Ringer tees, AV Club spec. Wear it to the science fair.</p>
+      <div class="row">
+        <span class="price">$59.97 <s class="was">$99</s></span>
+        <a class="cta" href="https://buy.trychannel3.com/svqF307-cvfe-uosIs6?o=01KX7XPF9JYRKM5JJ57DZGK17S&amp;aid=01KXNGWNQAXMKER9R4Y6N8C8DG" target="_blank" rel="noopener sponsored">Grab it at nordstromrack.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/0Qfb942-0gyb-uosIs6?o=01KRG0B676S5Y6KHP5V4END2SD&amp;aid=01KXNGWNQAXMKER9R4Y6N8C8DG" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/a9d63a66-9f4e-4b3b-96bf-02d4db00932a?aid=01KXNGWNQAXMKER9R4Y6N8C8DG&amp;mid=0gyb" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Reigning Champ</span>
+      <h3 class="name">Midweight Jersey Ringer Standard T-shirt</h3>
+      <p class="note">Ringer tees, AV Club spec. Wear it to the science fair.</p>
+      <div class="row">
+        <span class="price">$58 </span>
+        <a class="cta" href="https://buy.trychannel3.com/0Qfb942-0gyb-uosIs6?o=01KRG0B676S5Y6KHP5V4END2SD&amp;aid=01KXNGWNQAXMKER9R4Y6N8C8DG" target="_blank" rel="noopener sponsored">Grab it at reigningchamp.com</a>
+      </div>
+    </div></article>
+    </div>
+    <p class="shelf-hint" aria-hidden="true">Drag sideways. Don&#39;t wander off.</p></div>
+  </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div>
+        <h2>The record</h2>
+        <p>Stranger Things&trade; and Netflix are trademarks of their respective owners. Aisle I is the licensed goods. Aisles II through V are the town around them, not licensed product.</p>
+        <p>Prices and stock come from Channel3 and flicker like everything else in Hawkins; confirm at the retailer.</p>
+      </div>
+      <div>
+        <h2>The arrangement</h2>
+        <p>Links are monetized. When you buy through one, this site earns a commission. Friends don't lie.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      var els = document.querySelectorAll("[data-reveal]");
+      if (reduced || !("IntersectionObserver" in window)) {
+        els.forEach(function (el) { el.classList.add("in"); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        var batch = entries.filter(function (e) { return e.isIntersecting; });
+        batch.forEach(function (e, n) {
+          e.target.style.setProperty("--stagger", Math.min(n * 45, 320) + "ms");
+          e.target.classList.add("in");
+          io.unobserve(e.target);
+        });
+      }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+      els.forEach(function (el) { io.observe(el); });
+    })();
+  </script>
+</body>
+</html>
