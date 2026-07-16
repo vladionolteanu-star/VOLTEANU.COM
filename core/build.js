@@ -54,12 +54,20 @@ async function main() {
   };
 
   let queriesRun = 0;
+  let aborted = null;
   for (const spec of universe.queries) {
     const filters = {};
     if (spec.price) filters.price = spec.price;
     if (spec.gender) filters.gender = spec.gender;
 
-    const products = await client.searchAll(spec.query, { filters, maxPages: 2 });
+    // Out of credits mid-run is survivable: keep what we have, ship smaller.
+    let products;
+    try {
+      products = await client.searchAll(spec.query, { filters, maxPages: 2 });
+    } catch (err) {
+      aborted = err.message;
+      break;
+    }
     queriesRun++;
 
     const candidates = products
@@ -80,6 +88,15 @@ async function main() {
   }
 
   const items = [...byId.values()];
+  if (aborted && items.length === 0) {
+    console.error(`API failed before anything was collected: ${aborted}`);
+    process.exit(1);
+  }
+  if (aborted) {
+    console.warn(
+      `\nAPI stopped after ${queriesRun}/${universe.queries.length} queries (${aborted}); writing the partial collection.`
+    );
+  }
   const chapterCounts = Object.fromEntries(
     universe.chapters.map((c) => [c.key, items.filter((i) => i.chapter === c.key).length])
   );
