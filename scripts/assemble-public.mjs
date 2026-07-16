@@ -18,6 +18,25 @@ const esc = (s = "") =>
 
 rmSync(PUBLIC, { recursive: true, force: true });
 mkdirSync(PUBLIC, { recursive: true });
+cpSync(join(ROOT, "assets", "volteanu-logo.jpg"), join(PUBLIC, "volteanu-logo.jpg"));
+
+// Same ranking the sites' evidence boards use: iconic officials first.
+function pickPreviews(items, universe, n = 4) {
+  const officials = items.filter((i) => i.collection === "official");
+  const ranked = [
+    ...officials.filter((i) => universe.evidenceIconic.test(i.title)),
+    ...officials,
+  ];
+  const seen = new Set();
+  const picks = [];
+  for (const i of ranked) {
+    if (seen.has(i.image)) continue;
+    seen.add(i.image);
+    picks.push(i);
+    if (picks.length === n) break;
+  }
+  return picks;
+}
 
 const entries = [];
 for (const id of readdirSync(SITES)) {
@@ -29,12 +48,15 @@ for (const id of readdirSync(SITES)) {
   const { default: universe } = await import(
     new URL(`../sites/${id}/universe.js`, import.meta.url).href
   );
+  const show =
+    universe.copy.title.match(/curated edit of (?:the )?(.+?) universe/i)?.[1] ??
+    id.replace(/-/g, " ");
   entries.push({
     id,
     name: universe.name,
-    lede: universe.copy.metaDescription,
+    show,
     count: data.items?.length ?? 0,
-    updated: (data.generatedAt ?? "").slice(0, 10),
+    previews: pickPreviews(data.items ?? [], universe),
   });
 }
 
@@ -42,9 +64,12 @@ const cards = entries
   .map(
     (e) => `
     <a class="site" href="/${e.id}/">
+      <span class="proof">${e.previews
+        .map((p) => `<span class="tile"><img src="${esc(p.image)}" alt="" decoding="async" /></span>`)
+        .join("")}</span>
+      <span class="site-show">${esc(e.show)}</span>
       <span class="site-name">${esc(e.name)}</span>
-      <span class="site-lede">${esc(e.lede)}</span>
-      <span class="site-meta">${e.count} pieces &middot; updated ${esc(e.updated)}</span>
+      <span class="site-meta">${e.count} pieces</span>
     </a>`
   )
   .join("");
@@ -61,38 +86,55 @@ writeFileSync(
 <style>
   :root{
     --ground: oklch(0.15 0.01 80);
+    --surface: oklch(0.18 0.012 80);
     --ink: oklch(0.92 0.015 85);
     --ink-dim: oklch(0.68 0.02 85);
     --hairline: color-mix(in oklch, var(--ink) 14%, transparent);
+    --paper: oklch(0.96 0.01 90);
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
   }
   *{ box-sizing: border-box; }
   body{ margin:0; background: var(--ground); color: var(--ink);
     font-family: Georgia, "Times New Roman", serif; line-height: 1.5;
     min-height: 100vh; display: grid; place-items: center; padding: 48px 24px; }
-  main{ max-width: 720px; width: 100%; }
-  .kicker{ font-family: ui-sans-serif, Arial, sans-serif; font-size: 11px;
-    letter-spacing: .3em; text-transform: uppercase; color: var(--ink-dim); margin: 0 0 18px; }
-  h1{ font-size: clamp(34px, 6vw, 54px); font-weight: 400; line-height: 1.05;
-    margin: 0 0 14px; letter-spacing: -0.01em; }
-  .lede{ color: var(--ink-dim); font-style: italic; margin: 0 0 44px; max-width: 52ch; }
-  .sites{ display: grid; gap: 1px; background: var(--hairline);
-    border-block: 1px solid var(--hairline); }
-  .site{ background: var(--ground); padding: 26px 4px; text-decoration: none;
-    color: inherit; display: grid; gap: 6px; transition: padding-left .25s ease; }
-  .site:hover{ padding-left: 14px; }
-  .site-name{ font-size: 24px; }
-  .site-lede{ color: var(--ink-dim); font-size: 14.5px; font-style: italic; max-width: 60ch; }
+  main{ max-width: 1060px; width: 100%; }
+  .masthead{ display: flex; align-items: center; gap: 16px; margin: 0 0 40px; }
+  .mark{ width: 56px; height: 56px; border-radius: 50%; display: block;
+    box-shadow: 0 0 0 1px var(--hairline), 0 10px 26px -14px oklch(0 0 0 / 0.8); }
+  .wordmark{ font-family: ui-sans-serif, Arial, sans-serif; font-size: 15px;
+    font-weight: 700; letter-spacing: .34em; text-transform: uppercase; }
+  .tagline{ font-size: 13.5px; font-style: italic; color: var(--ink-dim); margin-top: 3px; }
+  .sites{ display: grid; gap: 22px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .site{ background: var(--surface); border: 1px solid var(--hairline);
+    padding: 14px 14px 20px; text-decoration: none; color: inherit;
+    display: flex; flex-direction: column; gap: 4px;
+    transition: transform .3s var(--ease), border-color .3s var(--ease); }
+  .site:hover{ transform: translateY(-4px); border-color: color-mix(in oklch, var(--ink) 34%, transparent); }
+  .site:focus-visible{ outline: 2px solid var(--ink); outline-offset: 3px; }
+  .proof{ display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 16px; }
+  .tile{ display: block; background: var(--paper); padding: 7px; }
+  .tile img{ display: block; width: 100%; aspect-ratio: 1; object-fit: cover; }
+  .site-show{ font-family: ui-sans-serif, Arial, sans-serif; font-size: 11px;
+    font-weight: 600; letter-spacing: .26em; text-transform: uppercase; color: var(--ink-dim); }
+  .site-name{ font-size: 23px; line-height: 1.15; }
+  .site:hover .site-name{ text-decoration: underline; text-underline-offset: 4px;
+    text-decoration-thickness: 1px; }
   .site-meta{ font-family: ui-sans-serif, Arial, sans-serif; font-size: 11px;
-    letter-spacing: .18em; text-transform: uppercase; color: var(--ink-dim); }
-  footer{ margin-top: 46px; color: var(--ink-dim); font-size: 12.5px; }
+    letter-spacing: .18em; text-transform: uppercase; color: var(--ink-dim); margin-top: 6px; }
+  footer{ margin-top: 44px; color: var(--ink-dim); font-size: 12.5px; }
 </style>
 </head>
 <body>
   <main>
-    <p class="kicker">volteanu &middot; curated universe storefronts</p>
-    <h1>Worlds you can walk into. Things you can walk out with.</h1>
-    <p class="lede">One storefront per beloved TV universe: the licensed relics and the wardrobe of the world around them, each piece chosen on purpose.</p>
-    <nav class="sites">${cards}</nav>
+    <header class="masthead">
+      <img class="mark" src="volteanu-logo.jpg" alt="volteanu" width="56" height="56" />
+      <div>
+        <div class="wordmark">volteanu</div>
+        <div class="tagline">One storefront per beloved TV universe.</div>
+      </div>
+    </header>
+    <nav class="sites" aria-label="Storefronts">${cards}</nav>
     <footer>Links are monetized; purchases may earn this site a commission. All trademarks belong to their owners.</footer>
   </main>
 </body>
