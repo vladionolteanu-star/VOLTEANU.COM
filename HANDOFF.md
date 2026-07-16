@@ -9,9 +9,11 @@ invoke it and follow it. This file is the state of the world it plugs into.
 - **This repo** is the canonical monorepo. Remotes (push to BOTH):
   - `origin` → https://gitlab.com/vladionstar-group/volteanu
   - `github` → https://github.com/vladionolteanu-star/VOLTEANU.COM
-- **Two live sites** on the shared engine, both fully built and pushed:
+- **Four live sites** on the shared engine, all fully built and pushed:
   - `sites/sopranos` — Bada Bing & Co. (86 items; smoke/oxblood/neon, Oswald + Source Serif)
   - `sites/true-detective` — Carcosa Outfitters (104 items; tar/sulfur/typewriter, Cormorant + Special Elite + Lora)
+  - `sites/breaking-bad` — The Heisenberg Estate (light manila auction catalog, Saira Stencil One + IBM Plex)
+  - `sites/stranger-things` — Hawkins General (56 items, lean build, credits were low; indigo night/signal red/cream flyer plates, Fraunces + Literata + Share Tech Mono)
 - **Engine** in `core/` (channel3.js, curation.js, build.js, render.js).
   One renderer for all sites; improvements go there behind theme flags,
   NEVER fork it. New site = only `universe.js` + `theme.js`.
@@ -28,6 +30,10 @@ invoke it and follow it. This file is the state of the world it plugs into.
 - `.env` (gitignored, exists locally) has `CHANNEL3_API_KEY` — Vlad's key;
   attribution is by API key, vendor id `uosIs6`. Cost: $7/1000 queries,
   a full site build ≈ 60–70 credits, expect 2–3 build iterations.
+  Credits are running LOW (July 2026): plan lean (~24 queries ≈ 48 credits),
+  put official queries first in universe.js, and prefer surgical prunes +
+  chapter-scoped top-up scripts over full rebuilds. core/build.js now writes
+  the partial collection if the API dies mid-run instead of losing the run.
 - Channel3 dashboard (trychannel3.com/sign-in): clicks tracking works.
   **Still pending (nag Vlad):** profile identity verification + Stripe
   payout connection — without them brands can deny commissions.
