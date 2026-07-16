@@ -1,0 +1,15 @@
+{
+  "name": "volteanu",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "volteanu.com: an aggregator of curated, themed affiliate storefronts (one per beloved TV universe), powered by the Channel3 API. Shared engine in core/, one folder per universe in sites/.",
+  "scripts": {
+    "build:data": "node --env-file=.env core/build.js",
+    "build:site": "node core/render.js",
+    "build": "node --env-file=.env core/build.js %npm_config_site% && node core/render.js %npm_config_site%"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

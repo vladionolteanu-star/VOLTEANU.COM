@@ -1,0 +1,1733 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Carcosa Outfitters | A Curated Edit of the True Detective Universe</title>
+<meta name="description" content="True Detective, season one, bought carefully. The case file, the detective&#39;s kit, and the Louisiana around them, in five files." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Special+Elite&family=Lora:ital@0;1&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ground: oklch(0.15 0.015 150);
+    --surface: oklch(0.19 0.02 150);
+    --well: oklch(0.12 0.012 150);
+    --ink: oklch(0.90 0.015 90);
+    --ink-dim: oklch(0.70 0.02 95);
+    --accent: oklch(0.78 0.13 95);
+    --accent-strong: oklch(0.78 0.13 95);
+    --plate-bg: oklch(0.78 0.13 95);
+    --plate-ink: oklch(0.15 0.015 150);
+    --plate-numeral: oklch(0.40 0.09 50);
+    --plate-intro-ink: oklch(0.30 0.04 100);
+    --tag-bg: oklch(0.55 0.13 40);
+    --tag-ink: oklch(0.90 0.015 90);
+    --cta-hover: oklch(0.90 0.015 90);
+    --scrollbar: oklch(0.60 0.11 90);
+    --thread: oklch(0.52 0.19 25);
+    --exhibit-paper: oklch(0.90 0.015 90);
+    --exhibit-ink: oklch(0.32 0.03 90);
+    --exhibit-filter: saturate(.82) sepia(.12);
+    --font-base: "Lora", Georgia, serif;
+    --font-title: "Cormorant Garamond", Georgia, serif;
+    --font-label: "Special Elite", "Courier New", monospace;
+    --font-prose: "Lora", Georgia, serif;
+    --font-quote: "Cormorant Garamond", Georgia, serif;
+    --font-note: "Special Elite", "Courier New", monospace;
+    --note-style: normal;
+    --title-transform: none;
+    --title-weight: 500;
+    --title-leading: 0.98;
+    --name-font: "Cormorant Garamond", Georgia, serif;
+    --name-size: 20px;
+    --name-weight: 600;
+    --price-size: 16px;
+    --wordmark-size: 20px;
+    --hairline: color-mix(in oklch, var(--ink) 12%, transparent);
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body{
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--font-base);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { max-width: 100%; }
+  a { color: inherit; }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 48px); }
+
+  [data-reveal]{ opacity: 0; transform: translateY(14px);
+    transition: opacity .34s var(--ease), transform .34s var(--ease);
+    transition-delay: var(--stagger, 0ms); }
+  [data-reveal].in{ opacity: 1; transform: none; }
+
+  /* ---- masthead + hero ---- */
+  .masthead{
+    position: sticky; top: 0; z-index: 20;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 14px clamp(20px, 4vw, 48px);
+    background: color-mix(in oklch, var(--ground) 87%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .wordmark{ font-family: var(--font-title); font-weight: 600;
+    font-size: var(--wordmark-size, 19px); letter-spacing: .05em;
+    text-transform: uppercase; text-decoration: none; }
+  .wm-accent{ color: var(--accent-strong); }
+  .masthead-note{ font-family: var(--font-note, var(--font-label));
+    font-style: var(--note-style, normal); font-size: 13px; color: var(--ink-dim); }
+
+  .hero{ padding: clamp(70px, 11vh, 140px) 0 clamp(56px, 8vh, 90px);
+    display: grid; gap: clamp(36px, 5vw, 72px); align-items: center; }
+  @media (min-width: 980px){ .hero{ grid-template-columns: 1.15fr 1fr; } }
+  .kicker{ font-family: var(--font-label); font-size: 11.5px; font-weight: 500;
+    letter-spacing: .22em; text-transform: uppercase;
+    color: var(--accent); margin: 0 0 26px; }
+  h1{
+    font-family: var(--font-title); font-weight: var(--title-weight, 600);
+    text-transform: var(--title-transform, none);
+    font-size: clamp(52px, 10.5vw, 148px);
+    line-height: var(--title-leading, 0.95); letter-spacing: -0.01em;
+    margin: 0 0 30px; max-width: 13ch; text-wrap: balance;
+  }
+
+  .h1-accent{ font-style: italic; color: var(--accent-strong); }
+  .hero .lede{
+    font-family: var(--font-prose);
+    font-size: clamp(16px, 1.9vw, 19.5px);
+    color: var(--ink-dim); max-width: 57ch; margin: 0;
+  }
+
+  /* evidence board */
+  .evidence{ position: relative; min-height: 465px; }
+
+  .thread{ position: absolute; inset: 0; width: 100%; height: 100%;
+    pointer-events: none; z-index: 5; }
+  .thread path{ stroke: var(--thread, oklch(0.52 0.19 25)); stroke-width: 1.6;
+    fill: none; opacity: .85; vector-effect: non-scaling-stroke; }
+  .thread circle{ fill: var(--thread, oklch(0.52 0.19 25)); }
+  .exhibit{
+    position: absolute; display: block; width: min(46%, 228px);
+    background: var(--exhibit-paper, var(--ink)); padding: 9px 9px 7px;
+    box-shadow: 0 18px 44px -18px oklch(0 0 0 / 0.68);
+    text-decoration: none;
+    transition: transform .35s var(--ease), box-shadow .35s var(--ease);
+  }
+  .exhibit img{ display: block; width: 100%; aspect-ratio: 1;
+    object-fit: cover; filter: var(--exhibit-filter, saturate(.9)); }
+  .exhibit-label{ display: block; padding: 7px 2px 2px;
+    font-family: var(--font-label); font-size: 10px; font-weight: 600;
+    letter-spacing: .2em; text-transform: uppercase;
+    color: var(--exhibit-ink, oklch(0.33 0.04 60)); }
+  .exhibit-1{ top: 0; left: 3%; transform: rotate(-3.5deg); z-index: 4; }
+  .exhibit-2{ top: 9%; right: 2%; transform: rotate(2.5deg); z-index: 3; }
+  .exhibit-3{ bottom: 5%; left: 11%; transform: rotate(2deg); z-index: 2; }
+  .exhibit-4{ bottom: 0; right: 9%; transform: rotate(-2deg); z-index: 1; }
+  .exhibit:hover{ transform: rotate(0deg) translateY(-6px); z-index: 9; }
+  .exhibit:focus-visible{ outline: 2px solid var(--accent); outline-offset: 3px; }
+  @media (max-width: 979px){
+    .evidence{ min-height: 0; display: grid; gap: 18px 14px;
+      grid-template-columns: repeat(2, 1fr); padding: 8px 4px; }
+    .exhibit{ position: static; width: auto; }
+    .thread{ display: none; }
+    .exhibit-1{ transform: rotate(-2deg); }
+    .exhibit-2{ transform: rotate(1.5deg); }
+    .exhibit-3{ transform: rotate(1.5deg); }
+    .exhibit-4{ transform: rotate(-1.5deg); }
+  }
+
+  /* chapter index */
+  .index-head{ font-family: var(--font-label); font-size: 12px;
+    letter-spacing: .22em; text-transform: uppercase; color: var(--ink-dim);
+    margin: clamp(48px, 7vh, 80px) 0 14px; }
+  .index{ display: grid; gap: 1px; background: var(--hairline);
+    border-block: 1px solid var(--hairline);
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+  .index.no-head{ margin-top: clamp(48px, 7vh, 80px); }
+  .idx{ background: var(--ground); padding: 20px 20px 24px;
+    display: flex; flex-direction: column; gap: 5px;
+    text-decoration: none; transition: background .3s var(--ease); }
+  .idx:hover{ background: var(--surface); }
+  .idx:focus-visible{ outline: 2px solid var(--accent); outline-offset: -2px; }
+  .idx-numeral{ font-family: var(--font-label); color: var(--accent);
+    font-size: 11px; letter-spacing: .2em; text-transform: uppercase; }
+  .idx-title{ font-family: var(--font-title); font-size: 23px; font-weight: 600;
+    text-transform: var(--title-transform, none); }
+  .idx-count{ font-family: var(--font-note, var(--font-label));
+    font-style: var(--note-style, normal); font-size: 12.5px; color: var(--ink-dim); }
+
+  /* ---- chapter plates ---- */
+  .chapter{ margin-top: clamp(90px, 14vh, 160px); }
+  .plate{
+    background: var(--plate-bg); color: var(--plate-ink);
+    padding: clamp(52px, 9vh, 110px) clamp(20px, 4vw, 48px);
+  }
+  .numeral{ display: block; font-family: var(--font-label);
+    color: var(--plate-numeral); font-size: 12px; font-weight: 500;
+    letter-spacing: .28em; text-transform: uppercase; margin-bottom: 13px; }
+  .plate-title{
+    font-family: var(--font-title); font-weight: var(--title-weight, 600);
+    text-transform: var(--title-transform, none);
+    font-size: clamp(45px, 9vw, 118px); line-height: .95;
+    margin: 0 0 17px; max-width: 1200px;
+  }
+  .plate-intro{ font-family: var(--font-prose); font-style: italic;
+    font-size: clamp(16px, 1.8vw, 19px);
+    color: var(--plate-intro-ink); margin: 0; max-width: 54ch; }
+  .chapter-body{ max-width: 1296px;
+    margin: clamp(36px, 6vh, 64px) auto 0;
+    padding: 0 clamp(20px, 4vw, 48px); }
+
+  /* ---- cards ---- */
+  .card{ display: flex; flex-direction: column;
+    border: 1px solid var(--hairline); background: var(--surface); }
+  .frame{ display: block; aspect-ratio: 1; overflow: hidden; position: relative;
+    background: var(--well, oklch(0.12 0.01 60)); }
+  .frame img{ width: 100%; height: 100%; object-fit: cover; display: block;
+    transition: transform .4s var(--ease); }
+  .card:hover .frame img{ transform: scale(1.03); }
+
+  .oos .frame img, .oos .thumb img{ filter: grayscale(.58) brightness(.87); }
+  .oos-tag{ position: absolute; top: 12px; left: 12px;
+    background: var(--tag-bg); color: var(--tag-ink);
+    font-family: var(--font-label); font-size: 10px; font-weight: 600;
+    letter-spacing: .2em; text-transform: uppercase; padding: 5px 9px; }
+  .oos-tag-inline{ position: static; margin-left: 10px; padding: 3px 7px;
+    vertical-align: middle; }
+
+  .body{ display: flex; flex-direction: column; gap: 7px;
+    padding: 18px 18px 22px; flex: 1; }
+  .eyebrow{ font-family: var(--font-label); color: var(--accent);
+    font-size: 10.5px; font-weight: 500;
+    letter-spacing: .17em; text-transform: uppercase; }
+  .name{ font-family: var(--name-font, var(--font-title));
+    font-size: var(--name-size, 19px); font-weight: var(--name-weight, 600);
+    line-height: 1.2; margin: 0; }
+  .note{ font-family: var(--font-prose); font-style: italic;
+    font-size: 14.5px; color: var(--ink-dim); margin: 0; }
+  .row{ margin-top: auto; padding-top: 16px; display: flex;
+    justify-content: space-between; align-items: baseline; gap: 12px;
+    border-top: 1px solid var(--hairline); }
+  .price{ font-family: var(--price-font, var(--font-label));
+    font-size: var(--price-size, 17px); font-weight: 600;
+    font-variant-numeric: tabular-nums; }
+  .was{ color: var(--ink-dim); font-weight: 400; font-size: 12.5px; margin-left: 6px; }
+  .cta{ font-family: var(--font-label); font-size: 11.5px; font-weight: 500;
+    letter-spacing: .09em; text-transform: uppercase; color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid color-mix(in oklch, var(--accent) 45%, transparent);
+    padding-bottom: 2px; white-space: nowrap;
+    transition: color .25s var(--ease), border-color .25s var(--ease); }
+  .cta:hover{ color: var(--cta-hover, var(--ink)); border-color: var(--cta-hover, var(--ink)); }
+  .cta:focus-visible, .frame:focus-visible{
+    outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  /* feature layout: hero + 2x2 support; overflow flows below */
+  .feature{ display: grid; gap: 22px; grid-template-columns: 1.35fr 1fr; }
+  .card-hero .frame{ aspect-ratio: auto; flex: 1; min-height: 380px; }
+  .card-hero .body{ flex: 0 0 auto; }
+  .card-hero .name{ font-size: calc(var(--name-size, 19px) + 7px); }
+  .card-hero .note{ font-size: 15.5px; }
+  .feature-rest{ display: grid; gap: 22px; grid-template-columns: repeat(2, 1fr); }
+  .feature-overflow{ display: grid; gap: 22px; margin-top: 22px;
+    grid-template-columns: repeat(3, 1fr); }
+  @media (max-width: 880px){
+    .feature{ grid-template-columns: 1fr; }
+    .card-hero .frame{ aspect-ratio: 1; min-height: 0; flex: initial; }
+    .feature-rest{ grid-template-columns: repeat(2, 1fr); }
+    .feature-overflow{ grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 560px){
+    .feature-rest, .feature-overflow{ grid-template-columns: 1fr; }
+  }
+
+  /* shelf layout */
+  .shelf{ display: flex; gap: 18px; overflow-x: auto;
+    scroll-snap-type: x mandatory; padding-bottom: 10px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar, var(--accent)) transparent; }
+  .card-shelf{ min-width: min(300px, 78vw); scroll-snap-align: start; }
+  .shelf-hint{ font-family: var(--font-note, var(--font-label));
+    font-style: var(--note-style, normal); color: var(--ink-dim);
+    font-size: 12px; letter-spacing: .06em; margin: 10px 0 0; }
+  @media (hover: none){ .shelf-hint{ display: none; } }
+
+  /* ledger layout */
+  .ledger{ border-top: 1px solid var(--hairline); }
+  .ledger-row{ display: grid; align-items: center; gap: 20px;
+    grid-template-columns: 92px 1fr auto;
+    padding: 18px 0; border-bottom: 1px solid var(--hairline); }
+  .thumb{ width: 92px; height: 92px; overflow: hidden; display: block;
+    background: var(--well, oklch(0.12 0.01 60)); }
+  .thumb img{ width: 100%; height: 100%; object-fit: cover; display: block; }
+  .ledger-main .name{ font-size: calc(var(--name-size, 19px) + 2px); }
+  .ledger-main .note{ margin-top: 4px; }
+  .ledger-end{ display: flex; flex-direction: column; gap: 8px;
+    align-items: flex-end; text-align: right; }
+  @media (max-width: 640px){
+    .ledger-row{ grid-template-columns: 72px 1fr; }
+    .thumb{ width: 72px; height: 72px; }
+    .ledger-end{ grid-column: 2; flex-direction: row; align-items: baseline;
+      justify-content: space-between; width: 100%; }
+  }
+
+  /* quote interstitial */
+  .quote{ margin-top: clamp(90px, 14vh, 160px); text-align: center;
+    padding: 0 clamp(20px, 4vw, 48px); }
+  .quote blockquote{
+    font-family: var(--font-quote, var(--font-title));
+    font-style: italic; font-weight: 500;
+    font-size: clamp(27px, 4.6vw, 46px); line-height: 1.22;
+    max-width: 24ch; margin: 0 auto; text-wrap: balance; }
+  .quote cite{ display: block; margin-top: 18px; font-style: normal;
+    font-family: var(--font-label); font-size: 11px; font-weight: 500;
+    letter-spacing: .28em; text-transform: uppercase; color: var(--accent); }
+
+  /* footer */
+  footer{ margin-top: clamp(100px, 16vh, 180px);
+    border-top: 1px solid var(--hairline);
+    padding: 44px 0 72px; }
+  footer .wrap{ display: grid; gap: 28px; grid-template-columns: 1.2fr 1fr; }
+  @media (max-width: 720px){ footer .wrap{ grid-template-columns: 1fr; } }
+  footer h2{ font-family: var(--font-label); font-size: 13px; font-weight: 600;
+    letter-spacing: .16em; text-transform: uppercase; margin: 0 0 10px; }
+  footer p{ font-family: var(--font-prose); font-size: 14px;
+    color: var(--ink-dim); margin: 0 0 8px; max-width: 58ch; }
+
+  @media (prefers-reduced-motion: reduce){
+    [data-reveal]{ opacity: 1; transform: none; transition: none; }
+    .h1-accent{ animation: none; }
+    html{ scroll-behavior: auto; }
+    .frame img{ transition: none; }
+  }</style>
+</head>
+<body>
+  <header class="masthead">
+    <a class="wordmark" href="#top"><span class="wm-accent">Carcosa</span> Outfitters</a>
+    <span class="masthead-note">season one, an edit</span>
+  </header>
+
+  <main id="top">
+    <section class="hero wrap">
+      <div class="hero-copy">
+        <p class="kicker" data-reveal>104 pieces &middot; five files &middot; Louisiana, 1995&ndash;2012 &middot; updated July 2026</p>
+        <h1 data-reveal>Step into the <span class="h1-accent">flat circle</span></h1>
+        <p class="lede" data-reveal>True Detective, season one, bought carefully. The case file, the detective&#39;s kit, and the Louisiana that swallowed them: sulfur, cedar, chicory, and bone. Every link goes straight to the retailer.</p>
+      </div>
+      <div class="evidence" aria-label="From the case file">
+        <svg class="thread" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M 22 12 L 78 22 L 30 68 L 72 84" />
+          <circle cx="22" cy="12" r="1.4"/><circle cx="78" cy="22" r="1.4"/>
+          <circle cx="30" cy="68" r="1.4"/><circle cx="72" cy="84" r="1.4"/>
+        </svg>
+        
+      <a class="exhibit exhibit-1" href="#casefile" data-reveal>
+        <img src="https://cdn.trychannel3.com/1962ce76-daf0-42ec-8782-d83666f8b231?aid=01KXN2VC3RXG226NDQAM1S734G&amp;mid=rSYD" alt="True Detective Poster Art" loading="eager" decoding="async" />
+        <span class="exhibit-label">Exhibit A &amp;middot; CID</span>
+      </a>
+      <a class="exhibit exhibit-2" href="#casefile" data-reveal>
+        <img src="https://cdn.trychannel3.com/0ac18268-0875-4ce1-91b8-b23fcfee9c43?aid=01KXN2VEBSWH1GTMP8D00HF3B8&amp;mid=rSYD" alt="True Detective Poster" loading="eager" decoding="async" />
+        <span class="exhibit-label">Exhibit B &amp;middot; CID</span>
+      </a>
+      <a class="exhibit exhibit-3" href="#casefile" data-reveal>
+        <img src="https://cdn.trychannel3.com/01KDGEF5688FTPS700D0AS9QNY?aid=01KXN2VH9A7KRH6M3DNP5FEYSF&amp;mid=BUfJ" alt="The King In Yellow (paperback)" loading="eager" decoding="async" />
+        <span class="exhibit-label">Exhibit C &amp;middot; CID</span>
+      </a>
+      <a class="exhibit exhibit-4" href="#casefile" data-reveal>
+        <img src="https://cdn.trychannel3.com/ddfc7a0f-4ed5-4952-b4af-70222802be9d?aid=01KXN2VC3RXG226NDQAM1S734G&amp;mid=51qV" alt="True Detective: The Complete Seasons 1-3 (box Set) [blu-ray]" loading="eager" decoding="async" />
+        <span class="exhibit-label">Exhibit D &amp;middot; CID</span>
+      </a>
+      </div>
+    </section>
+
+    <div class="wrap">
+      <p class="index-head">Explore the evidence</p>
+      <nav class="index" aria-label="Chapters">
+      <a class="idx" href="#casefile" data-reveal>
+        <span class="idx-numeral">File I</span>
+        <span class="idx-title">The Case File</span>
+        <span class="idx-count">7 pieces</span>
+      </a>
+      <a class="idx" href="#kit" data-reveal>
+        <span class="idx-numeral">File II</span>
+        <span class="idx-title">The Detective&#39;s Kit</span>
+        <span class="idx-count">24 pieces</span>
+      </a>
+      <a class="idx" href="#carcosa" data-reveal>
+        <span class="idx-numeral">File III</span>
+        <span class="idx-title">Carcosa</span>
+        <span class="idx-count">25 pieces</span>
+      </a>
+      <a class="idx" href="#bayou" data-reveal>
+        <span class="idx-numeral">File IV</span>
+        <span class="idx-title">The Bayou</span>
+        <span class="idx-count">22 pieces</span>
+      </a>
+      <a class="idx" href="#wardrobe" data-reveal>
+        <span class="idx-numeral">File V</span>
+        <span class="idx-title">The Wardrobe</span>
+        <span class="idx-count">26 pieces</span>
+      </a></nav>
+    </div>
+    
+  <section class="chapter" id="casefile">
+    <header class="plate" data-reveal>
+      <span class="numeral">File I</span>
+      <h2 class="plate-title">The Case File</h2>
+      <p class="plate-intro">The on-the-nose stuff. Shirts, posters, the tapes, the book that started the dread.</p>
+    </header>
+    <div class="chapter-body">
+    <div class="ledger">
+  <article class="ledger-row" data-reveal>
+    <a class="thumb" href="https://buy.trychannel3.com/WCFIlWe-rSYD-uosIs6?o=01KKT7N4SZKRQBWWE6M0MR7PMA&amp;aid=01KXN2VC3RXG226NDQAM1S734G" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/1962ce76-daf0-42ec-8782-d83666f8b231?aid=01KXN2VC3RXG226NDQAM1S734G&amp;mid=rSYD" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="ledger-main">
+      <h3 class="name">True Detective Poster Art </h3>
+      <p class="note">For the wall you stare at when it all connects.</p>
+    </div>
+    <div class="ledger-end">
+      <span class="price">$44.99</span>
+      <a class="cta" href="https://buy.trychannel3.com/WCFIlWe-rSYD-uosIs6?o=01KKT7N4SZKRQBWWE6M0MR7PMA&amp;aid=01KXN2VC3RXG226NDQAM1S734G" target="_blank" rel="noopener sponsored">Examine at displate.com</a>
+    </div>
+  </article>
+  <article class="ledger-row" data-reveal>
+    <a class="thumb" href="https://buy.trychannel3.com/rTRmZPo-51qV-uosIs6?o=01KSQ89TBXGGP8TRW1K2VSCKYW&amp;aid=01KXN2VC3RXG226NDQAM1S734G" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/ddfc7a0f-4ed5-4952-b4af-70222802be9d?aid=01KXN2VC3RXG226NDQAM1S734G&amp;mid=51qV" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="ledger-main">
+      <h3 class="name">True Detective: The Complete Seasons 1-3 (box Set) [blu-ray] </h3>
+      <p class="note">For the wall you stare at when it all connects.</p>
+    </div>
+    <div class="ledger-end">
+      <span class="price">$44.90</span>
+      <a class="cta" href="https://buy.trychannel3.com/rTRmZPo-51qV-uosIs6?o=01KSQ89TBXGGP8TRW1K2VSCKYW&amp;aid=01KXN2VC3RXG226NDQAM1S734G" target="_blank" rel="noopener sponsored">Examine at gruv.com</a>
+    </div>
+  </article>
+  <article class="ledger-row" data-reveal>
+    <a class="thumb" href="https://buy.trychannel3.com/8koUxwj-51qV-uosIs6?o=01KSQ9HG9ZJ7Q1PNFEXRRBPR7G&amp;aid=01KXN2VC3RXG226NDQAM1S734G" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/90c689ba-0457-468b-b429-be84e209e0bd?aid=01KXN2VC3RXG226NDQAM1S734G&amp;mid=51qV" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="ledger-main">
+      <h3 class="name">True Detective: The Complete Seasons 1-3 (box Set) [dvd] </h3>
+      <p class="note">For the wall you stare at when it all connects.</p>
+    </div>
+    <div class="ledger-end">
+      <span class="price">$23.35</span>
+      <a class="cta" href="https://buy.trychannel3.com/8koUxwj-51qV-uosIs6?o=01KSQ9HG9ZJ7Q1PNFEXRRBPR7G&amp;aid=01KXN2VC3RXG226NDQAM1S734G" target="_blank" rel="noopener sponsored">Examine at gruv.com</a>
+    </div>
+  </article>
+  <article class="ledger-row" data-reveal>
+    <a class="thumb" href="https://buy.trychannel3.com/8eWj6U2-rSYD-uosIs6?o=01KKP7R5M5DY4AFS8Z38AQPGFC&amp;aid=01KXN2VEBSWH1GTMP8D00HF3B8" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/0ac18268-0875-4ce1-91b8-b23fcfee9c43?aid=01KXN2VEBSWH1GTMP8D00HF3B8&amp;mid=rSYD" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="ledger-main">
+      <h3 class="name">True Detective Poster </h3>
+      <p class="note">The two of them, before the years got in.</p>
+    </div>
+    <div class="ledger-end">
+      <span class="price">$44.99</span>
+      <a class="cta" href="https://buy.trychannel3.com/8eWj6U2-rSYD-uosIs6?o=01KKP7R5M5DY4AFS8Z38AQPGFC&amp;aid=01KXN2VEBSWH1GTMP8D00HF3B8" target="_blank" rel="noopener sponsored">Examine at displate.com</a>
+    </div>
+  </article>
+  <article class="ledger-row oos" data-reveal>
+    <a class="thumb" href="https://buy.trychannel3.com/ckaODsU-51qV-uosIs6?o=01KSQB4CY98K6CN1H0EK8RGQET&amp;aid=01KXN2VEBSWH1GTMP8D00HF3B8" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/6e919598-2524-48ac-af19-9ce6aaa65048?aid=01KXN2VEBSWH1GTMP8D00HF3B8&amp;mid=51qV" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="ledger-main">
+      <h3 class="name">True Detective: The Complete First Season (blu-ray New Box Art) [blu-ray] <span class="oos-tag oos-tag-inline">Gone</span></h3>
+      <p class="note">The two of them, before the years got in.</p>
+    </div>
+    <div class="ledger-end">
+      <span class="price">$24.89</span>
+      <a class="cta" href="https://buy.trychannel3.com/ckaODsU-51qV-uosIs6?o=01KSQB4CY98K6CN1H0EK8RGQET&amp;aid=01KXN2VEBSWH1GTMP8D00HF3B8" target="_blank" rel="noopener sponsored">Examine at gruv.com</a>
+    </div>
+  </article>
+  <article class="ledger-row" data-reveal>
+    <a class="thumb" href="https://buy.trychannel3.com/gIBNNlj-TEwE-uosIs6?o=01KCJH01C1Y4TFWVHZ8QSXQYS2&amp;aid=01KXN2VEBSWH1GTMP8D00HF3B8" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/gIBNNlj?aid=01KXN2VEBSWH1GTMP8D00HF3B8&amp;mid=TEwE" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="ledger-main">
+      <h3 class="name">True Detective Blu-ray </h3>
+      <p class="note">The two of them, before the years got in.</p>
+    </div>
+    <div class="ledger-end">
+      <span class="price">$32.99</span>
+      <a class="cta" href="https://buy.trychannel3.com/gIBNNlj-TEwE-uosIs6?o=01KCJH01C1Y4TFWVHZ8QSXQYS2&amp;aid=01KXN2VEBSWH1GTMP8D00HF3B8" target="_blank" rel="noopener sponsored">Examine at us.zavvi.com</a>
+    </div>
+  </article>
+  <article class="ledger-row" data-reveal>
+    <a class="thumb" href="https://buy.trychannel3.com/jLsn4sP-BUfJ-uosIs6?o=01KDGEFC9MD43SS0NGH2XDZSX0&amp;aid=01KXN2VH9A7KRH6M3DNP5FEYSF" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/01KDGEF5688FTPS700D0AS9QNY?aid=01KXN2VH9A7KRH6M3DNP5FEYSF&amp;mid=BUfJ" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="ledger-main">
+      <h3 class="name">The King In Yellow (paperback) </h3>
+      <p class="note">The 1895 book behind the dread. Public domain, private consequences.</p>
+    </div>
+    <div class="ledger-end">
+      <span class="price">$13.99</span>
+      <a class="cta" href="https://buy.trychannel3.com/jLsn4sP-BUfJ-uosIs6?o=01KDGEFC9MD43SS0NGH2XDZSX0&amp;aid=01KXN2VH9A7KRH6M3DNP5FEYSF" target="_blank" rel="noopener sponsored">Examine at abramsbooks.com</a>
+    </div>
+  </article></div></div>
+  </section>
+  <section class="chapter" id="kit">
+    <header class="plate" data-reveal>
+      <span class="numeral">File II</span>
+      <h2 class="plate-title">The Detective&#39;s Kit</h2>
+      <p class="plate-intro">Flask, lighter, ledger. Tools for the long nights of looking.</p>
+    </header>
+    <div class="chapter-body">
+    <div class="feature">
+      <article class="card card-hero" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/yUkdn3o-KYoO-uosIs6?o=01KSZETPQ8389TZ4CZ068B3606&amp;aid=01KXN2VZDYJGYZGKB6RHV4J2JQ" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/360bf1a3-0dd9-48e7-8915-a0b554811d46?aid=01KXN2VZDYJGYZGKB6RHV4J2JQ&amp;mid=KYoO" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Helzberg</span>
+      <h3 class="name">Cross Pendant In Black Rhodium Sterling Silver</h3>
+      <p class="note">The one thing on Rust&#39;s wall. Bare, like the apartment.</p>
+      <div class="row">
+        <span class="price">$297.49 <s class="was">$349.99</s></span>
+        <a class="cta" href="https://buy.trychannel3.com/yUkdn3o-KYoO-uosIs6?o=01KSZETPQ8389TZ4CZ068B3606&amp;aid=01KXN2VZDYJGYZGKB6RHV4J2JQ" target="_blank" rel="noopener sponsored">Examine at helzberg.com</a>
+      </div>
+    </div></article>
+      <div class="feature-rest"><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/WcR0s4L-KYoO-uosIs6?o=01KRC3X8RSFK7J2E0881ZHWANK&amp;aid=01KXN2VZDYJGYZGKB6RHV4J2JQ" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/fc2e32e0-db85-4f3e-9857-5990296e179b?aid=01KXN2VZDYJGYZGKB6RHV4J2JQ&amp;mid=KYoO" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Helzberg</span>
+      <h3 class="name">Cross Pendant With Diamond Accent</h3>
+      <p class="note">The one thing on Rust&#39;s wall. Bare, like the apartment.</p>
+      <div class="row">
+        <span class="price">$135.99 <s class="was">$159.99</s></span>
+        <a class="cta" href="https://buy.trychannel3.com/WcR0s4L-KYoO-uosIs6?o=01KRC3X8RSFK7J2E0881ZHWANK&amp;aid=01KXN2VZDYJGYZGKB6RHV4J2JQ" target="_blank" rel="noopener sponsored">Examine at helzberg.com</a>
+      </div>
+    </div></article><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/3IWqfUf-8Q8d-uosIs6?o=01KJ3CKWBCK4ZHHTCKK9J65SHR&amp;aid=01KXN2VTJQH6V5WQ1XQQXBEXXG" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/01KJ3CJWRKMMCDQWJKWNJCRD1C?aid=01KXN2VTJQH6V5WQ1XQQXBEXXG&amp;mid=8Q8d" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Ray-Ban</span>
+      <h3 class="name">Ray-ban Aviator Classic Polished Gold Sunglasses W/b-15 Brown Polarized Lenses 0rb3025-001/57-58</h3>
+      <p class="note">State-issued squint. 1995 spec.</p>
+      <div class="row">
+        <span class="price">$244 </span>
+        <a class="cta" href="https://buy.trychannel3.com/3IWqfUf-8Q8d-uosIs6?o=01KJ3CKWBCK4ZHHTCKK9J65SHR&amp;aid=01KXN2VTJQH6V5WQ1XQQXBEXXG" target="_blank" rel="noopener sponsored">Examine at eurooptic.com</a>
+      </div>
+    </div></article><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/j8kBMrR-dCgO-uosIs6?o=01KSS82MD722NDJEYDRVMCX21T&amp;aid=01KXN2VXZ9RNV3N5Y58MZB3MYB" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/a0c08051-c420-417d-83b8-f8aadf635eb5?aid=01KXN2VXZ9RNV3N5Y58MZB3MYB&amp;mid=dCgO" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Applause</span>
+      <h3 class="name">Plaud Ai Note Voice Recorder With Case</h3>
+      <p class="note">For statements. People say things.</p>
+      <div class="row">
+        <span class="price">$199.99 <s class="was">$249.99</s></span>
+        <a class="cta" href="https://buy.trychannel3.com/j8kBMrR-dCgO-uosIs6?o=01KSS82MD722NDJEYDRVMCX21T&amp;aid=01KXN2VXZ9RNV3N5Y58MZB3MYB" target="_blank" rel="noopener sponsored">Examine at samsclub.com</a>
+      </div>
+    </div></article><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/dqBtxru-cvfe-uosIs6?o=01KVZMFGETSDM50XDGGFA4RDTN&amp;aid=01KXN2VTX3ED6MZWP2E5QVMPE9" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/ac900f3b-4158-409c-9213-99779d1ed83a?aid=01KXN2VTX3ED6MZWP2E5QVMPE9&amp;mid=cvfe" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Gucci</span>
+      <h3 class="name">62mm Aviator Sunglasses</h3>
+      <p class="note">State-issued squint. 1995 spec.</p>
+      <div class="row">
+        <span class="price">$299.97 <s class="was">$575</s></span>
+        <a class="cta" href="https://buy.trychannel3.com/dqBtxru-cvfe-uosIs6?o=01KVZMFGETSDM50XDGGFA4RDTN&amp;aid=01KXN2VTX3ED6MZWP2E5QVMPE9" target="_blank" rel="noopener sponsored">Examine at nordstromrack.com</a>
+      </div>
+    </div></article></div>
+    </div>
+    <div class="feature-overflow"><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/Ga5PPso-rVsJ-uosIs6?o=01KCVGEDZP3QR9Q2T6CT79GGQ9&amp;aid=01KXN2VTJQH6V5WQ1XQQXBEXXG" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/Ga5PPso-rVsJ?aid=01KXN2VTJQH6V5WQ1XQQXBEXXG&amp;mid=rVsJ" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Gucci</span>
+      <h3 class="name">Aviator-frame Metal Sunglasses</h3>
+      <p class="note">State-issued squint. 1995 spec.</p>
+      <div class="row">
+        <span class="price">$238 <s class="was">$560</s></span>
+        <a class="cta" href="https://buy.trychannel3.com/Ga5PPso-rVsJ-uosIs6?o=01KCVGEDZP3QR9Q2T6CT79GGQ9&amp;aid=01KXN2VTJQH6V5WQ1XQQXBEXXG" target="_blank" rel="noopener sponsored">Examine at gaffos.com</a>
+      </div>
+    </div></article><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/lVWypO9-FB3l-uosIs6?o=01KBPBCC9F6C4H9BXJVF7M7Z85&amp;aid=01KXN2VNVZMG7MQM9EEA1N23H1" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/lVWypO9?aid=01KXN2VNVZMG7MQM9EEA1N23H1&amp;mid=FB3l" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Akron Zips</span>
+      <h3 class="name">Personalized Zippo Windproof Lighter - Vintage Bar</h3>
+      <p class="note">A light in the dark. Literal, for once.</p>
+      <div class="row">
+        <span class="price">$44.99 </span>
+        <a class="cta" href="https://buy.trychannel3.com/lVWypO9-FB3l-uosIs6?o=01KBPBCC9F6C4H9BXJVF7M7Z85&amp;aid=01KXN2VNVZMG7MQM9EEA1N23H1" target="_blank" rel="noopener sponsored">Examine at personalizationmall.com</a>
+      </div>
+    </div></article><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/tZUPPPO-FB3l-uosIs6?o=01KBPCKDSEEAS3BSBS4T9EAFQ4&amp;aid=01KXN2VNVZMG7MQM9EEA1N23H1" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/tZUPPPO?aid=01KXN2VNVZMG7MQM9EEA1N23H1&amp;mid=FB3l" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Akron Zips</span>
+      <h3 class="name">Zippo® Personalized Windproof Lighter - #2955</h3>
+      <p class="note">A light in the dark. Literal, for once.</p>
+      <div class="row">
+        <span class="price">$44.99 </span>
+        <a class="cta" href="https://buy.trychannel3.com/tZUPPPO-FB3l-uosIs6?o=01KBPCKDSEEAS3BSBS4T9EAFQ4&amp;aid=01KXN2VNVZMG7MQM9EEA1N23H1" target="_blank" rel="noopener sponsored">Examine at personalizationmall.com</a>
+      </div>
+    </div></article><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/Q5VdVQ6-De8Y-uosIs6?o=01KKFDSMV6DDQVX8CQ1SCQ9RDP&amp;aid=01KXN2VQNGTWSM9E5XKS2N87H2" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/6833f571-8b06-4327-a73f-1b2d844d4e3b?aid=01KXN2VQNGTWSM9E5XKS2N87H2&amp;mid=De8Y" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Kemo Sabe</span>
+      <h3 class="name">12 Oz. Bison Flask</h3>
+      <p class="note">For the passenger seat. Off duty, technically.</p>
+      <div class="row">
+        <span class="price">$125 </span>
+        <a class="cta" href="https://buy.trychannel3.com/Q5VdVQ6-De8Y-uosIs6?o=01KKFDSMV6DDQVX8CQ1SCQ9RDP&amp;aid=01KXN2VQNGTWSM9E5XKS2N87H2" target="_blank" rel="noopener sponsored">Examine at kemosabe.com</a>
+      </div>
+    </div></article><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/OMRrnKw-dGrY-uosIs6?o=01KBPC01SN9AHZZ1QB6SH8Q0TR&amp;aid=01KXN2VTX3ED6MZWP2E5QVMPE9" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/OMRrnKw?aid=01KXN2VTX3ED6MZWP2E5QVMPE9&amp;mid=dGrY" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Carmen Sol</span>
+      <h3 class="name">Gold Aviator Sunglasses - Gradient Red/large</h3>
+      <p class="note">State-issued squint. 1995 spec.</p>
+      <div class="row">
+        <span class="price">$195 </span>
+        <a class="cta" href="https://buy.trychannel3.com/OMRrnKw-dGrY-uosIs6?o=01KBPC01SN9AHZZ1QB6SH8Q0TR&amp;aid=01KXN2VTX3ED6MZWP2E5QVMPE9" target="_blank" rel="noopener sponsored">Examine at carmensol.com</a>
+      </div>
+    </div></article><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/bIbK9fW-FB3l-uosIs6?o=01KBP8ZY56VYNJ06KTH7AGPDZS&amp;aid=01KXN2VNVZMG7MQM9EEA1N23H1" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/bIbK9fW?aid=01KXN2VNVZMG7MQM9EEA1N23H1&amp;mid=FB3l" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Akron Zips</span>
+      <h3 class="name">Write Your Own Personalized Zippo Windproof Lighter</h3>
+      <p class="note">A light in the dark. Literal, for once.</p>
+      <div class="row">
+        <span class="price">$31.49 <s class="was">$44.99</s></span>
+        <a class="cta" href="https://buy.trychannel3.com/bIbK9fW-FB3l-uosIs6?o=01KBP8ZY56VYNJ06KTH7AGPDZS&amp;aid=01KXN2VNVZMG7MQM9EEA1N23H1" target="_blank" rel="noopener sponsored">Examine at personalizationmall.com</a>
+      </div>
+    </div></article><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/freN5rC-RZFC-uosIs6?o=01KBP7SGW9JXH1ZQD2RJZKDD5F&amp;aid=01KXN2VQ9N6MGM6JCPVY8KWHES" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/freN5rC?aid=01KXN2VQ9N6MGM6JCPVY8KWHES&amp;mid=RZFC" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Not Another Bill</span>
+      <h3 class="name">Hip Flask With Leather Pouch - Navy</h3>
+      <p class="note">For the passenger seat. Off duty, technically.</p>
+      <div class="row">
+        <span class="price">$67 </span>
+        <a class="cta" href="https://buy.trychannel3.com/freN5rC-RZFC-uosIs6?o=01KBP7SGW9JXH1ZQD2RJZKDD5F&amp;aid=01KXN2VQ9N6MGM6JCPVY8KWHES" target="_blank" rel="noopener sponsored">Examine at notanotherbill.com</a>
+      </div>
+    </div></article><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/Otm69do-cRZD-uosIs6?o=01KBPCY4JWSXWVZWV2JKMFW99Z&amp;aid=01KXN2VSEXQ0KKDYCDX4JT7XDZ" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/746454eb-6978-48ad-a204-573e8b9c0a0a?aid=01KXN2VSEXQ0KKDYCDX4JT7XDZ&amp;mid=cRZD" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Graphic Image</span>
+      <h3 class="name">9&#39; Wire-o-notebook - No</h3>
+      <p class="note">Rust kept a ledger. Keep yours.</p>
+      <div class="row">
+        <span class="price">$148 </span>
+        <a class="cta" href="https://buy.trychannel3.com/Otm69do-cRZD-uosIs6?o=01KBPCY4JWSXWVZWV2JKMFW99Z&amp;aid=01KXN2VSEXQ0KKDYCDX4JT7XDZ" target="_blank" rel="noopener sponsored">Examine at graphicimage.com</a>
+      </div>
+    </div></article><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/A49utKv-T9Fg-uosIs6?o=01KC9AX1JSX75GTQSB07Z8VNV2&amp;aid=01KXN2VXZ9RNV3N5Y58MZB3MYB" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/78929a0d-7dc1-4ce7-be1b-800285ccd4cf?aid=01KXN2VXZ9RNV3N5Y58MZB3MYB&amp;mid=3egv" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Olympus</span>
+      <h3 class="name">Olympus Ds 2600 2gb Digital Voice Recorder</h3>
+      <p class="note">For statements. People say things.</p>
+      <div class="row">
+        <span class="price">$359.99 </span>
+        <a class="cta" href="https://buy.trychannel3.com/A49utKv-T9Fg-uosIs6?o=01KC9AX1JSX75GTQSB07Z8VNV2&amp;aid=01KXN2VXZ9RNV3N5Y58MZB3MYB" target="_blank" rel="noopener sponsored">Examine at adorama.com</a>
+      </div>
+    </div></article><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/490xIUJ-PhLm-uosIs6?o=01KT9R8CFWW8K7MZAEV30NZDTG&amp;aid=01KXN2VQ9N6MGM6JCPVY8KWHES" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/55d0b1b5-1505-473b-b714-fc9c43de9b52?aid=01KXN2VQ9N6MGM6JCPVY8KWHES&amp;mid=PhLm" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Danny Kortchmar</span>
+      <h3 class="name">Arlo Leather-wrapped Hip Flask</h3>
+      <p class="note">For the passenger seat. Off duty, technically.</p>
+      <div class="row">
+        <span class="price">$120 </span>
+        <a class="cta" href="https://buy.trychannel3.com/490xIUJ-PhLm-uosIs6?o=01KT9R8CFWW8K7MZAEV30NZDTG&amp;aid=01KXN2VQ9N6MGM6JCPVY8KWHES" target="_blank" rel="noopener sponsored">Examine at korchmar.com</a>
+      </div>
+    </div></article><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/ubMVWQ6-aFKe-uosIs6?o=01KBPDB0ZN4X5FXYNS8ZB2C5D8&amp;aid=01KXN2VQ9N6MGM6JCPVY8KWHES" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/74ab83ea-3ed4-4df5-bb9f-2d29ffe1d302?aid=01KXN2VQ9N6MGM6JCPVY8KWHES&amp;mid=aFKe" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Tom Beckbe</span>
+      <h3 class="name">Tom Beckbe Hip Flask (6oz) - Oak</h3>
+      <p class="note">For the passenger seat. Off duty, technically.</p>
+      <div class="row">
+        <span class="price">$115 </span>
+        <a class="cta" href="https://buy.trychannel3.com/ubMVWQ6-aFKe-uosIs6?o=01KBPDB0ZN4X5FXYNS8ZB2C5D8&amp;aid=01KXN2VQ9N6MGM6JCPVY8KWHES" target="_blank" rel="noopener sponsored">Examine at tombeckbe.com</a>
+      </div>
+    </div></article><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/ld46Pen-asdf-uosIs6?o=01KVMQRJDYA60CNHBJBBD665TD&amp;aid=01KXN2VSEXQ0KKDYCDX4JT7XDZ" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/929a340c-eade-41ea-8021-1fe39ff6cbe5?aid=01KXN2VSEXQ0KKDYCDX4JT7XDZ&amp;mid=asdf" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Montblanc</span>
+      <h3 class="name">Medium Lined Leather Notebook</h3>
+      <p class="note">Rust kept a ledger. Keep yours.</p>
+      <div class="row">
+        <span class="price">$95 </span>
+        <a class="cta" href="https://buy.trychannel3.com/ld46Pen-asdf-uosIs6?o=01KVMQRJDYA60CNHBJBBD665TD&amp;aid=01KXN2VSEXQ0KKDYCDX4JT7XDZ" target="_blank" rel="noopener sponsored">Examine at nordstrom.com</a>
+      </div>
+    </div></article><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/LWiXq4q-0Nox-uosIs6?o=01KT6QCPQ0GMD8R8K0JA5CB6DJ&amp;aid=01KXN2VSEXQ0KKDYCDX4JT7XDZ" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/0e390174-5bc7-4143-a636-f9a07b303319?aid=01KXN2VSEXQ0KKDYCDX4JT7XDZ&amp;mid=0Nox" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Saint Owen</span>
+      <h3 class="name">Signature Leather Journal</h3>
+      <p class="note">Rust kept a ledger. Keep yours.</p>
+      <div class="row">
+        <span class="price">$55 </span>
+        <a class="cta" href="https://buy.trychannel3.com/LWiXq4q-0Nox-uosIs6?o=01KT6QCPQ0GMD8R8K0JA5CB6DJ&amp;aid=01KXN2VSEXQ0KKDYCDX4JT7XDZ" target="_blank" rel="noopener sponsored">Examine at saintowen.com</a>
+      </div>
+    </div></article><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/EzVVMvB-cRZD-uosIs6?o=01KBPCRB1CP1V3YTP7CN3GC89X&amp;aid=01KXN2VS5JR869GAKE4XEHXWVK" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/EzVVMvB?aid=01KXN2VS5JR869GAKE4XEHXWVK&amp;mid=cRZD" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Graphic Image</span>
+      <h3 class="name">7&quot; Leather Wrapped Refillable Journal</h3>
+      <p class="note">Rust kept a ledger. Keep yours.</p>
+      <div class="row">
+        <span class="price">$90 </span>
+        <a class="cta" href="https://buy.trychannel3.com/EzVVMvB-cRZD-uosIs6?o=01KBPCRB1CP1V3YTP7CN3GC89X&amp;aid=01KXN2VS5JR869GAKE4XEHXWVK" target="_blank" rel="noopener sponsored">Examine at graphicimage.com</a>
+      </div>
+    </div></article><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/B3zholq-BsaX-uosIs6?o=01KSQXHKS2CBYCNM1CB861H25P&amp;aid=01KXN2VW22ARHD45Q962AQVB4V" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/8e72997a-1d9f-4b4d-a250-2ac0501ee241?aid=01KXN2VW22ARHD45Q962AQVB4V&amp;mid=BsaX" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Stanley</span>
+      <h3 class="name">Stanley Classic Stainless Steel Insulated Vacuum Bottle</h3>
+      <p class="note">Coffee that outlasts the stakeout.</p>
+      <div class="row">
+        <span class="price">$50.47 </span>
+        <a class="cta" href="https://buy.trychannel3.com/B3zholq-BsaX-uosIs6?o=01KSQXHKS2CBYCNM1CB861H25P&amp;aid=01KXN2VW22ARHD45Q962AQVB4V" target="_blank" rel="noopener sponsored">Examine at walmart.com</a>
+      </div>
+    </div></article><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/aNvO9lw-Vytj-uosIs6?o=01KCF7P5J243WQVJC97B5Q8S0G&amp;aid=01KXN2VWA2X1HZJZGJP92PX4TH" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/aNvO9lw?aid=01KXN2VWA2X1HZJZGJP92PX4TH&amp;mid=Vytj" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Uplift</span>
+      <h3 class="name">Stainless Steel Vacuum Bottle Portable Insulated Tumbler</h3>
+      <p class="note">Coffee that outlasts the stakeout.</p>
+      <div class="row">
+        <span class="price">$51.48 <s class="was">$102.97</s></span>
+        <a class="cta" href="https://buy.trychannel3.com/aNvO9lw-Vytj-uosIs6?o=01KCF7P5J243WQVJC97B5Q8S0G&amp;aid=01KXN2VWA2X1HZJZGJP92PX4TH" target="_blank" rel="noopener sponsored">Examine at inspireuplift.com</a>
+      </div>
+    </div></article><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/HGmmbxn-Vytj-uosIs6?o=01KCG91WMTV1D98C82TVFQS8JV&amp;aid=01KXN2VW22ARHD45Q962AQVB4V" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/HGmmbxn?aid=01KXN2VW22ARHD45Q962AQVB4V&amp;mid=Vytj" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Combo</span>
+      <h3 class="name">Portable Coffee Mug, Stainless Steel Thermos Bottle, Vacuum Insulated Travel Bottle, Office Business Gift Set</h3>
+      <p class="note">Coffee that outlasts the stakeout.</p>
+      <div class="row">
+        <span class="price">$49.97 <s class="was">$99.94</s></span>
+        <a class="cta" href="https://buy.trychannel3.com/HGmmbxn-Vytj-uosIs6?o=01KCG91WMTV1D98C82TVFQS8JV&amp;aid=01KXN2VW22ARHD45Q962AQVB4V" target="_blank" rel="noopener sponsored">Examine at inspireuplift.com</a>
+      </div>
+    </div></article><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/hSNBAhV-Vytj-uosIs6?o=01KCFBHAGTFHVEC96PPS4NDC0K&amp;aid=01KXN2VW22ARHD45Q962AQVB4V" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/hSNBAhV?aid=01KXN2VW22ARHD45Q962AQVB4V&amp;mid=Vytj" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Uplift</span>
+      <h3 class="name">Stainless Steel Thermos Bottle Vacuum Insulated Flask</h3>
+      <p class="note">Coffee that outlasts the stakeout.</p>
+      <div class="row">
+        <span class="price">$47.97 <s class="was">$95.94</s></span>
+        <a class="cta" href="https://buy.trychannel3.com/hSNBAhV-Vytj-uosIs6?o=01KCFBHAGTFHVEC96PPS4NDC0K&amp;aid=01KXN2VW22ARHD45Q962AQVB4V" target="_blank" rel="noopener sponsored">Examine at inspireuplift.com</a>
+      </div>
+    </div></article><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/6K7ZP0j-UFxh-uosIs6?o=01KBPBV3NJCYHTZQKYJKSJAVNW&amp;aid=01KXN2VNVZMG7MQM9EEA1N23H1" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/84e34e7b-efe1-4a4b-b6d7-d485a543b69b?aid=01KXN2VNVZMG7MQM9EEA1N23H1&amp;mid=A1IE" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Akron Zips</span>
+      <h3 class="name">Classic High Polish Chrome Windproof Lighter</h3>
+      <p class="note">A light in the dark. Literal, for once.</p>
+      <div class="row">
+        <span class="price">$24.95 </span>
+        <a class="cta" href="https://buy.trychannel3.com/6K7ZP0j-UFxh-uosIs6?o=01KBPBV3NJCYHTZQKYJKSJAVNW&amp;aid=01KXN2VNVZMG7MQM9EEA1N23H1" target="_blank" rel="noopener sponsored">Examine at forzasports.com</a>
+      </div>
+    </div></article></div></div>
+  </section>
+  <section class="chapter" id="carcosa">
+    <header class="plate" data-reveal>
+      <span class="numeral">File III</span>
+      <h2 class="plate-title">Carcosa</h2>
+      <p class="plate-intro">Antlers, twig work, black stars. Decorative, allegedly.</p>
+    </header>
+    <div class="chapter-body">
+    <div class="shelf" role="list" aria-label="Carcosa">
+      <article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/0WTTW3Z-0RAk-uosIs6?o=01KBPD8ZG3JJ2T8XM7CSB1E7ZF&amp;aid=01KXN2W6839G1H3XB8G0S9B967" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/9f6447d6-616d-45c0-a9dc-10f9bf823745?aid=01KXN2W6839G1H3XB8G0S9B967&amp;mid=0RAk" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Coppertist.Wu</span>
+      <h3 class="name">Ouroboros Ring 2.0 - Tsavorite/#8</h3>
+      <p class="note">The snake eats its tail. Time does the same.</p>
+      <div class="row">
+        <span class="price">$308.95 </span>
+        <a class="cta" href="https://buy.trychannel3.com/0WTTW3Z-0RAk-uosIs6?o=01KBPD8ZG3JJ2T8XM7CSB1E7ZF&amp;aid=01KXN2W6839G1H3XB8G0S9B967" target="_blank" rel="noopener sponsored">Examine at coppertistwu.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/Ey9XjAN-0RAk-uosIs6?o=01KBPB37Z160XPYB0713YCKSYK&amp;aid=01KXN2W6839G1H3XB8G0S9B967" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/0d93746d-8517-4a2d-bd04-b8b27bbba386?aid=01KXN2W6839G1H3XB8G0S9B967&amp;mid=0RAk" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Coppertist.Wu</span>
+      <h3 class="name">Ouroboros Ring 2.0 - Orange Sapphire/#7</h3>
+      <p class="note">The snake eats its tail. Time does the same.</p>
+      <div class="row">
+        <span class="price">$308.95 </span>
+        <a class="cta" href="https://buy.trychannel3.com/Ey9XjAN-0RAk-uosIs6?o=01KBPB37Z160XPYB0713YCKSYK&amp;aid=01KXN2W6839G1H3XB8G0S9B967" target="_blank" rel="noopener sponsored">Examine at coppertistwu.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/sxNlIoZ-0RAk-uosIs6?o=01KBP9A4BPNZ516TJSPEYPY5D1&amp;aid=01KXN2W6839G1H3XB8G0S9B967" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/87a55237-def2-420e-a00b-de5c78550189?aid=01KXN2W6839G1H3XB8G0S9B967&amp;mid=0RAk" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Coppertist.Wu</span>
+      <h3 class="name">Ouroboros Ring 2.0 - Tsavorite/#7</h3>
+      <p class="note">The snake eats its tail. Time does the same.</p>
+      <div class="row">
+        <span class="price">$308.95 </span>
+        <a class="cta" href="https://buy.trychannel3.com/sxNlIoZ-0RAk-uosIs6?o=01KBP9A4BPNZ516TJSPEYPY5D1&amp;aid=01KXN2W6839G1H3XB8G0S9B967" target="_blank" rel="noopener sponsored">Examine at coppertistwu.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/vOhEWqX-SqEL-uosIs6?o=01KRXTK02FXF9936012AXXHWX4&amp;aid=01KXN2WD2M1RQ3N2VF6JRXYSG6" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/3f4515a5-ccbf-4a13-8ba8-29c205da587a?aid=01KXN2WD2M1RQ3N2VF6JRXYSG6&amp;mid=v7oe" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">GI ArtLab</span>
+      <h3 class="name">Black Smoke Abstract By Gi Artlab</h3>
+      <p class="note">The spiral. You&#39;ve seen it before, you&#39;ll see it again.</p>
+      <div class="row">
+        <span class="price">$636.45 </span>
+        <a class="cta" href="https://buy.trychannel3.com/vOhEWqX-SqEL-uosIs6?o=01KRXTK02FXF9936012AXXHWX4&amp;aid=01KXN2WD2M1RQ3N2VF6JRXYSG6" target="_blank" rel="noopener sponsored">Examine at raymourflanigan.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/GM6CIFk-rNHQ-uosIs6?o=01KHKNWK50RQNJ6JX46XZE3HGV&amp;aid=01KXN2WD2M1RQ3N2VF6JRXYSG6" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/ca3414cc-9a95-4b4a-a064-d2e241862601?aid=01KXN2WD2M1RQ3N2VF6JRXYSG6&amp;mid=rNHQ" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Deco 79</span>
+      <h3 class="name">Black Minimalist Textured Canvas Art #bt084</h3>
+      <p class="note">The spiral. You&#39;ve seen it before, you&#39;ll see it again.</p>
+      <div class="row">
+        <span class="price">$809 </span>
+        <a class="cta" href="https://buy.trychannel3.com/GM6CIFk-rNHQ-uosIs6?o=01KHKNWK50RQNJ6JX46XZE3HGV&amp;aid=01KXN2WD2M1RQ3N2VF6JRXYSG6" target="_blank" rel="noopener sponsored">Examine at zoesdeco.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/wIujjpP-rNHQ-uosIs6?o=01KHVNT0RZRHJCCNPD9MNS9PN0&amp;aid=01KXN2WD2M1RQ3N2VF6JRXYSG6" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/617440a5-8054-4056-9c45-9e4486a8c4d4?aid=01KXN2WD2M1RQ3N2VF6JRXYSG6&amp;mid=rNHQ" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Deco 79</span>
+      <h3 class="name">Black Textured Minimalist Wall Art #bt035</h3>
+      <p class="note">The spiral. You&#39;ve seen it before, you&#39;ll see it again.</p>
+      <div class="row">
+        <span class="price">$579 </span>
+        <a class="cta" href="https://buy.trychannel3.com/wIujjpP-rNHQ-uosIs6?o=01KHVNT0RZRHJCCNPD9MNS9PN0&amp;aid=01KXN2WD2M1RQ3N2VF6JRXYSG6" target="_blank" rel="noopener sponsored">Examine at zoesdeco.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/pV1IkkE-hh00-uosIs6?o=01KBPD91745HPKNV83G4W9CN7S&amp;aid=01KXN2W6839G1H3XB8G0S9B967" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/pV1IkkE?aid=01KXN2W6839G1H3XB8G0S9B967&amp;mid=hh00" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">GTHIC</span>
+      <h3 class="name">Ouroboros Snake Sterling Silver Ring - 14</h3>
+      <p class="note">The snake eats its tail. Time does the same.</p>
+      <div class="row">
+        <span class="price">$214.87 </span>
+        <a class="cta" href="https://buy.trychannel3.com/pV1IkkE-hh00-uosIs6?o=01KBPD91745HPKNV83G4W9CN7S&amp;aid=01KXN2W6839G1H3XB8G0S9B967" target="_blank" rel="noopener sponsored">Examine at gthic.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/Z1GIE6H-cOmF-uosIs6?o=01KBP839DQV9Z29P7N6HJ35F98&amp;aid=01KXN2WDCSJF0E6E00EZ02KZ2P" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/8484da5c-bbf9-4f7a-a1c0-08ed1a209080?aid=01KXN2WDCSJF0E6E00EZ02KZ2P&amp;mid=cOmF" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Oliver Gal</span>
+      <h3 class="name">Black Vortex - 16x20/bfl</h3>
+      <p class="note">The spiral. You&#39;ve seen it before, you&#39;ll see it again.</p>
+      <div class="row">
+        <span class="price">$295 </span>
+        <a class="cta" href="https://buy.trychannel3.com/Z1GIE6H-cOmF-uosIs6?o=01KBP839DQV9Z29P7N6HJ35F98&amp;aid=01KXN2WDCSJF0E6E00EZ02KZ2P" target="_blank" rel="noopener sponsored">Examine at olivergal.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/ldBbST4-7xXX-uosIs6?o=01KBPBAWNMFWWARPCKSMBAH13T&amp;aid=01KXN2W16666T75QWRYYK8Z25N" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/ldBbST4?aid=01KXN2W16666T75QWRYYK8Z25N&amp;mid=7xXX" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Regina Andrew</span>
+      <h3 class="name">Antler Objet Large - White</h3>
+      <p class="note">The crown from the cane fields. Decorative, allegedly.</p>
+      <div class="row">
+        <span class="price">$200 </span>
+        <a class="cta" href="https://buy.trychannel3.com/ldBbST4-7xXX-uosIs6?o=01KBPBAWNMFWWARPCKSMBAH13T&amp;aid=01KXN2W16666T75QWRYYK8Z25N" target="_blank" rel="noopener sponsored">Examine at melroseandmadison.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/E5M8CpR-Vytj-uosIs6?o=01KCG2XJFWVKZ8PEYC53CYR5FX&amp;aid=01KXN2W0YHR0W0T2CDEY8J3NFZ" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/E5M8CpR?aid=01KXN2W0YHR0W0T2CDEY8J3NFZ&amp;mid=Vytj" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Uplifted Finds</span>
+      <h3 class="name">Luxury Resin Deer Statue For Modern Home Decoration</h3>
+      <p class="note">The crown from the cane fields. Decorative, allegedly.</p>
+      <div class="row">
+        <span class="price">$154.97 <s class="was">$309.94</s></span>
+        <a class="cta" href="https://buy.trychannel3.com/E5M8CpR-Vytj-uosIs6?o=01KCG2XJFWVKZ8PEYC53CYR5FX&amp;aid=01KXN2W0YHR0W0T2CDEY8J3NFZ" target="_blank" rel="noopener sponsored">Examine at inspireuplift.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/GNoCeT7-Vytj-uosIs6?o=01KCGQ2Q18T3FW0W828WQ1VGJW&amp;aid=01KXN2WB4B16ZV3HQQ1HCERSMV" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/GNoCeT7?aid=01KXN2WB4B16ZV3HQQ1HCERSMV&amp;mid=Vytj" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Multisell Products Hub</span>
+      <h3 class="name">Human Head Skull Statue Resin Figurines For Medical Teaching Halloween Decor Crafts</h3>
+      <p class="note">A conversation piece. The conversation is short.</p>
+      <div class="row">
+        <span class="price">$114.97 <s class="was">$229.94</s></span>
+        <a class="cta" href="https://buy.trychannel3.com/GNoCeT7-Vytj-uosIs6?o=01KCGQ2Q18T3FW0W828WQ1VGJW&amp;aid=01KXN2WB4B16ZV3HQQ1HCERSMV" target="_blank" rel="noopener sponsored">Examine at inspireuplift.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/bJB7Rym-asdf-uosIs6?o=01KGJ6RDRH5444W8N6VZP5DK2J&amp;aid=01KXN2WB4B16ZV3HQQ1HCERSMV" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/6f1a0c34-b7e9-4b39-a562-cd0c5a635153?aid=01KXN2WB4B16ZV3HQQ1HCERSMV&amp;mid=asdf" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Nordstrom</span>
+      <h3 class="name">Resin Steer Skull Wall Decor</h3>
+      <p class="note">A conversation piece. The conversation is short.</p>
+      <div class="row">
+        <span class="price">$82.99 </span>
+        <a class="cta" href="https://buy.trychannel3.com/bJB7Rym-asdf-uosIs6?o=01KGJ6RDRH5444W8N6VZP5DK2J&amp;aid=01KXN2WB4B16ZV3HQQ1HCERSMV" target="_blank" rel="noopener sponsored">Examine at nordstrom.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/0b7y4Mx-Q1hs-uosIs6?o=01KRDVVB33XQ5RTD4C0HMHTJD0&amp;aid=01KXN2W4PQSJCBYDKVJ897JX4W" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/c5790302-36c2-44fe-980b-44f8c58d0fdf?aid=01KXN2W4PQSJCBYDKVJ897JX4W&amp;mid=Q1hs" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Uttermost</span>
+      <h3 class="name">Gilded Branch 25&quot; Wide Dark Brown Sculpture</h3>
+      <p class="note">Twig work. Ask no further questions.</p>
+      <div class="row">
+        <span class="price">$237.60 </span>
+        <a class="cta" href="https://buy.trychannel3.com/0b7y4Mx-Q1hs-uosIs6?o=01KRDVVB33XQ5RTD4C0HMHTJD0&amp;aid=01KXN2W4PQSJCBYDKVJ897JX4W" target="_blank" rel="noopener sponsored">Examine at lampsplus.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/JTcyBXE-QP55-uosIs6?o=01KVQM98ARXTMSQRPRZSP39C03&amp;aid=01KXN2W16666T75QWRYYK8Z25N" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/f850255e-8f75-42ac-8907-2b443e30ee84?aid=01KXN2W16666T75QWRYYK8Z25N&amp;mid=QP55" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Benzara Inc.</span>
+      <h3 class="name">Magnesia Deer Head Wall Accent</h3>
+      <p class="note">The crown from the cane fields. Decorative, allegedly.</p>
+      <div class="row">
+        <span class="price">$249.96 <s class="was">$284.99</s></span>
+        <a class="cta" href="https://buy.trychannel3.com/JTcyBXE-QP55-uosIs6?o=01KVQM98ARXTMSQRPRZSP39C03&amp;aid=01KXN2W16666T75QWRYYK8Z25N" target="_blank" rel="noopener sponsored">Examine at overstock.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/udFOgrG-VCoB-uosIs6?o=01KBPAP7SYXEXRC86SHN1Y43P7&amp;aid=01KXN2W89Z14J8N1403HNQJSM1" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/17353b94-06f1-4379-a688-a4f02c56492a?aid=01KXN2W89Z14J8N1403HNQJSM1&amp;mid=VCoB" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Georgia Bulldogs</span>
+      <h3 class="name">Taper Candles, 12&quot; (set Of 8 Pairs) - Smoke</h3>
+      <p class="note">Mood lighting for unresolved cases.</p>
+      <div class="row">
+        <span class="price">$72 <s class="was">$144</s></span>
+        <a class="cta" href="https://buy.trychannel3.com/udFOgrG-VCoB-uosIs6?o=01KBPAP7SYXEXRC86SHN1Y43P7&amp;aid=01KXN2W89Z14J8N1403HNQJSM1" target="_blank" rel="noopener sponsored">Examine at luluandgeorgia.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/vCV8tbh-asdf-uosIs6?o=01KHCD8QXD5H693PCQAKB1C1XG&amp;aid=01KXN2W89Z14J8N1403HNQJSM1" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/58c2d251-d7ff-4134-a6ff-4299ebf97e68?aid=01KXN2W89Z14J8N1403HNQJSM1&amp;mid=asdf" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Nordstrom</span>
+      <h3 class="name">Set Of 6 Black Dinner Candles</h3>
+      <p class="note">Mood lighting for unresolved cases.</p>
+      <div class="row">
+        <span class="price">$57.99 <s class="was">$104.99</s></span>
+        <a class="cta" href="https://buy.trychannel3.com/vCV8tbh-asdf-uosIs6?o=01KHCD8QXD5H693PCQAKB1C1XG&amp;aid=01KXN2W89Z14J8N1403HNQJSM1" target="_blank" rel="noopener sponsored">Examine at nordstrom.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/t7HkjF1-bJUv-uosIs6?o=01KD6PE9XK2X89NHQX8S5QYWDH&amp;aid=01KXN2W9Q8PKC5MW2M0KXNCTZH" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/01KD6PDQG2DAKBWBA93BG5AZDT?aid=01KXN2W9Q8PKC5MW2M0KXNCTZH&amp;mid=bJUv" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Pamela Love</span>
+      <h3 class="name">The Infinite Door: A Tarot Deck And Guide Book</h3>
+      <p class="note">The ladies at the laundromat had opinions.</p>
+      <div class="row">
+        <span class="price">$35 </span>
+        <a class="cta" href="https://buy.trychannel3.com/t7HkjF1-bJUv-uosIs6?o=01KD6PE9XK2X89NHQX8S5QYWDH&amp;aid=01KXN2W9Q8PKC5MW2M0KXNCTZH" target="_blank" rel="noopener sponsored">Examine at pamelalove.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/Ne2HyMC-V9Jc-uosIs6?o=01KBPBYKE6EH692YGCAHQQAX4R&amp;aid=01KXN2W81HCD3KE0Q4YRW5XE0G" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/e8d77fc5-8b0b-4f9d-9662-3f3289e089b5?aid=01KXN2W81HCD3KE0Q4YRW5XE0G&amp;mid=V9Jc" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Paddywax</span>
+      <h3 class="name">Black / White Unscented Taper Candles (set Of 4)</h3>
+      <p class="note">Mood lighting for unresolved cases.</p>
+      <div class="row">
+        <span class="price">$34 </span>
+        <a class="cta" href="https://buy.trychannel3.com/Ne2HyMC-V9Jc-uosIs6?o=01KBPBYKE6EH692YGCAHQQAX4R&amp;aid=01KXN2W81HCD3KE0Q4YRW5XE0G" target="_blank" rel="noopener sponsored">Examine at ascotandhart.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/P8LqGER-33hd-uosIs6?o=01KBPCKW4NRQY1A2NWKN2C2846&amp;aid=01KXN2W81HCD3KE0Q4YRW5XE0G" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/a5f07312-308e-4bac-84d8-1f4c91906817?aid=01KXN2W81HCD3KE0Q4YRW5XE0G&amp;mid=33hd" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Colonial Candle</span>
+      <h3 class="name">10&quot; Black Handipt Taper, 12 Pack</h3>
+      <p class="note">Mood lighting for unresolved cases.</p>
+      <div class="row">
+        <span class="price">$45 <s class="was">$65</s></span>
+        <a class="cta" href="https://buy.trychannel3.com/P8LqGER-33hd-uosIs6?o=01KBPCKW4NRQY1A2NWKN2C2846&amp;aid=01KXN2W81HCD3KE0Q4YRW5XE0G" target="_blank" rel="noopener sponsored">Examine at colonialcandle.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/GAYgFix-Qqxu-uosIs6?o=01KVW9X2C6MENWBSN0JHCXP0TS&amp;aid=01KXN2W4Z5E57N09B9AE5YHCVA" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/ed6b55fc-b46a-46d0-8243-f26dbe3125dd?aid=01KXN2W4Z5E57N09B9AE5YHCVA&amp;mid=Qqxu" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Uniquewise</span>
+      <h3 class="name">White Wood Modern Decorative Object</h3>
+      <p class="note">Twig work. Ask no further questions.</p>
+      <div class="row">
+        <span class="price">$87.98 </span>
+        <a class="cta" href="https://buy.trychannel3.com/GAYgFix-Qqxu-uosIs6?o=01KVW9X2C6MENWBSN0JHCXP0TS&amp;aid=01KXN2W4Z5E57N09B9AE5YHCVA" target="_blank" rel="noopener sponsored">Examine at lowes.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/Uvzqs9k-Qqxu-uosIs6?o=01KJ21VHCPAZWBYGTNPSVE4A49&amp;aid=01KXN2W4Z5E57N09B9AE5YHCVA" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/1467c045-c993-4802-a002-4afa0fe86c82?aid=01KXN2W4Z5E57N09B9AE5YHCVA&amp;mid=Qqxu" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Uniquewise</span>
+      <h3 class="name">Uniquewise White Wood Modern Decorative Object</h3>
+      <p class="note">Twig work. Ask no further questions.</p>
+      <div class="row">
+        <span class="price">$87.98 <s class="was">$149.27</s></span>
+        <a class="cta" href="https://buy.trychannel3.com/Uvzqs9k-Qqxu-uosIs6?o=01KJ21VHCPAZWBYGTNPSVE4A49&amp;aid=01KXN2W4Z5E57N09B9AE5YHCVA" target="_blank" rel="noopener sponsored">Examine at lowes.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/J9r1lH7-98k8-uosIs6?o=01KBPAX5MKPB2EA281YQMM6SPX&amp;aid=01KXN2W16666T75QWRYYK8Z25N" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/7387cfee-3747-48e5-9947-2eccf659462e?aid=01KXN2W16666T75QWRYYK8Z25N&amp;mid=WoUK" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Melrose</span>
+      <h3 class="name">Modern Wood Deer Head Mount</h3>
+      <p class="note">The crown from the cane fields. Decorative, allegedly.</p>
+      <div class="row">
+        <span class="price">$62.99 </span>
+        <a class="cta" href="https://buy.trychannel3.com/J9r1lH7-98k8-uosIs6?o=01KBPAX5MKPB2EA281YQMM6SPX&amp;aid=01KXN2W16666T75QWRYYK8Z25N" target="_blank" rel="noopener sponsored">Examine at scheels.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/6navnyN-BsaX-uosIs6?o=01KSPSN9QSH1ZQJGCY7W3Y4H0D&amp;aid=01KXN2W9Q8PKC5MW2M0KXNCTZH" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/0b0f6349-9410-4113-85fb-27e1e0774cce?aid=01KXN2W9Q8PKC5MW2M0KXNCTZH&amp;mid=BsaX" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Lo Scarabeo</span>
+      <h3 class="name">Egyptian Tarot Egyptian Tarot Deck (hardcover)</h3>
+      <p class="note">The ladies at the laundromat had opinions.</p>
+      <div class="row">
+        <span class="price">$22.32 <s class="was">$23.95</s></span>
+        <a class="cta" href="https://buy.trychannel3.com/6navnyN-BsaX-uosIs6?o=01KSPSN9QSH1ZQJGCY7W3Y4H0D&amp;aid=01KXN2W9Q8PKC5MW2M0KXNCTZH" target="_blank" rel="noopener sponsored">Examine at walmart.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/LWYiYPX-QetO-uosIs6?o=01KH88Q336V0T9P5RJ5Y1XR49R&amp;aid=01KXN2W9YVWT4T1D95X0GG1P5S" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/e50d94ea-54dd-4365-8105-89827b001585?aid=01KXN2W9YVWT4T1D95X0GG1P5S&amp;mid=QetO" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Holly Rose</span>
+      <h3 class="name">Holly Simple Tarot Guidebook</h3>
+      <p class="note">The ladies at the laundromat had opinions.</p>
+      <div class="row">
+        <span class="price">$24 </span>
+        <a class="cta" href="https://buy.trychannel3.com/LWYiYPX-QetO-uosIs6?o=01KH88Q336V0T9P5RJ5Y1XR49R&amp;aid=01KXN2W9YVWT4T1D95X0GG1P5S" target="_blank" rel="noopener sponsored">Examine at urbanoutfitters.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/cXfTCJH-Vytj-uosIs6?o=01KCFEXV0CAA57PMSYTW1A9X2M&amp;aid=01KXN2W9Q8PKC5MW2M0KXNCTZH" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/cXfTCJH?aid=01KXN2W9Q8PKC5MW2M0KXNCTZH&amp;mid=Vytj" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">On Spot Shop</span>
+      <h3 class="name">Pink Rider Tarot Cards For Beginners, Divination Deck English Version Oracle Board Game For Fortune Telling, Party Play</h3>
+      <p class="note">The ladies at the laundromat had opinions.</p>
+      <div class="row">
+        <span class="price">$19.97 <s class="was">$39.94</s></span>
+        <a class="cta" href="https://buy.trychannel3.com/cXfTCJH-Vytj-uosIs6?o=01KCFEXV0CAA57PMSYTW1A9X2M&amp;aid=01KXN2W9Q8PKC5MW2M0KXNCTZH" target="_blank" rel="noopener sponsored">Examine at inspireuplift.com</a>
+      </div>
+    </div></article>
+    </div>
+    <p class="shelf-hint" aria-hidden="true">Drag sideways. Follow the thread.</p></div>
+  </section>
+  <aside class="quote" data-reveal>
+    <blockquote>&ldquo;The world needs bad men. We keep the other bad men from the door.&rdquo;</blockquote>
+    <cite>Det. R. Cohle, Louisiana CID</cite>
+  </aside>
+  <section class="chapter" id="bayou">
+    <header class="plate" data-reveal>
+      <span class="numeral">File IV</span>
+      <h2 class="plate-title">The Bayou</h2>
+      <p class="plate-intro">Chicory, cayenne, sepia light. The Louisiana that swallowed them.</p>
+    </header>
+    <div class="chapter-body">
+    <div class="feature">
+      <article class="card card-hero" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/UhnCal1-asdf-uosIs6?o=01KBPBYRV4X6ADP109BYQQDGC3&amp;aid=01KXN2WPDM4PQKZV0E6B9BSFTE" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/UhnCal1?aid=01KXN2WPDM4PQKZV0E6B9BSFTE&amp;mid=asdf" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Filson</span>
+      <h3 class="name">Waxed Canvas Barn Jacket</h3>
+      <p class="note">It rains on the just and the unjust. Mostly here.</p>
+      <div class="row">
+        <span class="price">$395 </span>
+        <a class="cta" href="https://buy.trychannel3.com/UhnCal1-asdf-uosIs6?o=01KBPBYRV4X6ADP109BYQQDGC3&amp;aid=01KXN2WPDM4PQKZV0E6B9BSFTE" target="_blank" rel="noopener sponsored">Examine at nordstrom.com</a>
+      </div>
+    </div></article>
+      <div class="feature-rest"><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/O0IEqeI-xhqp-uosIs6?o=01KBPA6C69SGS3SECP5J278G2N&amp;aid=01KXN2WPDM4PQKZV0E6B9BSFTE" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/6e288685-4dcc-4689-a1a8-4554c8470567?aid=01KXN2WPDM4PQKZV0E6B9BSFTE&amp;mid=xhqp" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Belstaff</span>
+      <h3 class="name">Men&#39;s Waxed Cotton Ground Jacket</h3>
+      <p class="note">It rains on the just and the unjust. Mostly here.</p>
+      <div class="row">
+        <span class="price">$495 </span>
+        <a class="cta" href="https://buy.trychannel3.com/O0IEqeI-xhqp-uosIs6?o=01KBPA6C69SGS3SECP5J278G2N&amp;aid=01KXN2WPDM4PQKZV0E6B9BSFTE" target="_blank" rel="noopener sponsored">Examine at belstaff.com</a>
+      </div>
+    </div></article><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/TxJ9372-lJxY-uosIs6?o=01KBPCX5QXMNBWPJ3FN7VXB535&amp;aid=01KXN2WND7HHFW00F08WDXSBCS" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/01KD8FYAW4TGRN8RBJBPXS7W17?aid=01KXN2WND7HHFW00F08WDXSBCS&amp;mid=0JF2" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Cire Trudon</span>
+      <h3 class="name">Abd El Kader La Petite Candle</h3>
+      <p class="note">Smells like the treeline at dusk. In a good way, mostly.</p>
+      <div class="row">
+        <span class="price">$58 </span>
+        <a class="cta" href="https://buy.trychannel3.com/TxJ9372-lJxY-uosIs6?o=01KBPCX5QXMNBWPJ3FN7VXB535&amp;aid=01KXN2WND7HHFW00F08WDXSBCS" target="_blank" rel="noopener sponsored">Examine at dermstore.com</a>
+      </div>
+    </div></article><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/oDXgxjE-riv6-uosIs6?o=01KS49PD1VVGVTJHXMW3T3VCPC&amp;aid=01KXN2WND7HHFW00F08WDXSBCS" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/cfa1f905-6f04-4ed8-b410-2cadb9493ec8?aid=01KXN2WND7HHFW00F08WDXSBCS&amp;mid=riv6" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Cozy Earth</span>
+      <h3 class="name">Candle Botanic</h3>
+      <p class="note">Smells like the treeline at dusk. In a good way, mostly.</p>
+      <div class="row">
+        <span class="price">$48 </span>
+        <a class="cta" href="https://buy.trychannel3.com/oDXgxjE-riv6-uosIs6?o=01KS49PD1VVGVTJHXMW3T3VCPC&amp;aid=01KXN2WND7HHFW00F08WDXSBCS" target="_blank" rel="noopener sponsored">Examine at cozyearth.com</a>
+      </div>
+    </div></article><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/Eo5Ndbk-cyJ2-uosIs6?o=01KBPD5708G52T0CTQJE3QT0AC&amp;aid=01KXN2WKEY3HSC15YR8E55V7GS" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/d27529ec-47b6-4d35-a769-f01a1e968020?aid=01KXN2WKEY3HSC15YR8E55V7GS&amp;mid=cyJ2" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">HomeWetBar.com</span>
+      <h3 class="name">Caliente! Spicy Snacks Hot Sauce Gift Basket</h3>
+      <p class="note">Heat with paperwork. Handle accordingly.</p>
+      <div class="row">
+        <span class="price">$79.95 <s class="was">$99.95</s></span>
+        <a class="cta" href="https://buy.trychannel3.com/Eo5Ndbk-cyJ2-uosIs6?o=01KBPD5708G52T0CTQJE3QT0AC&amp;aid=01KXN2WKEY3HSC15YR8E55V7GS" target="_blank" rel="noopener sponsored">Examine at homewetbar.com</a>
+      </div>
+    </div></article></div>
+    </div>
+    <div class="feature-overflow"><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/DmBlLfJ-7Eau-uosIs6?o=01KSMTSZT83F5237T2V81KTF8T&amp;aid=01KXN2WN49P2MZEX9NA2WHZTNH" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/I1LNCi8?aid=01KXN2WN49P2MZEX9NA2WHZTNH&amp;mid=7Eau" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Brooks Brothers</span>
+      <h3 class="name">Oak Moss &amp; Vetiver &quot;success&quot; Candle</h3>
+      <p class="note">Smells like the treeline at dusk. In a good way, mostly.</p>
+      <div class="row">
+        <span class="price">$55 </span>
+        <a class="cta" href="https://buy.trychannel3.com/DmBlLfJ-7Eau-uosIs6?o=01KSMTSZT83F5237T2V81KTF8T&amp;aid=01KXN2WN49P2MZEX9NA2WHZTNH" target="_blank" rel="noopener sponsored">Examine at brooksbrothers.com</a>
+      </div>
+    </div></article><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/CR0kif6-aYKO-uosIs6?o=01KBP9WEP0WMGFDWJHEVVG42HJ&amp;aid=01KXN2WJ75J0435A11Z0R76A2F" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/CR0kif6?aid=01KXN2WJ75J0435A11Z0R76A2F&amp;mid=aYKO" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Cusa Tea</span>
+      <h3 class="name">Dark Roast Coffee - 30 Servings</h3>
+      <p class="note">New Orleans coffee, black. Sleep is a choice.</p>
+      <div class="row">
+        <span class="price">$39.99 </span>
+        <a class="cta" href="https://buy.trychannel3.com/CR0kif6-aYKO-uosIs6?o=01KBP9WEP0WMGFDWJHEVVG42HJ&amp;aid=01KXN2WJ75J0435A11Z0R76A2F" target="_blank" rel="noopener sponsored">Examine at drinkcusa.com</a>
+      </div>
+    </div></article><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/ce9OTZs-asdf-uosIs6?o=01KH9RHSAZS2GM932ERXTVS9PJ&amp;aid=01KXN2WN49P2MZEX9NA2WHZTNH" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/1daf5143-d7d7-43ce-a088-b6d788d153fe?aid=01KXN2WN49P2MZEX9NA2WHZTNH&amp;mid=asdf" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Nordstrom</span>
+      <h3 class="name">Fern Moss Xl 3‑wick Candle</h3>
+      <p class="note">Smells like the treeline at dusk. In a good way, mostly.</p>
+      <div class="row">
+        <span class="price">$59 </span>
+        <a class="cta" href="https://buy.trychannel3.com/ce9OTZs-asdf-uosIs6?o=01KH9RHSAZS2GM932ERXTVS9PJ&amp;aid=01KXN2WN49P2MZEX9NA2WHZTNH" target="_blank" rel="noopener sponsored">Examine at nordstrom.com</a>
+      </div>
+    </div></article><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/uBakUFT-8pMZ-uosIs6?o=01KCYB4BT3BAK6TW3JPXVSYM0M&amp;aid=01KXN2WKPM9MEATCMK32NC087C" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/01KCYB2XJ6NZQ70P9VSJ755W7Q?aid=01KXN2WKPM9MEATCMK32NC087C&amp;mid=8pMZ" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Butterfly Bakery of Vermont</span>
+      <h3 class="name">Sweet Heat Gift Basket</h3>
+      <p class="note">Heat with paperwork. Handle accordingly.</p>
+      <div class="row">
+        <span class="price">$70 </span>
+        <a class="cta" href="https://buy.trychannel3.com/uBakUFT-8pMZ-uosIs6?o=01KCYB4BT3BAK6TW3JPXVSYM0M&amp;aid=01KXN2WKPM9MEATCMK32NC087C" target="_blank" rel="noopener sponsored">Examine at butterflybakeryvt.com</a>
+      </div>
+    </div></article><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/C2h7hoj-oJIc-uosIs6?o=01KBPA890EV3PEMHP18P5DCX0K&amp;aid=01KXN2WKPM9MEATCMK32NC087C" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/a8e48b61-3c04-4adc-b28c-4d99a06f7b5b?aid=01KXN2WKPM9MEATCMK32NC087C&amp;mid=oJIc" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">The Truffleist</span>
+      <h3 class="name">Holiday Gift Crate</h3>
+      <p class="note">Heat with paperwork. Handle accordingly.</p>
+      <div class="row">
+        <span class="price">$80 </span>
+        <a class="cta" href="https://buy.trychannel3.com/C2h7hoj-oJIc-uosIs6?o=01KBPA890EV3PEMHP18P5DCX0K&amp;aid=01KXN2WKPM9MEATCMK32NC087C" target="_blank" rel="noopener sponsored">Examine at truffleist.com</a>
+      </div>
+    </div></article><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/qZ3LMC6-8pMZ-uosIs6?o=01KCYB900H9JZ1JRAM9EEQNMR6&amp;aid=01KXN2WKPM9MEATCMK32NC087C" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/01KCYB88VFS0WGAMEDF8S5DCGQ?aid=01KXN2WKPM9MEATCMK32NC087C&amp;mid=8pMZ" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Butterfly Bakery of Vermont</span>
+      <h3 class="name">Sweet And Savory Gift Set</h3>
+      <p class="note">Heat with paperwork. Handle accordingly.</p>
+      <div class="row">
+        <span class="price">$61 <s class="was">$64.28</s></span>
+        <a class="cta" href="https://buy.trychannel3.com/qZ3LMC6-8pMZ-uosIs6?o=01KCYB900H9JZ1JRAM9EEQNMR6&amp;aid=01KXN2WKPM9MEATCMK32NC087C" target="_blank" rel="noopener sponsored">Examine at butterflybakeryvt.com</a>
+      </div>
+    </div></article><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/t0Jb8wk-64qT-uosIs6?o=01KBPYH111KJQ3DKCF7GDHY8VC&amp;aid=01KXN2WJ75J0435A11Z0R76A2F" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/18430d43-4ad1-4020-977a-e3dfc40e3fbc?aid=01KXN2WJ75J0435A11Z0R76A2F&amp;mid=64qT" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Graffeo Coffee Roasting Company Inc.</span>
+      <h3 class="name">Graffeo Dark Roast Coffee</h3>
+      <p class="note">New Orleans coffee, black. Sleep is a choice.</p>
+      <div class="row">
+        <span class="price">$25 </span>
+        <a class="cta" href="https://buy.trychannel3.com/t0Jb8wk-64qT-uosIs6?o=01KBPYH111KJQ3DKCF7GDHY8VC&amp;aid=01KXN2WJ75J0435A11Z0R76A2F" target="_blank" rel="noopener sponsored">Examine at graffeo.com</a>
+      </div>
+    </div></article><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/EE9yB7J-1ooq-uosIs6?o=01KT1N8XNAGE9N97XHQYD47WGX&amp;aid=01KXN2WJ75J0435A11Z0R76A2F" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/3907d4f5-6bcd-4e67-8afb-22373326d566?aid=01KXN2WJ75J0435A11Z0R76A2F&amp;mid=3egv" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Green Mountain Coffee Roasters</span>
+      <h3 class="name">Green Mountain Coffee Ground Coffee, French Roast, 2.2 Oz Per Bag, Carton Of 50 Bags</h3>
+      <p class="note">New Orleans coffee, black. Sleep is a choice.</p>
+      <div class="row">
+        <span class="price">$86.99 </span>
+        <a class="cta" href="https://buy.trychannel3.com/EE9yB7J-1ooq-uosIs6?o=01KT1N8XNAGE9N97XHQYD47WGX&amp;aid=01KXN2WJ75J0435A11Z0R76A2F" target="_blank" rel="noopener sponsored">Examine at cpooutlets.com</a>
+      </div>
+    </div></article><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/OiSRFMK-ObEj-uosIs6?o=01KBPBTCDV1X8ZMRK8Q4PGJNT2&amp;aid=01KXN2WJ75J0435A11Z0R76A2F" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/OiSRFMK?aid=01KXN2WJ75J0435A11Z0R76A2F&amp;mid=ObEj" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Coffee Bros.: Specialty Coffee + Equipment</span>
+      <h3 class="name">Dark Roast Coffee - 2lb</h3>
+      <p class="note">New Orleans coffee, black. Sleep is a choice.</p>
+      <div class="row">
+        <span class="price">$49.60 </span>
+        <a class="cta" href="https://buy.trychannel3.com/OiSRFMK-ObEj-uosIs6?o=01KBPBTCDV1X8ZMRK8Q4PGJNT2&amp;aid=01KXN2WJ75J0435A11Z0R76A2F" target="_blank" rel="noopener sponsored">Examine at coffeebros.com</a>
+      </div>
+    </div></article><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/4AgkuTQ-l9AT-uosIs6?o=01KBPA91CHKJJ504PV316ED4WK&amp;aid=01KXN2WGJE3R9HCWNGV2BEJHZX" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/4a06375b-2101-4858-a2f8-c17c7eb9be4a?aid=01KXN2WGJE3R9HCWNGV2BEJHZX&amp;mid=l9AT" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Zatarain&#39;s</span>
+      <h3 class="name">Zatarains, Ssnng Creole, 8 Oz(case Of 12)</h3>
+      <p class="note">Gumbo doctrine. Respect the roux.</p>
+      <div class="row">
+        <span class="price">$37.22 <s class="was">$38.28</s></span>
+        <a class="cta" href="https://buy.trychannel3.com/4AgkuTQ-l9AT-uosIs6?o=01KBPA91CHKJJ504PV316ED4WK&amp;aid=01KXN2WGJE3R9HCWNGV2BEJHZX" target="_blank" rel="noopener sponsored">Examine at herbsdaily.com</a>
+      </div>
+    </div></article><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/JNsTE1E-dhoY-uosIs6?o=01KJHKCRWQCM0XWFSC12TAE9FF&amp;aid=01KXN2WGTKHPCQE17VM7V9KRPQ" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/9154317b-0a0d-4bc8-9841-affceeaf0a4f?aid=01KXN2WGTKHPCQE17VM7V9KRPQ&amp;mid=dhoY" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Chronicle Books</span>
+      <h3 class="name">Chronicle Books Cooking Up A Storm</h3>
+      <p class="note">Gumbo doctrine. Respect the roux.</p>
+      <div class="row">
+        <span class="price">$30 </span>
+        <a class="cta" href="https://buy.trychannel3.com/JNsTE1E-dhoY-uosIs6?o=01KJHKCRWQCM0XWFSC12TAE9FF&amp;aid=01KXN2WGTKHPCQE17VM7V9KRPQ" target="_blank" rel="noopener sponsored">Examine at bespokepost.com</a>
+      </div>
+    </div></article><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/EYy53v7-l9AT-uosIs6?o=01KBPBH1YNN3NR8K4M8E8DQKWZ&amp;aid=01KXN2WGJE3R9HCWNGV2BEJHZX" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/3ad0a72d-947b-4e30-a57c-e5ecb5ba0956?aid=01KXN2WGJE3R9HCWNGV2BEJHZX&amp;mid=l9AT" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Tony Chachere&#39;s</span>
+      <h3 class="name">Tony Chachere&#39;s, Creole Seasoning, 7 Oz(case Of 6)</h3>
+      <p class="note">Gumbo doctrine. Respect the roux.</p>
+      <div class="row">
+        <span class="price">$23.35 <s class="was">$23.49</s></span>
+        <a class="cta" href="https://buy.trychannel3.com/EYy53v7-l9AT-uosIs6?o=01KBPBH1YNN3NR8K4M8E8DQKWZ&amp;aid=01KXN2WGJE3R9HCWNGV2BEJHZX" target="_blank" rel="noopener sponsored">Examine at herbsdaily.com</a>
+      </div>
+    </div></article><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/fMHHRog-ep39-uosIs6?o=01KTXX1JCX2B8MJQDPPGH2J9JW&amp;aid=01KXN2WGJE3R9HCWNGV2BEJHZX" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/e9fb8554-7040-4916-9f33-242f2b7198a9?aid=01KXN2WGJE3R9HCWNGV2BEJHZX&amp;mid=ep39" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Meat N&#39; Bone</span>
+      <h3 class="name">Bayou Cajun Blend</h3>
+      <p class="note">Gumbo doctrine. Respect the roux.</p>
+      <div class="row">
+        <span class="price">$12.99 </span>
+        <a class="cta" href="https://buy.trychannel3.com/fMHHRog-ep39-uosIs6?o=01KTXX1JCX2B8MJQDPPGH2J9JW&amp;aid=01KXN2WGJE3R9HCWNGV2BEJHZX" target="_blank" rel="noopener sponsored">Examine at meatnbone.com</a>
+      </div>
+    </div></article><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/aNIYLjx-3Bk3-uosIs6?o=01KDH404PCQ7DEV403H7WJ7DJG&amp;aid=01KXN2WEZJW7RDNY0AGNN9QX7E" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/01KDH3ZRTPKB29NVGDF84T71SJ?aid=01KXN2WEZJW7RDNY0AGNN9QX7E&amp;mid=3Bk3" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Jaynes Gallery</span>
+      <h3 class="name">Usa, Louisiana, Lake Martin. Cypress Swamp Forest. - Canvas Print</h3>
+      <p class="note">Sepia water, cypress knees, no witnesses.</p>
+      <div class="row">
+        <span class="price">$87.99 <s class="was">$219.99</s></span>
+        <a class="cta" href="https://buy.trychannel3.com/aNIYLjx-3Bk3-uosIs6?o=01KDH404PCQ7DEV403H7WJ7DJG&amp;aid=01KXN2WEZJW7RDNY0AGNN9QX7E" target="_blank" rel="noopener sponsored">Examine at icanvas.com</a>
+      </div>
+    </div></article><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/cOowfi2-3Bk3-uosIs6?o=01KDFTJBTXZA1W8JJ6SB28NGF7&amp;aid=01KXN2WEZJW7RDNY0AGNN9QX7E" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/01KDFTJ0Z6TBHMJSC31A6T47MH?aid=01KXN2WEZJW7RDNY0AGNN9QX7E&amp;mid=3Bk3" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Jaynes Gallery</span>
+      <h3 class="name">Usa, Louisiana, Atchafalaya National Wildlife Refuge. Sunrise On Cypress Trees And Spanish Moss. - Canvas Print</h3>
+      <p class="note">Sepia water, cypress knees, no witnesses.</p>
+      <div class="row">
+        <span class="price">$33.99 <s class="was">$84.99</s></span>
+        <a class="cta" href="https://buy.trychannel3.com/cOowfi2-3Bk3-uosIs6?o=01KDFTJBTXZA1W8JJ6SB28NGF7&amp;aid=01KXN2WEZJW7RDNY0AGNN9QX7E" target="_blank" rel="noopener sponsored">Examine at icanvas.com</a>
+      </div>
+    </div></article><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/wLM1niN-3Bk3-uosIs6?o=01KDH5N5KYQ1PPZVNGVMV2QWWB&amp;aid=01KXN2WEZJW7RDNY0AGNN9QX7E" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/01KDH5MW82B594T6D0WKJJH32M?aid=01KXN2WEZJW7RDNY0AGNN9QX7E&amp;mid=3Bk3" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">iCanvas</span>
+      <h3 class="name">Cypress Swamp V Canvas Print</h3>
+      <p class="note">Sepia water, cypress knees, no witnesses.</p>
+      <div class="row">
+        <span class="price">$87.99 <s class="was">$219.99</s></span>
+        <a class="cta" href="https://buy.trychannel3.com/wLM1niN-3Bk3-uosIs6?o=01KDH5N5KYQ1PPZVNGVMV2QWWB&amp;aid=01KXN2WEZJW7RDNY0AGNN9QX7E" target="_blank" rel="noopener sponsored">Examine at icanvas.com</a>
+      </div>
+    </div></article><article class="card " data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/LRau50r-zUPh-uosIs6?o=01KBPA8NZ4XH8VPG65BKVWFD74&amp;aid=01KXN2WEZJW7RDNY0AGNN9QX7E" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/LRau50r?aid=01KXN2WEZJW7RDNY0AGNN9QX7E&amp;mid=zUPh" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Home Art Haven</span>
+      <h3 class="name">Enchanting Dawn Swamp Canvas - 60 X 60 Cm</h3>
+      <p class="note">Sepia water, cypress knees, no witnesses.</p>
+      <div class="row">
+        <span class="price">$49.99 </span>
+        <a class="cta" href="https://buy.trychannel3.com/LRau50r-zUPh-uosIs6?o=01KBPA8NZ4XH8VPG65BKVWFD74&amp;aid=01KXN2WEZJW7RDNY0AGNN9QX7E" target="_blank" rel="noopener sponsored">Examine at homearthaven.com</a>
+      </div>
+    </div></article></div></div>
+  </section>
+  <section class="chapter" id="wardrobe">
+    <header class="plate" data-reveal>
+      <span class="numeral">File V</span>
+      <h2 class="plate-title">The Wardrobe</h2>
+      <p class="plate-intro">Flannel, chambray, worn leather. Dress for fieldwork in 1995.</p>
+    </header>
+    <div class="chapter-body">
+    <div class="shelf" role="list" aria-label="The Wardrobe">
+      <article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/AyLeZJa-ZG9E-uosIs6?o=01KBPCG2K85J2ZBKH19G6KXBY6&amp;aid=01KXN2WXPRQ3VNF94AN2DDNPKA" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/ef9db17e-b2be-4669-8165-7dc278828142?aid=01KXN2WXPRQ3VNF94AN2DDNPKA&amp;mid=DcL7" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Ernest W. Baker</span>
+      <h3 class="name">Ernest W. Baker Quilted Leather Jacket</h3>
+      <p class="note">Worn like the years wore him.</p>
+      <div class="row">
+        <span class="price">$974 <s class="was">$1,585</s></span>
+        <a class="cta" href="https://buy.trychannel3.com/AyLeZJa-ZG9E-uosIs6?o=01KBPCG2K85J2ZBKH19G6KXBY6&amp;aid=01KXN2WXPRQ3VNF94AN2DDNPKA" target="_blank" rel="noopener sponsored">Examine at baltini.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/uUNTwJJ-Hupp-uosIs6?o=01KBP7SNKK2GX8EBAG71A3YS2Q&amp;aid=01KXN2WXD9XXFFXR8ZN6QE9XD7" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/uUNTwJJ?aid=01KXN2WXD9XXFFXR8ZN6QE9XD7&amp;mid=Hupp" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Rodd and Gunn</span>
+      <h3 class="name">Little River Leather Jacket</h3>
+      <p class="note">Worn like the years wore him.</p>
+      <div class="row">
+        <span class="price">$798 </span>
+        <a class="cta" href="https://buy.trychannel3.com/uUNTwJJ-Hupp-uosIs6?o=01KBP7SNKK2GX8EBAG71A3YS2Q&amp;aid=01KXN2WXD9XXFFXR8ZN6QE9XD7" target="_blank" rel="noopener sponsored">Examine at roddandgunn.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/LRnV9cs-Hupp-uosIs6?o=01KBPAP5Z7W7AS917690T93C5E&amp;aid=01KXN2WXD9XXFFXR8ZN6QE9XD7" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/LRnV9cs?aid=01KXN2WXD9XXFFXR8ZN6QE9XD7&amp;mid=Hupp" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Rodd and Gunn</span>
+      <h3 class="name">Long Island Leather Jacket</h3>
+      <p class="note">Worn like the years wore him.</p>
+      <div class="row">
+        <span class="price">$798 </span>
+        <a class="cta" href="https://buy.trychannel3.com/LRnV9cs-Hupp-uosIs6?o=01KBPAP5Z7W7AS917690T93C5E&amp;aid=01KXN2WXD9XXFFXR8ZN6QE9XD7" target="_blank" rel="noopener sponsored">Examine at roddandgunn.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/beaRQry-Qp2v-uosIs6?o=01KBPCAQMC28AS219RJVAJX4RH&amp;aid=01KXN2WXD9XXFFXR8ZN6QE9XD7" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/beaRQry?aid=01KXN2WXD9XXFFXR8ZN6QE9XD7&amp;mid=Qp2v" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Cockpit USA</span>
+      <h3 class="name">Vintage Roughneck Oil Driller Jacket Z21f008 - M</h3>
+      <p class="note">Worn like the years wore him.</p>
+      <div class="row">
+        <span class="price">$830 </span>
+        <a class="cta" href="https://buy.trychannel3.com/beaRQry-Qp2v-uosIs6?o=01KBPCAQMC28AS219RJVAJX4RH&amp;aid=01KXN2WXD9XXFFXR8ZN6QE9XD7" target="_blank" rel="noopener sponsored">Examine at cockpitusa.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/bp3R36D-pqRL-uosIs6?o=01KBPBYPWV2FGTG1N1DJDTFE5H&amp;aid=01KXN2X1F5RT8W3BJ2KSXJ3Z2B" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/bp3R36D?aid=01KXN2X1F5RT8W3BJ2KSXJ3Z2B&amp;mid=pqRL" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">47 Brand</span>
+      <h3 class="name">&#39;47 Blank Trucker</h3>
+      <p class="note">Marty&#39;s off-duty thinking cap.</p>
+      <div class="row">
+        <span class="price">$35 </span>
+        <a class="cta" href="https://buy.trychannel3.com/bp3R36D-pqRL-uosIs6?o=01KBPBYPWV2FGTG1N1DJDTFE5H&amp;aid=01KXN2X1F5RT8W3BJ2KSXJ3Z2B" target="_blank" rel="noopener sponsored">Examine at 47brand.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/WyL5J4Z-fWWx-uosIs6?o=01KBPBADNP8ACK07CG88G9748Y&amp;aid=01KXN2WYQN5TAJ4J9W53F5BPWM" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/WyL5J4Z?aid=01KXN2WYQN5TAJ4J9W53F5BPWM&amp;mid=fWWx" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Carmina</span>
+      <h3 class="name">Men&#39;s Leather Belt Dark Brown Waxy Commander</h3>
+      <p class="note">Louisiana state standard. Holds more than pants.</p>
+      <div class="row">
+        <span class="price">$170 </span>
+        <a class="cta" href="https://buy.trychannel3.com/WyL5J4Z-fWWx-uosIs6?o=01KBPBADNP8ACK07CG88G9748Y&amp;aid=01KXN2WYQN5TAJ4J9W53F5BPWM" target="_blank" rel="noopener sponsored">Examine at carminashoemaker.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/7zIQJtI-fWWx-uosIs6?o=01KBPA8MDBDJT4BNMCQV1NMVAR&amp;aid=01KXN2WYQN5TAJ4J9W53F5BPWM" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/01KD20NY5YF8D0F5P59Y1MHSX0?aid=01KXN2WYQN5TAJ4J9W53F5BPWM&amp;mid=fWWx" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Carmina</span>
+      <h3 class="name">Men&#39;s Leather Belt Brown Waxy Commander</h3>
+      <p class="note">Louisiana state standard. Holds more than pants.</p>
+      <div class="row">
+        <span class="price">$170 </span>
+        <a class="cta" href="https://buy.trychannel3.com/7zIQJtI-fWWx-uosIs6?o=01KBPA8MDBDJT4BNMCQV1NMVAR&amp;aid=01KXN2WYQN5TAJ4J9W53F5BPWM" target="_blank" rel="noopener sponsored">Examine at carminashoemaker.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/1J3nmpE-fWWx-uosIs6?o=01KBPCKH0P6D5DD9VXPNZMS4SV&amp;aid=01KXN2WZ12H06J6RMJNYSX2PHE" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/1J3nmpE?aid=01KXN2WZ12H06J6RMJNYSX2PHE&amp;mid=fWWx" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Carmina</span>
+      <h3 class="name">Men&#39;s Leather Belt Brown Funchal</h3>
+      <p class="note">Louisiana state standard. Holds more than pants.</p>
+      <div class="row">
+        <span class="price">$170 </span>
+        <a class="cta" href="https://buy.trychannel3.com/1J3nmpE-fWWx-uosIs6?o=01KBPCKH0P6D5DD9VXPNZMS4SV&amp;aid=01KXN2WZ12H06J6RMJNYSX2PHE" target="_blank" rel="noopener sponsored">Examine at carminashoemaker.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/4c1YNla-Tb6e-uosIs6?o=01KBPD95JSHZMDEWTWNP9KKK8V&amp;aid=01KXN2WZ12H06J6RMJNYSX2PHE" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/4c1YNla?aid=01KXN2WZ12H06J6RMJNYSX2PHE&amp;mid=Tb6e" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Roger Ximenez</span>
+      <h3 class="name">Gold Mock Croc Leather Belt - Cognac</h3>
+      <p class="note">Louisiana state standard. Holds more than pants.</p>
+      <div class="row">
+        <span class="price">$249 </span>
+        <a class="cta" href="https://buy.trychannel3.com/4c1YNla-Tb6e-uosIs6?o=01KBPD95JSHZMDEWTWNP9KKK8V&amp;aid=01KXN2WZ12H06J6RMJNYSX2PHE" target="_blank" rel="noopener sponsored">Examine at rogerximenez.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/IlRSwz2-asdf-uosIs6?o=01KBS6A88H0C7ACNW88Z78WDXY&amp;aid=01KXN2WTK5ZK6CKQ5B0YB58B8Q" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/IlRSwz2?aid=01KXN2WTK5ZK6CKQ5B0YB58B8Q&amp;mid=asdf" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Lee Prints</span>
+      <h3 class="name">101 Western Chambray Snap-up Shirt</h3>
+      <p class="note">CID casual. Iron optional after year three.</p>
+      <div class="row">
+        <span class="price">$200 </span>
+        <a class="cta" href="https://buy.trychannel3.com/IlRSwz2-asdf-uosIs6?o=01KBS6A88H0C7ACNW88Z78WDXY&amp;aid=01KXN2WTK5ZK6CKQ5B0YB58B8Q" target="_blank" rel="noopener sponsored">Examine at nordstrom.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/MMrc2zR-atzr-uosIs6?o=01KBP83WKGMWYBXY6MWAMM4ZGC&amp;aid=01KXN2X0CJTATSXNYR3CNJX6MQ" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/41ccd58a-e252-4410-97c3-73a3a1c8b471?aid=01KXN2X0CJTATSXNYR3CNJX6MQ&amp;mid=atzr" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">DURADERO</span>
+      <h3 class="name">New Buckhannon Unlined - Chestnut</h3>
+      <p class="note">For ground that keeps secrets.</p>
+      <div class="row">
+        <span class="price">$200 <s class="was">$235</s></span>
+        <a class="cta" href="https://buy.trychannel3.com/MMrc2zR-atzr-uosIs6?o=01KBP83WKGMWYBXY6MWAMM4ZGC&amp;aid=01KXN2X0CJTATSXNYR3CNJX6MQ" target="_blank" rel="noopener sponsored">Examine at duradero.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/B3aoxpu-fsxO-uosIs6?o=01KRA90960GSZ7K2TJX974HVQC&amp;aid=01KXN2X0CJTATSXNYR3CNJX6MQ" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/d7f8d921-53b5-44f9-8491-8602aa876b13?aid=01KXN2X0CJTATSXNYR3CNJX6MQ&amp;mid=fsxO" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Ariat</span>
+      <h3 class="name">Rebar Wedge Moc Toe 6&quot; Waterproof Composite Toe Work Boots</h3>
+      <p class="note">For ground that keeps secrets.</p>
+      <div class="row">
+        <span class="price">$189.95 </span>
+        <a class="cta" href="https://buy.trychannel3.com/B3aoxpu-fsxO-uosIs6?o=01KRA90960GSZ7K2TJX974HVQC&amp;aid=01KXN2X0CJTATSXNYR3CNJX6MQ" target="_blank" rel="noopener sponsored">Examine at zappos.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/j7T4I6z-asdf-uosIs6?o=01KBS1HVT4SKHYV05ZBEWVS15D&amp;aid=01KXN2WT8QE4EMXFQN871713TZ" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/j7T4I6z?aid=01KXN2WT8QE4EMXFQN871713TZ&amp;mid=asdf" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Todd Snyder
+</span>
+      <h3 class="name">Otero Carbon Chambray Shirt</h3>
+      <p class="note">CID casual. Iron optional after year three.</p>
+      <div class="row">
+        <span class="price">$178 </span>
+        <a class="cta" href="https://buy.trychannel3.com/j7T4I6z-asdf-uosIs6?o=01KBS1HVT4SKHYV05ZBEWVS15D&amp;aid=01KXN2WT8QE4EMXFQN871713TZ" target="_blank" rel="noopener sponsored">Examine at nordstrom.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/gQes4OP-A1IE-uosIs6?o=01KCAZPQSY6745S9DS3DNJN83G&amp;aid=01KXN2X02BDCDW9T8PXX6YSPAX" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/gQes4OP?aid=01KXN2X02BDCDW9T8PXX6YSPAX&amp;mid=nsTC" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Danner</span>
+      <h3 class="name">Danner Bull Run Moc Toe 6in St Mens Brown Leather Work Boots 15564</h3>
+      <p class="note">For ground that keeps secrets.</p>
+      <div class="row">
+        <span class="price">$269.95 </span>
+        <a class="cta" href="https://buy.trychannel3.com/gQes4OP-A1IE-uosIs6?o=01KCAZPQSY6745S9DS3DNJN83G&amp;aid=01KXN2X02BDCDW9T8PXX6YSPAX" target="_blank" rel="noopener sponsored">Examine at lapolicegear.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/B2H9Mk1-A1IE-uosIs6?o=01KCAZBVG3GKTFYW4W19DWRWKJ&amp;aid=01KXN2X0CJTATSXNYR3CNJX6MQ" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/08eea7f6-5068-49e1-8e0e-cc6fd6313961?aid=01KXN2X0CJTATSXNYR3CNJX6MQ&amp;mid=nsTC" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Danner</span>
+      <h3 class="name">Men&#39;s Bull Run Work Boots - Black</h3>
+      <p class="note">For ground that keeps secrets.</p>
+      <div class="row">
+        <span class="price">$269.95 </span>
+        <a class="cta" href="https://buy.trychannel3.com/B2H9Mk1-A1IE-uosIs6?o=01KCAZBVG3GKTFYW4W19DWRWKJ&amp;aid=01KXN2X0CJTATSXNYR3CNJX6MQ" target="_blank" rel="noopener sponsored">Examine at lapolicegear.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/40jSKMQ-RmmV-uosIs6?o=01KQZJ2X595C5ERJKSSXK7XP6Q&amp;aid=01KXN2WWBTNZ8QN2NATCWM7P1H" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/53da3b1e-f7af-4980-8242-1c49d9e4b1c5?aid=01KXN2WWBTNZ8QN2NATCWM7P1H&amp;mid=RmmV" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">FRAME</span>
+      <h3 class="name">S/s Light Cotton Tee Modern Grey</h3>
+      <p class="note">The Cohle base layer. No graphics, no comment.</p>
+      <div class="row">
+        <span class="price">$98 </span>
+        <a class="cta" href="https://buy.trychannel3.com/40jSKMQ-RmmV-uosIs6?o=01KQZJ2X595C5ERJKSSXK7XP6Q&amp;aid=01KXN2WWBTNZ8QN2NATCWM7P1H" target="_blank" rel="noopener sponsored">Examine at frame-store.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/Q0kTRIG-6GhA-uosIs6?o=01KBPA9XCM2ZK7EDFGDN8K0FY5&amp;aid=01KXN2WT8QE4EMXFQN871713TZ" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/Q0kTRIG?aid=01KXN2WT8QE4EMXFQN871713TZ&amp;mid=6GhA" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Quince</span>
+      <h3 class="name">Men&#39;s 100% Organic Chambray Long Sleeve Shirt In Dark Chambray</h3>
+      <p class="note">CID casual. Iron optional after year three.</p>
+      <div class="row">
+        <span class="price">$49.90 </span>
+        <a class="cta" href="https://buy.trychannel3.com/Q0kTRIG-6GhA-uosIs6?o=01KBPA9XCM2ZK7EDFGDN8K0FY5&amp;aid=01KXN2WT8QE4EMXFQN871713TZ" target="_blank" rel="noopener sponsored">Examine at quince.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/Waeb4ok-ccSv-uosIs6?o=01KBPB2P0S78M9S9Z5DZB34MN3&amp;aid=01KXN2WS01W19Z9GDYHBZFQP3H" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/1a7b0dde-6f08-4d19-be6d-768b3c649e37?aid=01KXN2WS01W19Z9GDYHBZFQP3H&amp;mid=ccSv" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Black Diamond Equipment</span>
+      <h3 class="name">Men&#39;s Project Heavy Flannel - Flax-black Plaid/3xl</h3>
+      <p class="note">Fieldwork flannel. Sleeves roll for digging.</p>
+      <div class="row">
+        <span class="price">$119 </span>
+        <a class="cta" href="https://buy.trychannel3.com/Waeb4ok-ccSv-uosIs6?o=01KBPB2P0S78M9S9Z5DZB34MN3&amp;aid=01KXN2WS01W19Z9GDYHBZFQP3H" target="_blank" rel="noopener sponsored">Examine at blackdiamondequipment.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/0NBknR4-V5BB-uosIs6?o=01KRF170C709A5KSZPMG26HWCS&amp;aid=01KXN2WS8WG12B4XTW9MRA3Q5H" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/8d74b2f3-baa1-40f5-bcd6-733c7f221f88?aid=01KXN2WS8WG12B4XTW9MRA3Q5H&amp;mid=V5BB" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Pendleton</span>
+      <h3 class="name">Men&#39;s Plaid Burnside Cotton Flannel Shirt</h3>
+      <p class="note">Fieldwork flannel. Sleeves roll for digging.</p>
+      <div class="row">
+        <span class="price">$118 </span>
+        <a class="cta" href="https://buy.trychannel3.com/0NBknR4-V5BB-uosIs6?o=01KRF170C709A5KSZPMG26HWCS&amp;aid=01KXN2WS8WG12B4XTW9MRA3Q5H" target="_blank" rel="noopener sponsored">Examine at pendleton-usa.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/K0IwLkh-P7vP-uosIs6?o=01KS33ZKMT4R2D4XD0DCTPHN8A&amp;aid=01KXN2WTK5ZK6CKQ5B0YB58B8Q" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/5e69b43d-c401-4642-81ed-c00f506edcc2?aid=01KXN2WTK5ZK6CKQ5B0YB58B8Q&amp;mid=P7vP" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Filson</span>
+      <h3 class="name">Chambray Cpo Shirt - Tan</h3>
+      <p class="note">CID casual. Iron optional after year three.</p>
+      <div class="row">
+        <span class="price">$149 </span>
+        <a class="cta" href="https://buy.trychannel3.com/K0IwLkh-P7vP-uosIs6?o=01KS33ZKMT4R2D4XD0DCTPHN8A&amp;aid=01KXN2WTK5ZK6CKQ5B0YB58B8Q" target="_blank" rel="noopener sponsored">Examine at filson.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/BuPryrZ-6GhA-uosIs6?o=01KRBRADWSDF58FYMRAGFAB47Y&amp;aid=01KXN2WVR1FFQJ31Y6R6BH03SY" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/b639a823-2db9-428c-b647-85e9fb4bfb62?aid=01KXN2WVR1FFQJ31Y6R6BH03SY&amp;mid=6GhA" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Quince</span>
+      <h3 class="name">100% Organic Cotton Heavyweight Relaxed Fit Jersey Tee</h3>
+      <p class="note">The Cohle base layer. No graphics, no comment.</p>
+      <div class="row">
+        <span class="price">$29.90 </span>
+        <a class="cta" href="https://buy.trychannel3.com/BuPryrZ-6GhA-uosIs6?o=01KRBRADWSDF58FYMRAGFAB47Y&amp;aid=01KXN2WVR1FFQJ31Y6R6BH03SY" target="_blank" rel="noopener sponsored">Examine at quince.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/SsBAbcm-6GhA-uosIs6?o=01KT3W5JBKMZNR8KJH29ZNF5YC&amp;aid=01KXN2WWBTNZ8QN2NATCWM7P1H" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/7d1049be-7c77-4704-b36d-4b1ec5aeb27d?aid=01KXN2WWBTNZ8QN2NATCWM7P1H&amp;mid=6GhA" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Quince</span>
+      <h3 class="name">Japanese Lotus Tee In Heather Grey</h3>
+      <p class="note">The Cohle base layer. No graphics, no comment.</p>
+      <div class="row">
+        <span class="price">$29.90 </span>
+        <a class="cta" href="https://buy.trychannel3.com/SsBAbcm-6GhA-uosIs6?o=01KT3W5JBKMZNR8KJH29ZNF5YC&amp;aid=01KXN2WWBTNZ8QN2NATCWM7P1H" target="_blank" rel="noopener sponsored">Examine at quince.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/pWxzhzf-pzJt-uosIs6?o=01KRJ5TFF0WTN08R263X6TXWC5&amp;aid=01KXN2WS8WG12B4XTW9MRA3Q5H" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/93c67b41-890b-4d8e-b881-03104a250785?aid=01KXN2WS8WG12B4XTW9MRA3Q5H&amp;mid=pzJt" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Fjällräven</span>
+      <h3 class="name">Ovik Twill Shirt - Men&#39;s</h3>
+      <p class="note">Fieldwork flannel. Sleeves roll for digging.</p>
+      <div class="row">
+        <span class="price">$120 </span>
+        <a class="cta" href="https://buy.trychannel3.com/pWxzhzf-pzJt-uosIs6?o=01KRJ5TFF0WTN08R263X6TXWC5&amp;aid=01KXN2WS8WG12B4XTW9MRA3Q5H" target="_blank" rel="noopener sponsored">Examine at als.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/kNDWXKl-Zhkr-uosIs6?o=01KTEDKDN1SH0MXWFGXA67RV1H&amp;aid=01KXN2WVR1FFQJ31Y6R6BH03SY" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/cd2ad62e-7ad0-4cd8-990a-1070d4e554d6?aid=01KXN2WVR1FFQJ31Y6R6BH03SY&amp;mid=Zhkr" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Abercrombie &amp; Fitch</span>
+      <h3 class="name">Premium Heavyweight Cropped Tee</h3>
+      <p class="note">The Cohle base layer. No graphics, no comment.</p>
+      <div class="row">
+        <span class="price">$40 </span>
+        <a class="cta" href="https://buy.trychannel3.com/kNDWXKl-Zhkr-uosIs6?o=01KTEDKDN1SH0MXWFGXA67RV1H&amp;aid=01KXN2WVR1FFQJ31Y6R6BH03SY" target="_blank" rel="noopener sponsored">Examine at abercrombie.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/cO2FSfD-YeVH-uosIs6?o=01KBP9Z52TCFP5C4M0MVE0D97X&amp;aid=01KXN2X1F5RT8W3BJ2KSXJ3Z2B" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/cO2FSfD?aid=01KXN2X1F5RT8W3BJ2KSXJ3Z2B&amp;mid=YeVH" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Flexfit</span>
+      <h3 class="name">5 Panel Mesh Trucker Snapback Cap - Navy</h3>
+      <p class="note">Marty&#39;s off-duty thinking cap.</p>
+      <div class="row">
+        <span class="price">$21.99 </span>
+        <a class="cta" href="https://buy.trychannel3.com/cO2FSfD-YeVH-uosIs6?o=01KBP9Z52TCFP5C4M0MVE0D97X&amp;aid=01KXN2X1F5RT8W3BJ2KSXJ3Z2B" target="_blank" rel="noopener sponsored">Examine at e4hats.com</a>
+      </div>
+    </div></article><article class="card card-shelf" data-reveal>
+    <a class="frame" href="https://buy.trychannel3.com/2L9Iyyo-hDVO-uosIs6?o=01KG58S76ZV5FDGCEMDZJERAEH&amp;aid=01KXN2WS01W19Z9GDYHBZFQP3H" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="https://cdn.trychannel3.com/01KG58PNJTJ8YXFXXBB9858FJP?aid=01KXN2WS01W19Z9GDYHBZFQP3H&amp;mid=hDVO" alt="" loading="lazy" decoding="async" />
+    </a>
+    <div class="body">
+      <span class="eyebrow">Ariat</span>
+      <h3 class="name">Heavy Weight Flannel Work Shirt</h3>
+      <p class="note">Fieldwork flannel. Sleeves roll for digging.</p>
+      <div class="row">
+        <span class="price">$119.95 </span>
+        <a class="cta" href="https://buy.trychannel3.com/2L9Iyyo-hDVO-uosIs6?o=01KG58S76ZV5FDGCEMDZJERAEH&amp;aid=01KXN2WS01W19Z9GDYHBZFQP3H" target="_blank" rel="noopener sponsored">Examine at ariat.com</a>
+      </div>
+    </div></article>
+    </div>
+    <p class="shelf-hint" aria-hidden="true">Drag sideways. Follow the thread.</p></div>
+  </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div>
+        <h2>The record</h2>
+        <p>True Detective&trade; and HBO are trademarks of their respective owners. File I is the on-the-nose material. Files II through V are the world around it, not licensed product.</p>
+        <p>Prices and stock come from Channel3 and drift like everything else; confirm at the retailer.</p>
+      </div>
+      <div>
+        <h2>The arrangement</h2>
+        <p>Links are monetized. When you buy through one, this site earns a commission. Nothing is ever over.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      var els = document.querySelectorAll("[data-reveal]");
+      if (reduced || !("IntersectionObserver" in window)) {
+        els.forEach(function (el) { el.classList.add("in"); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        var batch = entries.filter(function (e) { return e.isIntersecting; });
+        batch.forEach(function (e, n) {
+          e.target.style.setProperty("--stagger", Math.min(n * 45, 320) + "ms");
+          e.target.classList.add("in");
+          io.unobserve(e.target);
+        });
+      }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+      els.forEach(function (el) { io.observe(el); });
+    })();
+  </script>
+</body>
+</html>
