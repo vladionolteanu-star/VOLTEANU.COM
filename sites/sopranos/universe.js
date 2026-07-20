@@ -29,6 +29,11 @@ export default {
 
   queries: [
     // II — The Wardrobe
+    { chapter: "wardrobe", collection: "in_style", cap: 2,
+      query: "men's vintage leather car coat jacket",
+      note: "For collections.",
+      include: /leather|coat/i,
+      gender: "male", price: { min_price: 100, max_price: 1500 } },
     { chapter: "wardrobe", collection: "in_style", cap: 4,
       query: "men's velour tracksuit full zip jacket pants set",
       note: "The uniform for surveying the neighborhood from a lawn chair.",
@@ -115,6 +120,11 @@ export default {
       price: { min_price: 20, max_price: 300 } },
 
     // V — The Kitchen
+    { chapter: "kitchen", collection: "in_style", cap: 2,
+      query: "italian prosciutto slicing knife long narrow blade",
+      note: "For the gabagool.",
+      include: /knife|slic/i,
+      price: { min_price: 20, max_price: 200 } },
     { chapter: "kitchen", collection: "in_style", cap: 3,
       query: "bialetti moka pot stovetop espresso maker",
       note: "Coffee the way the old country made it. No machines.",
@@ -142,6 +152,10 @@ export default {
       price: { min_price: 15, max_price: 120 } },
 
     // I — The Shrine (official)
+    { chapter: "shrine", collection: "official", cap: 3,
+      query: "The Sopranos Family Cookbook",
+      note: "Artie Bucco's finest.",
+      price: { min_price: 10, max_price: 100 } },
     { chapter: "shrine", collection: "official", cap: 4,
       query: "The Sopranos Satriale's Bada Bing camp shirt Tombolo capsule",
       note: "The licensed capsule. Satriale's on your chest.",

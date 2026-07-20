@@ -102,6 +102,12 @@ for (const id of readdirSync(SITES)) {
   });
 }
 
+entries.sort((a, b) => {
+  if (a.id === "sopranos") return -1;
+  if (b.id === "sopranos") return 1;
+  return a.id.localeCompare(b.id);
+});
+
 const totalPieces = entries.reduce((n, e) => n + e.count, 0);
 
 // ---------------------------------------------------------------------------
