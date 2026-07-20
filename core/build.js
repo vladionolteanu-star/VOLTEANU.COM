@@ -1,8 +1,13 @@
-// Generic data pipeline: node --env-file=.env core/build.js <siteId>
+// Generic data pipeline: node --env-file=.env core/build.js <siteId> [batch]
 // Loads sites/<siteId>/universe.js, executes its acquisition plan against
 // the Channel3 API, writes sites/<siteId>/data/collection.json.
+//
+// With [batch]: runs only queries tagged { batch: N } and merges the results
+// into the existing collection instead of rebuilding it — credits are spent
+// on the new queries only. Existing items seed the dedupe fingerprints and
+// retailer caps, and are re-screened against globalExclude on the way in.
 
-import { writeFileSync, mkdirSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { dirname, join } from "node:path";
 import { createClient } from "./channel3.js";
@@ -53,9 +58,36 @@ async function main() {
     return true;
   };
 
+  const batch = process.argv[3] ? Number(process.argv[3]) : null;
+  let queries = universe.queries;
+  if (batch != null) {
+    queries = universe.queries.filter((q) => q.batch === batch);
+    if (queries.length === 0) {
+      console.error(`No queries tagged { batch: ${batch} } in this universe.`);
+      process.exit(1);
+    }
+    let seeded = 0;
+    let dropped = 0;
+    const prev = JSON.parse(readFileSync(OUT, "utf8"));
+    for (const item of prev.items ?? []) {
+      if (universe.globalExclude.test(item.title ?? "")) {
+        dropped++;
+        continue;
+      }
+      byId.set(item.id, item);
+      byFingerprint.set(fingerprint(item), item);
+      const rk = `${item.chapter}|${item.retailer}`;
+      retailerCount.set(rk, (retailerCount.get(rk) ?? 0) + 1);
+      seeded++;
+    }
+    console.log(
+      `Merge mode: ${seeded} existing items kept, ${dropped} re-screened out, running ${queries.length} batch-${batch} queries.\n`
+    );
+  }
+
   let queriesRun = 0;
   let aborted = null;
-  for (const spec of universe.queries) {
+  for (const spec of queries) {
     const filters = {};
     if (spec.price) filters.price = spec.price;
     if (spec.gender) filters.gender = spec.gender;
@@ -94,7 +126,7 @@ async function main() {
   }
   if (aborted) {
     console.warn(
-      `\nAPI stopped after ${queriesRun}/${universe.queries.length} queries (${aborted}); writing the partial collection.`
+      `\nAPI stopped after ${queriesRun}/${queries.length} queries (${aborted}); writing the partial collection.`
     );
   }
   const chapterCounts = Object.fromEntries(
