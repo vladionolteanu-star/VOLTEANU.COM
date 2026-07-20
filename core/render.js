@@ -217,7 +217,7 @@ ${tokens}
   h1{
     font-family: var(--font-title); font-weight: var(--title-weight, 600);
     text-transform: var(--title-transform, none);
-    font-size: clamp(52px, 10.5vw, 148px);
+    font-size: var(--h1-size, clamp(52px, 10.5vw, 148px));
     line-height: var(--title-leading, 0.95); letter-spacing: -0.01em;
     margin: 0 0 30px; max-width: 13ch; text-wrap: balance;
   }
@@ -227,6 +227,14 @@ ${h1Accent}
     font-size: clamp(16px, 1.9vw, 19.5px);
     color: var(--ink-dim); max-width: 57ch; margin: 0;
   }
+  .hero-cta{ display: inline-flex; align-items: center; gap: 10px; margin-top: 36px;
+    background: var(--btn-bg, var(--accent-strong)); color: var(--btn-ink, var(--ground));
+    font-family: var(--font-label); font-size: 14px; font-weight: 500;
+    letter-spacing: .03em; text-decoration: none; padding: 15px 28px;
+    border-radius: 999px;
+    transition: background .25s var(--ease), transform .25s var(--ease); }
+  .hero-cta:hover{ background: var(--cta-hover, var(--ink)); transform: translateY(-1px); }
+  .hero-cta:focus-visible{ outline: 2px solid var(--accent); outline-offset: 3px; }
 
   /* evidence board */
   .evidence{ position: relative; min-height: 465px; }
@@ -234,12 +242,14 @@ ${thread}
   .exhibit{
     position: absolute; display: block; width: min(46%, 228px);
     background: var(--exhibit-paper, var(--ink)); padding: 9px 9px 7px;
-    box-shadow: 0 18px 44px -18px oklch(0 0 0 / 0.68);
+    border-radius: var(--radius, 0);
+    box-shadow: var(--shadow-soft, 0 18px 44px -18px oklch(0 0 0 / 0.68));
     text-decoration: none;
     transition: transform .35s var(--ease), box-shadow .35s var(--ease);
   }
   .exhibit img{ display: block; width: 100%; aspect-ratio: 1;
-    object-fit: cover; filter: var(--exhibit-filter, saturate(.9)); }
+    object-fit: cover; border-radius: calc(var(--radius, 0px) / 2);
+    filter: var(--exhibit-filter, saturate(.9)); }
   .exhibit-label{ display: block; padding: 7px 2px 2px;
     font-family: var(--font-label); font-size: 10px; font-weight: 600;
     letter-spacing: .2em; text-transform: uppercase;
@@ -293,7 +303,7 @@ ${thread}
   .plate-title{
     font-family: var(--font-title); font-weight: var(--title-weight, 600);
     text-transform: var(--title-transform, none);
-    font-size: clamp(45px, 9vw, 118px); line-height: .95;
+    font-size: var(--plate-title-size, clamp(45px, 9vw, 118px)); line-height: .95;
     margin: 0 0 17px; max-width: 1200px;
   }
   .plate-intro{ font-family: var(--font-prose); font-style: italic;
@@ -305,8 +315,10 @@ ${thread}
 
   /* ---- cards ---- */
   .card{ display: flex; flex-direction: column;
-    border: 1px solid var(--hairline); background: var(--surface); }
+    border: 1px solid var(--hairline); background: var(--surface);
+    border-radius: var(--radius, 0); }
   .frame{ display: block; aspect-ratio: 1; overflow: hidden; position: relative;
+    border-radius: var(--radius, 0) var(--radius, 0) 0 0;
     background: var(--well, oklch(0.12 0.01 60)); }
   .frame img{ width: 100%; height: 100%; object-fit: cover; display: block;
     transition: transform .4s var(--ease); }
@@ -383,6 +395,7 @@ ${thread}
     grid-template-columns: 92px 1fr auto;
     padding: 18px 0; border-bottom: 1px solid var(--hairline); }
   .thumb{ width: 92px; height: 92px; overflow: hidden; display: block;
+    border-radius: var(--radius, 0);
     background: var(--well, oklch(0.12 0.01 60)); }
   .thumb img{ width: 100%; height: 100%; object-fit: cover; display: block; }
   .ledger-main .name{ font-size: calc(var(--name-size, 19px) + 2px); }
@@ -507,7 +520,11 @@ function render(universe, theme, data) {
       <div class="hero-copy">
         <p class="kicker" data-reveal>${kicker}</p>
         <h1 data-reveal>${copy.h1}</h1>
-        <p class="lede" data-reveal>${esc(copy.lede)}</p>
+        <p class="lede" data-reveal>${esc(copy.lede)}</p>${
+          copy.heroCta
+            ? `\n        <a class="hero-cta" href="${esc(copy.heroCta.href)}" data-reveal>${esc(copy.heroCta.label)} &rarr;</a>`
+            : ""
+        }
       </div>
       <div class="evidence" aria-label="${esc(copy.evidenceAria)}">${threadSvg}
         ${evidence}
