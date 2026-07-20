@@ -77,6 +77,31 @@ function pickShowcase(items, chapters, n = 16) {
 }
 
 // ---------------------------------------------------------------------------
+// Pick 4 in-world images for a universe's hero card: iconic licensed pieces
+// first, then officials, then anything — never repeating the showcase grid.
+// ---------------------------------------------------------------------------
+function pickHeroImages(items, universe, showcase, n = 4) {
+  const used = new Set(showcase.map((i) => i.image));
+  const withImg = items.filter((i) => i.image);
+  const officials = withImg.filter((i) => i.collection === "official");
+  const iconic = universe.evidenceIconic
+    ? officials.filter((i) => universe.evidenceIconic.test(i.title))
+    : [];
+  const pool = [...iconic, ...officials, ...withImg];
+  const seen = new Set();
+  const picks = [];
+  for (const skipUsed of [true, false]) {
+    for (const i of pool) {
+      if (seen.has(i.image) || (skipUsed && used.has(i.image))) continue;
+      seen.add(i.image);
+      picks.push(i);
+      if (picks.length === n) return picks;
+    }
+  }
+  return picks;
+}
+
+// ---------------------------------------------------------------------------
 // Collect site data
 // ---------------------------------------------------------------------------
 const entries = [];
@@ -95,15 +120,15 @@ for (const id of readdirSync(SITES)) {
   const show =
     universe.copy?.title?.match(/curated edit of (?:the )?(.+?) universe/i)?.[1] ??
     id.replace(/-/g, " ");
+  const showcase = pickShowcase(data.items ?? [], universe.chapters, 16);
   entries.push({
     id,
     name: universe.name,
     show,
-    rawTitle: universe.copy?.title || show,
-    pitch: universe.copy?.pitch || universe.copy?.lede || "",
     count: data.items?.length ?? 0,
     chapters: universe.chapters,
-    showcase: pickShowcase(data.items ?? [], universe.chapters, 16),
+    showcase,
+    heroPicks: pickHeroImages(data.items ?? [], universe, showcase),
     fontsHref: theme.fontsHref,
     t: theme.tokens,
   });
@@ -159,11 +184,17 @@ const uVars = (e) =>
 function universeSection(entry, i) {
   const cards = entry.showcase.map((item) => productCard(item)).join("");
 
+  const heroImgs = entry.heroPicks
+    .map(
+      (item) =>
+        `<img src="${esc(item.image)}" alt="${esc(item.title)}" loading="lazy" decoding="async" />`
+    )
+    .join("");
+
   const heroCard = `
     <a class="product hero-card" data-reveal href="/${esc(entry.id)}/">
-      <span class="hero-card-ch">${chNo(i)}</span>
-      <h3 class="hero-card-title">${esc(entry.name)}</h3>
-      <p class="hero-card-pitch">${esc(entry.pitch)}</p>
+      <span class="hero-card-ch">${chNo(i)} &middot; ${esc(entry.name)}</span>
+      <span class="hero-card-imgs">${heroImgs}</span>
       <span class="hero-card-link">Change the channel &rarr;</span>
     </a>
   `;
@@ -183,17 +214,6 @@ function universeSection(entry, i) {
 }
 
 const sections = entries.map((e, i) => universeSection(e, i)).join("");
-
-const channelStrip = entries
-  .map(
-    (e, i) => `
-      <a class="ch" href="#${esc(e.id)}" style="${uVars(e)}">
-        <span class="ch-no">${chNo(i)}</span>
-        <span class="ch-name">${esc(e.show)}</span>
-        <span class="ch-count">${e.count} pieces</span>
-      </a>`
-  )
-  .join("");
 
 const fontLinks = [...new Set(entries.map((e) => e.fontsHref))]
   .map((href) => `<link href="${href}" rel="stylesheet" />`)
@@ -245,30 +265,22 @@ ${fontLinks}
   .hero {
     max-width: 1200px;
     margin: 0 auto;
-    padding: clamp(44px, 9vh, 90px) 24px clamp(32px, 5vh, 48px);
+    padding: clamp(36px, 7vh, 70px) 24px clamp(24px, 4vh, 40px);
   }
 
   .logo {
     font-family: var(--display);
     font-weight: 800;
-    font-size: clamp(52px, 11vw, 132px);
-    line-height: 0.88;
-    letter-spacing: -0.035em;
+    font-size: clamp(34px, 5.6vw, 72px);
+    line-height: 0.98;
+    letter-spacing: -0.025em;
     color: var(--ink);
-    margin-bottom: clamp(16px, 2.5vh, 24px);
+    margin-bottom: clamp(14px, 2vh, 20px);
+    text-wrap: balance;
   }
 
-  .pitch {
-    font-size: clamp(15px, 1.8vw, 18px);
-    line-height: 1.5;
-    color: var(--ink-mid);
-    max-width: 52ch;
-    margin-bottom: 8px;
-  }
-
-  .pitch strong {
-    color: var(--ink);
-    font-weight: 700;
+  .logo-found {
+    color: var(--ink-dim);
   }
 
   .meta {
@@ -276,62 +288,6 @@ ${fontLinks}
     color: var(--ink-dim);
     letter-spacing: 0.14em;
     text-transform: uppercase;
-  }
-
-  /* -------------------------------------------------------- channel strip */
-  .channels {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 14px;
-    margin-top: clamp(28px, 4.5vh, 44px);
-  }
-
-  .ch {
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
-    padding: 18px 18px 20px;
-    border-radius: 10px;
-    background: var(--u-plate);
-    color: var(--u-plate-ink);
-    text-decoration: none;
-    transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
-  }
-
-  .ch:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 14px 28px -14px oklch(0 0 0 / 0.35);
-  }
-
-  .ch:focus-visible {
-    outline: 2px solid var(--ink);
-    outline-offset: 2px;
-  }
-
-  .ch-no {
-    font-family: var(--mono);
-    font-weight: 700;
-    font-size: 10.5px;
-    letter-spacing: 0.2em;
-    opacity: 0.72;
-  }
-
-  .ch-name {
-    font-family: var(--u-font);
-    font-weight: var(--u-title-weight);
-    text-transform: var(--u-title-transform);
-    font-size: clamp(19px, 1.9vw, 25px);
-    line-height: 1.02;
-  }
-
-  .ch-count {
-    font-family: var(--mono);
-    font-size: 11px;
-    opacity: 0.68;
-  }
-
-  @media (max-width: 760px) {
-    .channels { grid-template-columns: repeat(2, 1fr); gap: 10px; }
   }
 
   /* ----------------------------------------------------------- universe */
@@ -475,7 +431,7 @@ ${fontLinks}
   .hero-card {
     grid-column: span 1;
     justify-content: flex-start;
-    padding: clamp(22px, 2.6vw, 30px);
+    padding: clamp(16px, 1.8vw, 22px);
     background: var(--u-plate);
     color: var(--u-plate-ink);
     border: none;
@@ -498,26 +454,25 @@ ${fontLinks}
     font-weight: 700;
     font-size: 10.5px;
     letter-spacing: 0.2em;
+    text-transform: uppercase;
     opacity: 0.72;
-    margin-bottom: 10px;
-  }
-
-  .hero-card-title {
-    font-family: var(--u-font);
-    font-weight: var(--u-title-weight);
-    text-transform: var(--u-title-transform);
-    font-size: clamp(26px, 2.8vw, 40px);
-    line-height: 1.02;
     margin-bottom: 12px;
-    text-wrap: balance;
   }
 
-  .hero-card-pitch {
-    font-size: 12.5px;
-    line-height: 1.55;
-    color: var(--u-plate-dim);
-    margin-bottom: 22px;
-    max-width: 44ch;
+  .hero-card-imgs {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .hero-card-imgs img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 6px;
+    background: oklch(1 0 0);
   }
 
   .hero-card-link {
@@ -606,10 +561,8 @@ ${fontLinks}
 </head>
 <body>
   <header class="hero">
-    <h1 class="logo">VOLTEANU</h1>
-    <p class="pitch">TV shows have the best stuff. <strong>We found it.</strong></p>
-    <p class="meta">${totalPieces} pieces &middot; ${entries.length} channels &middot; tracked, curated, all shoppable</p>
-    <nav class="channels" aria-label="Universes">${channelStrip}</nav>
+    <h1 class="logo">TV shows have the best stuff.<br /><span class="logo-found">We found it.</span></h1>
+    <p class="meta">volteanu.com &middot; ${totalPieces} pieces &middot; ${entries.length} channels &middot; tracked, curated, all shoppable</p>
   </header>
 ${sections}
   <footer class="footer">Links are monetized; purchases may earn this site a commission. All trademarks belong to their owners.</footer>
