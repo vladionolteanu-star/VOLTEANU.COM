@@ -190,7 +190,7 @@ function css(theme) {
     30% { opacity: .2; } 42% { opacity: .55; } 54% { opacity: .3; }
   }`
     : `
-  .h1-accent{ font-style: italic; color: var(--accent-strong); }`;
+  .h1-accent{ font-style: var(--h1-accent-style, italic); color: var(--accent-strong); }`;
 
   const thread = theme.flags.evidenceThread
     ? `
