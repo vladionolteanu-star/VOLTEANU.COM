@@ -1,142 +1,43 @@
-// Assemble the deployable aggregator: public/<siteId>/ for every site in
-// sites/, plus a root public/index.html linking them. Vercel (or any static
-// host) serves public/ as the whole of volteanu.com.
+import re
+import sys
 
-import { readdirSync, readFileSync, writeFileSync, mkdirSync, cpSync, existsSync, rmSync } from "node:fs";
-import { fileURLToPath } from "node:url";
-import { dirname, join } from "node:path";
+with open("scripts/assemble-public.mjs", "r", encoding="utf-8") as f:
+    content = f.read()
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const ROOT = join(__dirname, "..");
-const SITES = join(ROOT, "sites");
-const PUBLIC = join(ROOT, "public");
+# 1. Update entries.push to include rawTitle and pitch
+push_target = """  entries.push({
+    id,
+    name: universe.name,
+    show,
+    count: data.items?.length ?? 0,"""
 
-const esc = (s = "") =>
-  String(s).replace(/[&<>"']/g, (c) =>
-    ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])
-  );
-
-const money = (n, cur = "USD") =>
-  new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: cur,
-    maximumFractionDigits: n % 1 === 0 ? 0 : 2,
-  }).format(n);
-
-rmSync(PUBLIC, { recursive: true, force: true });
-mkdirSync(PUBLIC, { recursive: true });
-cpSync(join(ROOT, "assets", "volteanu-logo.jpg"), join(PUBLIC, "volteanu-logo.jpg"));
-
-// ---------------------------------------------------------------------------
-// Pick a diverse showcase from across all chapters.
-// Strategy: round-robin through chapters, prefer InStock + paying commission,
-// ensure visual variety by never repeating the same image.
-// ---------------------------------------------------------------------------
-function pickShowcase(items, chapters, n = 16) {
-  const chapterKeys = chapters.map((ch) => ch.key);
-  const buckets = {};
-  for (const key of chapterKeys) buckets[key] = [];
-
-  for (const item of items) {
-    if (item.image && buckets[item.chapter]) {
-      buckets[item.chapter].push(item);
-    }
-  }
-
-  // Sort each bucket: InStock first, then by commission (desc), then by price
-  for (const key of chapterKeys) {
-    buckets[key].sort((a, b) => {
-      const aStock = a.availability === "InStock" ? 0 : 1;
-      const bStock = b.availability === "InStock" ? 0 : 1;
-      if (aStock !== bStock) return aStock - bStock;
-      if ((b.commissionRate || 0) !== (a.commissionRate || 0))
-        return (b.commissionRate || 0) - (a.commissionRate || 0);
-      return a.price - b.price;
-    });
-  }
-
-  const picks = [];
-  const seenImages = new Set();
-  let round = 0;
-
-  while (picks.length < n && round < 20) {
-    for (const key of chapterKeys) {
-      if (picks.length >= n) break;
-      const bucket = buckets[key];
-      const candidate = bucket.find((i) => !seenImages.has(i.image));
-      if (candidate) {
-        seenImages.add(candidate.image);
-        picks.push(candidate);
-        buckets[key] = bucket.filter((i) => i !== candidate);
-      }
-    }
-    round++;
-  }
-
-  return picks;
-}
-
-// ---------------------------------------------------------------------------
-// Collect site data
-// ---------------------------------------------------------------------------
-const entries = [];
-for (const id of readdirSync(SITES)) {
-  const dist = join(SITES, id, "dist");
-  if (!existsSync(join(dist, "index.html"))) continue;
-  cpSync(dist, join(PUBLIC, id), { recursive: true });
-
-  const data = JSON.parse(readFileSync(join(SITES, id, "data", "collection.json"), "utf8"));
-  const { default: universe } = await import(
-    new URL(`../sites/${id}/universe.js`, import.meta.url).href
-  );
-  const show =
-    universe.copy?.title?.match(/curated edit of (?:the )?(.+?) universe/i)?.[1] ??
-    id.replace(/-/g, " ");
-  entries.push({
+push_replacement = """  entries.push({
     id,
     name: universe.name,
     show,
     rawTitle: universe.copy?.title || show,
     pitch: universe.copy?.pitch || "",
-    count: data.items?.length ?? 0,
-    chapters: universe.chapters,
-    showcase: pickShowcase(data.items ?? [], universe.chapters, 16),
-  });
-}
+    count: data.items?.length ?? 0,"""
 
-entries.sort((a, b) => {
-  if (a.id === "sopranos") return -1;
-  if (b.id === "sopranos") return 1;
-  return a.id.localeCompare(b.id);
-});
+content = content.replace(push_target, push_replacement)
 
-const totalPieces = entries.reduce((n, e) => n + e.count, 0);
-
-// ---------------------------------------------------------------------------
-// Product card HTML
-// ---------------------------------------------------------------------------
-function productCard(item) {
-  const sale =
-    item.compareAt && item.compareAt > item.price
-      ? `<s class="was">${esc(money(item.compareAt, item.currency))}</s>`
-      : "";
-  return `
-      <a class="product" data-reveal href="${esc(item.url)}" target="_blank" rel="noopener sponsored">
-        <span class="product-img"><img src="${esc(item.image)}" alt="${esc(item.title)}" loading="lazy" decoding="async" /></span>
-        <span class="product-info">
-          <span class="product-brand">${esc(item.brand || item.retailer)}</span>
-          <span class="product-title">${esc(item.title)}</span>
-          <span class="product-price">${esc(money(item.price, item.currency))} ${sale}</span>
-        </span>
-      </a>`;
-}
-
-// ---------------------------------------------------------------------------
-// Universe section HTML
-// ---------------------------------------------------------------------------
-function universeSection(entry) {
+# 2. Update universeSection(entry) HTML
+section_target = """function universeSection(entry) {
   const cards = entry.showcase.map((item) => productCard(item)).join("");
-  const formattedTitle = esc(entry.rawTitle).replace(/\n/g, "<br/>");
+  return `
+    <section class="universe" id="${esc(entry.id)}">
+      <div class="universe-header">
+        <h2 class="universe-show">${esc(entry.show)}</h2>
+        <a class="universe-link" href="/${esc(entry.id)}/">${esc(entry.name)} &rarr; ${entry.count} pieces</a>
+      </div>
+      <div class="product-grid">${cards}</div>
+      <a class="universe-cta" href="/${esc(entry.id)}/">See all ${entry.count} pieces &rarr;</a>
+    </section>`;
+}"""
+
+section_replacement = """function universeSection(entry) {
+  const cards = entry.showcase.map((item) => productCard(item)).join("");
+  const formattedTitle = esc(entry.rawTitle).replace(/\\n/g, "<br/>");
   
   const heroCard = `
     <div class="product hero-card" data-reveal>
@@ -158,14 +59,20 @@ function universeSection(entry) {
       </div>
       <a class="universe-cta" href="/${esc(entry.id)}/">See all ${entry.count} pieces &rarr;</a>
     </section>`;
-}
+}"""
 
-const sections = entries.map((e) => universeSection(e)).join("");
+content = content.replace(section_target, section_replacement)
 
-// ---------------------------------------------------------------------------
-// Write public/index.html
-// ---------------------------------------------------------------------------
-writeFileSync(
+# 3. Replace the entire HTML template string in writeFileSync
+html_target_start = 'writeFileSync(\n  join(PUBLIC, "index.html"),\n  `<!doctype html>'
+html_target_end = '  /* -------------------------------------------------- responsive tweaks */'
+# Find start and end indices
+start_idx = content.find(html_target_start)
+if start_idx == -1:
+    print("Could not find start of HTML")
+    sys.exit(1)
+
+new_html = """writeFileSync(
   join(PUBLIC, "index.html"),
   `<!doctype html>
 <html lang="en">
@@ -486,69 +393,18 @@ writeFileSync(
     }
   }
 
-  /* -------------------------------------------------- responsive tweaks */  /* -------------------------------------------------- responsive tweaks */
-  @media (max-width: 600px) {
-    .product-grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1px;
-    }
-    .product-info {
-      padding: 10px 10px 12px;
-    }
-    .product-title {
-      font-size: 13px;
-    }
-    .universe-header {
-      flex-direction: column;
-      gap: 4px;
-    }
-  }
+  /* -------------------------------------------------- responsive tweaks */"""
 
-  @media (min-width: 601px) and (max-width: 899px) {
-    .product-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-</style>
-</head>
-<body>
-  <header class="hero">
-    <h1 class="logo">VOLTEANU</h1>
-    <p class="pitch">TV shows have the best stuff. <strong>We found it.</strong></p>
-    <p class="meta">${totalPieces} pieces across ${entries.length} universes. Tracked, curated, all shoppable.</p>
-  </header>
-${sections}
-  <footer class="footer">Links are monetized; purchases may earn this site a commission. All trademarks belong to their owners.</footer>
-  <script>
-    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const el = entry.target;
-            if (el.classList.contains('product-grid')) {
-              const cards = el.querySelectorAll('[data-reveal]');
-              cards.forEach((card, i) => {
-                setTimeout(() => card.classList.add('visible'), i * 35);
-              });
-            } else {
-              el.classList.add('visible');
-            }
-            io.unobserve(el);
-          }
-        });
-      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+# Use regex or string slicing to replace the CSS part
+# The original code ends responsive tweaks around line 413, then script tags.
+end_idx = content.find('  /* -------------------------------------------------- responsive tweaks */')
+if end_idx == -1:
+    print("Could not find end of CSS")
+    sys.exit(1)
 
-      document.querySelectorAll('.universe-header').forEach((h) => {
-        h.setAttribute('data-reveal', '');
-        io.observe(h);
-      });
-      document.querySelectorAll('.product-grid').forEach((grid) => io.observe(grid));
-    }
-  </script>
-</body>
-</html>
-`
-);
+final_content = content[:start_idx] + new_html + content[end_idx:]
 
-console.log(`Assembled public/ with ${entries.length} sites: ${entries.map((e) => e.id).join(", ")}`);
-console.log(`Total: ${totalPieces} pieces, ${entries.reduce((n, e) => n + e.showcase.length, 0)} showcase items on homepage`);
+with open("scripts/assemble-public.mjs", "w", encoding="utf-8") as f:
+    f.write(final_content)
+
+print("Successfully updated assemble-public.mjs")
