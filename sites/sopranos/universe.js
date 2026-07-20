@@ -14,6 +14,15 @@ export default {
   retailerCapPerChapter: 3,
   quoteAfterChapter: 2,
 
+  collages: [
+    { afterChapter: "shrine", label: "From the wardrobe",
+      note: "The uniform, previewed. Velour, terry, and the gold that goes over it.",
+      pick: /velour|track|terry|robe|silk|cuban|chain|bracelet/i },
+    { afterChapter: "gold", label: "After hours",
+      note: "The back room and the kitchen. Business gets discussed over these.",
+      pick: /humidor|whisk|decanter|poker|ashtray|moka|espresso|pasta/i },
+  ],
+
   chapters: [
     { key: "shrine", numeral: "I", title: "The Shrine", sort: "curated", layout: "ledger",
       intro: "The licensed stuff. For the wall, the shelf, and the record." },
@@ -199,6 +208,7 @@ export default {
     kicker: "{count} pieces &middot; five chapters &middot; updated {updated}",
     h1: `Dress like the <span class="h1-accent">family</span>`,
     lede: "The Sopranos universe, bought carefully. Licensed relics and the North Jersey wardrobe around them: velour, gold, cedar, and espresso. Every link goes straight to the retailer.",
+    heroCta: { label: "Browse the record", href: "#shrine" },
     evidenceAria: "From the case file",
     exhibitLabel: "Exhibit {letter}",
     indexHead: null,
