@@ -116,6 +116,41 @@ function chapterSection(ch, items, copy) {
   </section>`;
 }
 
+// --- collage interstitials ------------------------------------------------------
+
+// Optional per-site bands (universe.collages): the hero's exhibit language
+// repeated between chapters, each card clickable straight to the retailer.
+function collageBand(col, items, copy) {
+  const seen = new Set();
+  const picks = [];
+  for (const i of items) {
+    if (isOOS(i) || !col.pick.test(i.title) || seen.has(i.image)) continue;
+    seen.add(i.image);
+    picks.push(i);
+    if (picks.length === 4) break;
+  }
+  if (picks.length < 3) return "";
+  const cards = picks
+    .map(
+      (i) => `
+      <a class="exhibit collage-item" href="${esc(i.url)}" target="_blank" rel="noopener sponsored" data-reveal>
+        <img src="${esc(i.image)}" alt="${esc(i.title)}" loading="lazy" decoding="async" />
+        <span class="exhibit-label">${esc(i.brand || i.retailer)} &middot; ${esc(money(i.price, i.currency))}</span>
+      </a>`
+    )
+    .join("");
+  return `
+  <aside class="collage">
+    <div class="wrap">
+      <header class="collage-head" data-reveal>
+        <span class="collage-label">${esc(col.label)}</span>
+        <p class="collage-note">${esc(col.note)}</p>
+      </header>
+      <div class="collage-row">${cards}</div>
+    </div>
+  </aside>`;
+}
+
 // --- hero evidence board --------------------------------------------------------
 
 function pickEvidence(items, universe) {
@@ -409,6 +444,26 @@ ${thread}
       justify-content: space-between; width: 100%; }
   }
 
+  /* collage interstitial */
+  .collage{ margin-top: clamp(90px, 14vh, 160px); }
+  .collage-head{ display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap;
+    margin-bottom: 26px; }
+  .collage-label{ font-family: var(--font-label); font-size: 11.5px; font-weight: 500;
+    letter-spacing: .22em; text-transform: uppercase; color: var(--accent); }
+  .collage-note{ font-family: var(--font-note, var(--font-prose));
+    font-style: var(--note-style, normal);
+    font-size: 14.5px; color: var(--ink-dim); margin: 0; }
+  .collage-row{ display: grid; gap: 26px; grid-template-columns: repeat(4, 1fr); }
+  .collage-item{ position: static; width: auto; }
+  .collage-item:nth-child(1){ transform: rotate(-2deg); }
+  .collage-item:nth-child(2){ transform: rotate(1.6deg); }
+  .collage-item:nth-child(3){ transform: rotate(-1.2deg); }
+  .collage-item:nth-child(4){ transform: rotate(2.2deg); }
+  .collage-item:hover{ transform: rotate(0deg) translateY(-6px); }
+  @media (max-width: 880px){
+    .collage-row{ grid-template-columns: repeat(2, 1fr); gap: 18px 14px; }
+  }
+
   /* quote interstitial */
   .quote{ margin-top: clamp(90px, 14vh, 160px); text-align: center;
     padding: 0 clamp(20px, 4vw, 48px); }
@@ -486,14 +541,17 @@ function render(universe, theme, data) {
 
   const sections = universe.chapters
     .map((c, n) => {
-      const s = chapterSection(c, byChapter(c.key), copy);
-      return n === universe.quoteAfterChapter && s
-        ? s + `
+      let s = chapterSection(c, byChapter(c.key), copy);
+      if (n === universe.quoteAfterChapter && s) {
+        s += `
   <aside class="quote" data-reveal>
     <blockquote>&ldquo;${copy.quote.text}&rdquo;</blockquote>
     <cite>${esc(copy.quote.cite)}</cite>
-  </aside>`
-        : s;
+  </aside>`;
+      }
+      const col = universe.collages?.find((x) => x.afterChapter === c.key);
+      if (col && s) s += collageBand(col, items, copy);
+      return s;
     })
     .join("");
 
