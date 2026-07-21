@@ -26,6 +26,7 @@ const money = (n, cur = "USD") =>
 rmSync(PUBLIC, { recursive: true, force: true });
 mkdirSync(PUBLIC, { recursive: true });
 cpSync(join(ROOT, "assets", "volteanu-logo.jpg"), join(PUBLIC, "volteanu-logo.jpg"));
+cpSync(join(ROOT, "assets", "google166c56f5cbded422.html"), join(PUBLIC, "google166c56f5cbded422.html"));
 
 // ---------------------------------------------------------------------------
 // Pick a diverse showcase from across all chapters.
