@@ -598,5 +598,21 @@ ${sections}
 `
 );
 
+const sitemapUrls = [
+  "https://www.volteanu.com/",
+  ...entries.map((e) => `https://www.volteanu.com/${e.id}/`)
+];
+const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${sitemapUrls.map(url => `  <url>\n    <loc>${url}</loc>\n  </url>`).join('\n')}
+</urlset>`;
+writeFileSync(join(PUBLIC, "sitemap.xml"), sitemapXml);
+
+const robotsTxt = `User-agent: *
+Allow: /
+
+Sitemap: https://www.volteanu.com/sitemap.xml`;
+writeFileSync(join(PUBLIC, "robots.txt"), robotsTxt);
+
 console.log(`Assembled public/ with ${entries.length} sites: ${entries.map((e) => e.id).join(", ")}`);
 console.log(`Total: ${totalPieces} pieces, ${entries.reduce((n, e) => n + e.showcase.length, 0)} showcase items on homepage`);
