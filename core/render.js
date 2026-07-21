@@ -34,9 +34,33 @@ function cardInner(item, copy) {
       ? `<s class="was">${esc(money(item.compareAt, item.currency))}</s>`
       : "";
   const oosTag = isOOS(item) ? `<span class="oos-tag">${esc(copy.soldOut)}</span>` : "";
+  
+  const schema = {
+    "@context": "https://schema.org/",
+    "@type": "Product",
+    "name": item.title,
+    "image": [item.image],
+    "description": item.description || item.note || item.title,
+    "sku": item.id,
+    "brand": {
+      "@type": "Brand",
+      "name": item.brand || item.retailer
+    },
+    "offers": {
+      "@type": "Offer",
+      "url": item.url,
+      "priceCurrency": item.currency || "USD",
+      "price": item.price,
+      "itemCondition": "https://schema.org/NewCondition",
+      "availability": isOOS(item) ? "https://schema.org/OutOfStock" : "https://schema.org/InStock"
+    }
+  };
+  const schemaHtml = `<script type="application/ld+json">${JSON.stringify(schema)}</script>`;
+
   return `
+    ${schemaHtml}
     <a class="frame" href="${esc(item.url)}" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
-      <img src="${esc(item.image)}" alt="" loading="lazy" decoding="async" />${oosTag}
+      <img src="${esc(item.image)}" alt="${esc(item.alt_text || item.title)}" loading="lazy" decoding="async" />${oosTag}
     </a>
     <div class="body">
       <span class="eyebrow">${esc(item.brand || item.retailer)}</span>
@@ -56,10 +80,34 @@ function ledgerRow(item, copy) {
   const oosTag = isOOS(item)
     ? `<span class="oos-tag oos-tag-inline">${esc(copy.soldOut)}</span>`
     : "";
+    
+  const schema = {
+    "@context": "https://schema.org/",
+    "@type": "Product",
+    "name": item.title,
+    "image": [item.image],
+    "description": item.description || item.note || item.title,
+    "sku": item.id,
+    "brand": {
+      "@type": "Brand",
+      "name": item.brand || item.retailer
+    },
+    "offers": {
+      "@type": "Offer",
+      "url": item.url,
+      "priceCurrency": item.currency || "USD",
+      "price": item.price,
+      "itemCondition": "https://schema.org/NewCondition",
+      "availability": isOOS(item) ? "https://schema.org/OutOfStock" : "https://schema.org/InStock"
+    }
+  };
+  const schemaHtml = `<script type="application/ld+json">${JSON.stringify(schema)}</script>`;
+
   return `
+  ${schemaHtml}
   <article class="ledger-row${isOOS(item) ? " oos" : ""}" data-reveal>
-    <a class="thumb" href="${esc(item.url)}" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
-      <img src="${esc(item.image)}" alt="" loading="lazy" decoding="async" />
+    <a class="lr-img" href="${esc(item.url)}" target="_blank" rel="noopener sponsored" tabindex="-1" aria-hidden="true">
+      <img src="${esc(item.image)}" alt="${esc(item.alt_text || item.title)}" loading="lazy" decoding="async" />
     </a>
     <div class="ledger-main">
       <h3 class="name">${esc(item.title)} ${oosTag}</h3>

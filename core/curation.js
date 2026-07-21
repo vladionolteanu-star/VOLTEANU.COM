@@ -21,7 +21,7 @@ export function passesTheme(product, spec, universe) {
 function pickMainImage(images = []) {
   const cleaned = images.find((i) => i.is_main_image && i.is_cleaned_image);
   const main = images.find((i) => i.is_main_image);
-  return (cleaned ?? main ?? images[0])?.url ?? null;
+  return cleaned ?? main ?? images[0] ?? null;
 }
 
 // Prefer in-stock, then commission, then price.
@@ -51,8 +51,8 @@ export function fingerprint(record) {
 
 export function normalize(product, spec) {
   const offer = pickBestOffer(product.offers);
-  const image = pickMainImage(product.images);
-  if (!offer || !image) return null;
+  const imageObj = pickMainImage(product.images);
+  if (!offer || !imageObj || !imageObj.url) return null;
 
   return {
     id: product.id,
@@ -66,7 +66,10 @@ export function normalize(product, spec) {
     price: offer.price.price,
     compareAt: offer.price.compare_at_price ?? null,
     currency: offer.price.currency ?? "USD",
-    image,
+    image: imageObj.url,
+    alt_text: imageObj.alt_text ?? "",
+    description: product.description ?? "",
+    key_features: product.key_features ?? [],
     url: offer.url, // monetizable link, attributed to the API key that searched
     retailer: offer.domain ?? "",
     commissionRate: offer.max_commission_rate ?? 0,

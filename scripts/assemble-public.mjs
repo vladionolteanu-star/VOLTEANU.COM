@@ -151,9 +151,32 @@ function productCard(item) {
     item.compareAt && item.compareAt > item.price
       ? `<s class="was">${esc(money(item.compareAt, item.currency))}</s>`
       : "";
+  const schema = {
+    "@context": "https://schema.org/",
+    "@type": "Product",
+    "name": item.title,
+    "image": [item.image],
+    "description": item.description || item.note || item.title,
+    "sku": item.id,
+    "brand": {
+      "@type": "Brand",
+      "name": item.brand || item.retailer
+    },
+    "offers": {
+      "@type": "Offer",
+      "url": item.url,
+      "priceCurrency": item.currency || "USD",
+      "price": item.price,
+      "itemCondition": "https://schema.org/NewCondition",
+      "availability": "https://schema.org/InStock"
+    }
+  };
+  const schemaHtml = `<script type="application/ld+json">${JSON.stringify(schema)}</script>`;
+
   return `
+      ${schemaHtml}
       <a class="product" data-reveal href="${esc(item.url)}" target="_blank" rel="noopener sponsored">
-        <span class="product-img"><img src="${esc(item.image)}" alt="${esc(item.title)}" loading="lazy" decoding="async" /></span>
+        <span class="product-img"><img src="${esc(item.image)}" alt="${esc(item.alt_text || item.title)}" loading="lazy" decoding="async" /></span>
         <span class="product-info">
           <span class="product-brand">${esc(item.brand || item.retailer)}</span>
           <span class="product-title">${esc(item.title)}</span>
