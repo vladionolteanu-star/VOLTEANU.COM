@@ -27,6 +27,7 @@ rmSync(PUBLIC, { recursive: true, force: true });
 mkdirSync(PUBLIC, { recursive: true });
 cpSync(join(ROOT, "assets", "volteanu-logo.jpg"), join(PUBLIC, "volteanu-logo.jpg"));
 cpSync(join(ROOT, "assets", "google166c56f5cbded422.html"), join(PUBLIC, "google166c56f5cbded422.html"));
+if (existsSync(join(ROOT, "assets", "share"))) cpSync(join(ROOT, "assets", "share"), join(PUBLIC, "share"), { recursive: true });
 
 // ---------------------------------------------------------------------------
 // Pick a diverse showcase from across all chapters.

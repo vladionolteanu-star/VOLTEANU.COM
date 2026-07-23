@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Decizie Tablete: ZEBRA vs HONEYWELL</title>
+<style>
+  :root {
+    --ink: #000000;
+    --paper: #ffffff;
+    --muted: #666666;
+    --faint: #e5e5e5;
+    --zebra: #000000;
+    --zebra-10: #444444;
+    --hw: #E3000F;
+    --highlight: #f2f2f2;
+    --font-ui: "Inter", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+  
+  body {
+    font-family: var(--font-ui);
+    color: var(--ink);
+    background-color: var(--paper);
+    margin: 0;
+    padding: 64px 32px 120px;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+  }
+
+  .container {
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+
+  h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 16px; line-height: 1.1; }
+  .lede { font-size: 20px; color: var(--muted); margin: 0 0 48px; max-width: 800px; }
+  h2 { font-size: 20px; font-weight: 600; margin: 64px 0 24px; padding-bottom: 12px; border-bottom: 1px solid var(--faint); }
+  
+  table { width: 100%; border-collapse: collapse; text-align: left; margin-bottom: 32px; }
+  th, td { padding: 16px 20px; border-bottom: 1px solid var(--faint); vertical-align: top; }
+  th { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); font-weight: 600; padding-bottom: 24px; width: 23%; }
+  th:first-child { width: 31%; }
+  
+  .zebra-col { border-top: 2px solid var(--zebra); }
+  .zebra-10-col { border-top: 2px solid var(--zebra-10); }
+  .hw-col { border-top: 2px solid var(--hw); }
+
+  .row-item { display: block; font-weight: 500; font-size: 14px; margin-bottom: 4px; }
+  .row-sub { display: block; color: var(--muted); font-size: 12px; }
+  
+  .num { font-variant-numeric: tabular-nums; }
+  .val-main { display: block; font-size: 16px; font-weight: 500; }
+  .val-sub { display: block; font-size: 12px; color: var(--muted); margin-top: 4px; }
+  
+  .total-row td { background-color: var(--highlight); font-weight: 600; border-bottom: none; }
+  .total-row .val-main { font-size: 22px; font-weight: 700; }
+
+  .callout { background-color: var(--highlight); padding: 24px 32px; border-radius: 8px; margin-bottom: 32px; font-size: 15px; border-left: 4px solid var(--ink); }
+  .callout strong { display: block; margin-bottom: 8px; font-size: 16px; }
+
+  .callout-software { background-color: #f8f9fa; border-left-color: #5f6368; }
+  .callout-software strong { color: #202124; }
+
+  .img-container { display: flex; gap: 24px; margin-bottom: 48px; }
+  .img-box { flex: 1; text-align: center; background: var(--highlight); padding: 24px; border-radius: 8px; }
+  .img-box img { max-width: 100%; height: 160px; object-fit: contain; mix-blend-mode: multiply; }
+  .img-box h3 { font-size: 14px; font-weight: 600; margin: 24px 0 0; text-transform: uppercase; letter-spacing: 0.05em; }
+
+  .feedback-box { background: #fafafa; border: 1px solid var(--faint); border-radius: 8px; padding: 24px; margin-bottom: 16px; }
+  .feedback-loc { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); font-weight: 600; margin-bottom: 12px; display: block; }
+  .feedback-pro { margin: 0 0 12px; font-size: 14px; }
+  .feedback-con { margin: 0; font-size: 13px; color: #888; }
+  .feedback-con::before { content: "⚠️ "; }
+  .feedback-pro::before { content: "✅ "; }
+
+  .footer-section { margin-top: 80px; padding-top: 40px; border-top: 2px dashed var(--faint); color: var(--muted); }
+  .footer-section h2 { color: var(--ink); border-bottom: none; margin-top: 0; }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <h1>Decizie Tablete: ZEBRA vs HONEYWELL</h1>
+  <p class="lede">Comparație detaliată pentru faza de pilotare, integrând specificațiile tehnice validate de IT, feedback-ul operațional din magazine și datele comerciale curente. Sunt incluse opțiunile de 8" și 10" pentru Zebra, respectiv 10.1" pentru Honeywell.</p>
+
+  <div class="callout callout-software">
+    <strong>Compatibilitate Software (Ecosistemul Mobexpert)</strong>
+    Conform departamentului IT, ecosistemul software curent (Crosweb, inventar și alte aplicații) este deja testat și funcțional pe platforma Zebra. Adoptarea acestui brand presupune un necesar redus de adaptare și dezvoltare a aplicațiilor interne.
+  </div>
+
+  <div class="img-container">
+    <div class="img-box" style="border-top: 4px solid var(--zebra);">
+      <img src="zebra_tablet.png" alt="Zebra ET401 8">
+      <h3>Zebra ET401 (8")</h3>
+    </div>
+    <div class="img-box" style="border-top: 4px solid var(--zebra-10);">
+      <img src="zebra_tablet.png" alt="Zebra ET401 10">
+      <h3>Zebra ET401 (10.1")</h3>
+    </div>
+    <div class="img-box" style="border-top: 4px solid var(--hw);">
+      <img src="honeywell_tablet.png" alt="Honeywell EDA10A">
+      <h3>Honeywell EDA10A (10.1")</h3>
+    </div>
+  </div>
+
+  <h2>1. Feedback Operațional Intern (Utilizatori Magazine)</h2>
+  <div class="callout">
+    <strong>Contextul Pilotului:</strong>
+    În cadrul testelor inițiale, tableta Zebra de 8" a primit obiecții privind dimensiunea ecranului, utilizatorii considerând-o prea mică pentru interfața ERP și preferând vizibilitatea modelului Honeywell de 10.1". Includerea în ofertă a variantei Zebra ET401 de 10" aduce ambele echipamente la paritate din perspectiva mărimii ecranului.
+  </div>
+
+  <div class="feedback-box" style="border-left: 4px solid var(--hw);">
+    <span class="feedback-loc">Locație Pilot: Mobexpert Pipera</span>
+    <p class="feedback-pro">Suprafața de 10" apreciată maxim. Permite utilizarea optimă în landscape; tableta a răspuns mai rapid la comenzi, iar handstrap-ul rotativ ajută mult manevrarea alături de client.</p>
+  </div>
+
+  <div class="feedback-box" style="border-left: 4px solid var(--hw);">
+    <span class="feedback-loc">Locație Pilot: Mobexpert Constanța & Iași</span>
+    <p class="feedback-pro">Ecranele mari permit respectarea spațiului personal al clientului, comunicarea non-verbală devine fluidă. Funcțiile rulează fără probleme, în timp ce pe echipamentul mic (Zebra 8") s-au reclamat blocaje software.</p>
+  </div>
+
+  <div class="feedback-box" style="border-left: 4px solid var(--muted);">
+    <span class="feedback-loc">Observație privind formatul 10" (Mobexpert Pallady)</span>
+    <p class="feedback-con">Dezavantajul formatului de 10" constă în greutatea sporită a dispozitivelor. Personalul a raportat presiune pe încheieturi în urma purtării îndelungate, sugerând necesitatea utilizării unor genți de umăr (tip poștaș) pentru manevrare și siguranță.</p>
+  </div>
+
+  <h2>2. Proiecție Comercială (150 de unități)</h2>
+  <p style="margin-bottom: 24px;">Termen de livrare comunicat: <strong>5-7 zile lucrătoare pentru modelele Zebra</strong>, respectiv <strong>~30 de zile pentru Honeywell</strong>.</p>
+  
+  <table>
+    <thead>
+      <tr>
+        <th>Componentă</th>
+        <th class="num zebra-col">Zebra ET401 (8")</th>
+        <th class="num zebra-10-col">Zebra ET401 (10")</th>
+        <th class="num hw-col">Honeywell EDA10A (10.1")</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <span class="row-item">Preț Unitar Ofertat</span>
+        </td>
+        <td class="num">
+          <span class="val-main">501,00 €</span>
+        </td>
+        <td class="num">
+          <span class="val-main">559,00 €</span>
+        </td>
+        <td class="num">
+          <span class="val-main">529,48 €</span>
+        </td>
+      </tr>
+      <tr class="total-row">
+        <td>
+          <span class="row-item">TOTAL 150 BUCĂȚI</span>
+        </td>
+        <td class="num">
+          <span class="val-main">75.150 €</span>
+        </td>
+        <td class="num">
+          <span class="val-main">83.850 €</span>
+        </td>
+        <td class="num">
+          <span class="val-main">79.422 €</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+
+  <div class="footer-section">
+    <h2>Anexă Tehnică: Alinierea Specificațiilor</h2>
+    <p style="margin-bottom: 24px;">În comunicarea inițială primită din partea Honeywell, comparația tehnică propusă s-a raportat la modelul Zebra ET40 (o generație anterioară), nu la modelul ET401 solicitat. Mai jos este reprodus tabelul furnizat inițial, urmat de specificațiile tehnice reale, validate intern de IT CORE pentru echipamentele curente propuse.</p>
+
+    <h3>A. Tabelul comparativ furnizat de Honeywell (raportat la modelul anterior Zebra ET40)</h3>
+    <table style="opacity: 0.65;">
+      <thead>
+        <tr>
+          <th>Specificație</th>
+          <th class="num zebra-col">Zebra ET40 (Model Vechi)</th>
+          <th class="num hw-col">Honeywell EDA10A</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="row-item">Rezoluție Ecran</span></td>
+          <td><span class="val-main">1280 x 800 (WXGA)</span></td>
+          <td><span class="val-main">1920 x 1200 (FHD)</span></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><span class="row-item">Procesor</span></td>
+          <td><span class="val-main">Snapdragon SM6375</span></td>
+          <td><span class="val-main">Snapdragon SM4350-AC</span></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><span class="row-item">Memorie / Stocare</span></td>
+          <td><span class="val-main">4 GB RAM / 64 GB</span></td>
+          <td><span class="val-main">8 GB RAM / 128 GB</span></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><span class="row-item">Conectivitate</span></td>
+          <td><span class="val-main">Wi-Fi 6 / Bluetooth 5.1</span></td>
+          <td><span class="val-main">Wi-Fi 6 / Bluetooth 5.1</span></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><span class="row-item">Sistem Operare</span></td>
+          <td><span class="val-main">Android 11</span></td>
+          <td><span class="val-main">Android 12</span></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 style="margin-top: 48px; color: var(--ink);">B. Tabel comparativ validat IT CORE - Familia curentă ET401 vs Honeywell</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Specificație</th>
+          <th class="num zebra-col">Zebra ET401 (8")</th>
+          <th class="num zebra-10-col">Zebra ET401 (10")</th>
+          <th class="num hw-col">Honeywell EDA10A (10.1")</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <span class="row-item">Data Lansare</span>
+          </td>
+          <td><span class="val-main">2025</span></td>
+          <td><span class="val-main">2025</span></td>
+          <td><span class="val-main">2023</span></td>
+        </tr>
+        <tr>
+          <td>
+            <span class="row-item">Rezoluție Ecran</span>
+          </td>
+          <td><span class="val-main">1920 x 1200 (WUXGA)</span><span class="val-sub">600 niți</span></td>
+          <td><span class="val-main">1920 x 1200 (WUXGA)</span><span class="val-sub">600 niți</span></td>
+          <td><span class="val-main">1920 x 1200 (FHD)</span><span class="val-sub">550 niți</span></td>
+        </tr>
+        <tr>
+          <td>
+            <span class="row-item">Procesor</span>
+          </td>
+          <td><span class="val-main">Qualcomm Dragonwing Q6690</span></td>
+          <td><span class="val-main">Qualcomm Dragonwing Q6690</span></td>
+          <td><span class="val-main">Snapdragon SM4350 AC</span></td>
+        </tr>
+        <tr>
+          <td>
+            <span class="row-item">Memorie RAM</span>
+          </td>
+          <td><span class="val-main">6 GB LPDDR5</span></td>
+          <td><span class="val-main">6 GB LPDDR5</span></td>
+          <td><span class="val-main">8 GB LPDDR4X</span></td>
+        </tr>
+        <tr>
+          <td>
+            <span class="row-item">Conectivitate</span>
+          </td>
+          <td><span class="val-main">Wi-Fi 7 / BT 6.0 / NFC</span></td>
+          <td><span class="val-main">Wi-Fi 7 / BT 6.0 / NFC</span></td>
+          <td><span class="val-main">Wi-Fi 6 / BT 5.1 / NFC</span></td>
+        </tr>
+        <tr>
+          <td>
+            <span class="row-item">Sistem Operare</span>
+          </td>
+          <td><span class="val-main">Android 15 (suport A19)</span></td>
+          <td><span class="val-main">Android 15 (suport A19)</span></td>
+          <td><span class="val-main">Android 12 (suport A14)</span></td>
+        </tr>
+        <tr>
+          <td>
+            <span class="row-item">Baterie</span>
+          </td>
+          <td><span class="val-main">6.100 mAh</span></td>
+          <td><span class="val-main">7.600 mAh</span></td>
+          <td><span class="val-main">8.000 mAh</span></td>
+        </tr>
+        <tr>
+          <td>
+            <span class="row-item">Protecție & Apă</span>
+          </td>
+          <td><span class="val-main">IP68</span></td>
+          <td><span class="val-main">IP68</span></td>
+          <td><span class="val-main">IP65</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+</body>
+</html>
